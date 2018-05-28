@@ -1,6 +1,6 @@
 {
-  "name": "element-ui",
-  "version": "2.4.0",
+  "name": "element-yhui",
+  "version": "1.0.0",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -36,9 +36,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:ElemeFE/element.git"
+    "url": "https://github.com/aosnow/element-yhui.git"
   },
-  "homepage": "http://element.eleme.io",
+  "homepage": "https://github.com/aosnow/element-yhui.git",
   "keywords": [
     "eleme",
     "vue",
