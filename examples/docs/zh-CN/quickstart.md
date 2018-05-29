@@ -1,12 +1,6 @@
 ## 快速上手
 
-本节将介绍如何在项目中使用 Element。
-
-### 使用 Starter Kit
-
-我们提供了通用的[项目模板](https://github.com/ElementUI/element-starter)，你可以直接使用。对于 Laravel 用户，我们也准备了相应的[模板](https://github.com/ElementUI/element-in-laravel-starter)，同样可以直接下载使用。
-
-如果不希望使用我们提供的模板，请继续阅读。
+本节将介绍如何在项目中使用 Element-yhui。
 
 ### 引入 Element
 
@@ -19,7 +13,7 @@
 ```javascript
 import Vue from 'vue';
 import ElementUI from 'element-yhui';
-import 'element-yhui/lib/theme-chalk/index.css';
+import 'element-yhui/lib/theme-yinhe/index.css';
 import App from './App.vue';
 
 Vue.use(ElementUI);
@@ -51,8 +45,8 @@ npm install babel-plugin-component -D
     [
       "component",
       {
-        "libraryName": "element-ui",
-        "styleLibraryName": "theme-chalk"
+        "libraryName": "element-yhui",
+        "styleLibraryName": "theme-yinhe"
       }
     ]
   ]
@@ -68,6 +62,7 @@ import App from './App.vue';
 
 Vue.component(Button.name, Button);
 Vue.component(Select.name, Select);
+
 /* 或写为
  * Vue.use(Button)
  * Vue.use(Select)
@@ -79,7 +74,7 @@ new Vue({
 });
 ```
 
-完整组件列表和引入方式（完整组件列表以 [components.json](https://github.com/ElemeFE/element/blob/master/components.json) 为准）
+完整组件列表和引入方式（完整组件列表以 [components.json](https://github.com/aosnow/element-yhui/blob/dev/components.json) 为准）
 
 ```javascript
 import Vue from 'vue';

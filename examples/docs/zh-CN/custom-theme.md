@@ -7,15 +7,15 @@ Element 默认提供一套主题，CSS 命名采用 BEM 的风格，方便使用
 使用上述工具，可以很方便地实时预览主题色改变之后的视觉，同时它还可以基于新的主题色生成完整的样式文件包，供直接下载使用（关于如何使用下载的主题包，请参考本节「引入自定义主题」和「搭配插件按需引入组件主题」部分）。
 
 ### 在项目中改变 SCSS 变量
-Element 的 theme-chalk 使用 SCSS 编写，如果你的项目也使用了 SCSS，那么可以直接在项目中改变 Element 的样式变量。新建一个样式文件，例如 `element-variables.scss`，写入以下内容：
+Element 的 theme-yinhe 使用 SCSS 编写，如果你的项目也使用了 SCSS，那么可以直接在项目中改变 Element 的样式变量。新建一个样式文件，例如 `element-variables.scss`，写入以下内容：
 ```html
 /* 改变主题色变量 */
 $--color-primary: teal;
 
 /* 改变 icon 字体路径变量，必需 */
-$--font-path: '~element-ui/lib/theme-chalk/fonts';
+$--font-path: '~element-ui/lib/theme-yinhe/fonts';
 
-@import "~element-ui/packages/theme-chalk/src/index";
+@import "~element-ui/packages/theme-yinhe/src/index";
 ```
 
 之后，在项目的入口文件中，直接引入以上样式文件即可（无需引入 Element 编译好的 CSS 文件）：
@@ -43,10 +43,10 @@ npm i element-theme -g
 安装白垩主题，可以从 npm 安装或者从 GitHub 拉取最新代码。
 ```shell
 # 从 npm
-npm i element-theme-chalk -D
+npm i element-theme-yinhe -D
 
 # 从 GitHub
-npm i https://github.com/ElementUI/theme-chalk -D
+npm i https://github.com/ElementUI/theme-yinhe -D
 ```
 
 #### <strong>初始化变量文件</strong>

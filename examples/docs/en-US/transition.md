@@ -146,7 +146,7 @@ For collapse effect, use the `el-collapse-transition` component.
 
 ```js
 // fade/zoom
-import 'element-yhui/lib/theme-chalk/base.css';
+import 'element-yhui/lib/theme-yinhe/base.css';
 // collapse
 import CollapseTransition from 'element-yhui/lib/transitions/collapse-transition';
 import Vue from 'vue'

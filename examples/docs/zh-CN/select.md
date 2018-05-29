@@ -106,7 +106,7 @@
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
     },
-    
+
     mounted() {
       this.list = this.states.map(item => { return { value: item, label: item }; });
     },
@@ -144,6 +144,15 @@
 ```html
 <template>
   <el-select v-model="value" placeholder="请选择">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+  &nbsp;
+  <el-select v-model="value" placeholder="请选择" size="medium">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -242,7 +251,7 @@
     </el-option>
   </el-select>
 </template>
-  
+
 <script>
   export default {
     data() {
@@ -654,7 +663,7 @@
 如果 Select 的绑定值为对象类型，请务必指定 `value-key` 作为它的唯一性标识。
 :::
 
-### Select Attributes 
+### Select Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | multiple | 是否多选 | boolean | — | false |

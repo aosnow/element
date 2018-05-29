@@ -19,7 +19,7 @@ In main.js:
 ```javascript
 import Vue from 'vue';
 import ElementUI from 'element-yhui';
-import 'element-yhui/lib/theme-chalk/index.css';
+import 'element-yhui/lib/theme-yinhe/index.css';
 import App from './App.vue';
 
 Vue.use(ElementUI);
@@ -52,7 +52,7 @@ Then edit .babelrc:
       "component",
       {
         "libraryName": "element-ui",
-        "styleLibraryName": "theme-chalk"
+        "styleLibraryName": "theme-yinhe"
       }
     ]
   ]

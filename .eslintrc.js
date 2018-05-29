@@ -35,6 +35,8 @@ module.exports = {
     'prefer-destructuring': 'off',
     'no-nested-ternary': 'off',
     'global-require': 'off',
+    'quote-props': 'off',
+    'import/no-unresolved': 'off',
     // 强制驼峰法命名规则
     'camelcase': 'off',
     // Object 属性是否必须在新的一行书写

@@ -19,69 +19,69 @@
 </template>
 
 <script type="text/babel">
-  const TYPE_CLASSES_MAP = {
-    'success': 'el-icon-success',
-    'warning': 'el-icon-warning',
-    'error': 'el-icon-error'
-  };
-  export default {
-    name: 'ElAlert',
+const TYPE_CLASSES_MAP = {
+  'success': 'el-icon-success',
+  'warning': 'el-icon-warning',
+  'error': 'el-icon-error'
+};
+export default {
+  name: 'ElAlert',
 
-    props: {
-      title: {
-        type: String,
-        default: '',
-        required: true
-      },
-      description: {
-        type: String,
-        default: ''
-      },
-      type: {
-        type: String,
-        default: 'info'
-      },
-      closable: {
-        type: Boolean,
-        default: true
-      },
-      closeText: {
-        type: String,
-        default: ''
-      },
-      showIcon: Boolean,
-      center: Boolean
+  props: {
+    title: {
+      type: String,
+      default: '',
+      required: true
     },
-
-    data() {
-      return {
-        visible: true
-      };
+    description: {
+      type: String,
+      default: ''
     },
-
-    methods: {
-      close() {
-        this.visible = false;
-        this.$emit('close');
-      }
+    type: {
+      type: String,
+      default: 'info'
     },
+    closable: {
+      type: Boolean,
+      default: true
+    },
+    closeText: {
+      type: String,
+      default: ''
+    },
+    showIcon: Boolean,
+    center: Boolean
+  },
 
-    computed: {
-      typeClass() {
-        return `el-alert--${ this.type }`;
-      },
+  data() {
+    return {
+      visible: true
+    };
+  },
 
-      iconClass() {
-        return TYPE_CLASSES_MAP[this.type] || 'el-icon-info';
-      },
-
-      isBigIcon() {
-        return this.description || this.$slots.default ? 'is-big' : '';
-      },
-
-      isBoldTitle() {
-        return this.description || this.$slots.default ? 'is-bold' : '';
-      }
+  methods: {
+    close() {
+      this.visible = false;
+      this.$emit('close');
     }
-  };
+  },
+
+  computed: {
+    typeClass() {
+      return `el-alert--${this.type}`;
+    },
+
+    iconClass() {
+      return TYPE_CLASSES_MAP[this.type] || 'el-icon-info';
+    },
+
+    isBigIcon() {
+      return this.description || this.$slots.default ? 'is-big' : '';
+    },
+
+    isBoldTitle() {
+      return this.description || this.$slots.default ? 'is-bold' : '';
+    }
+  }
+};
 </script>

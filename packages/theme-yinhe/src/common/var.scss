@@ -2,19 +2,19 @@
 
 /* Transition
 -------------------------- */
-$--all-transition: all .3s cubic-bezier(.645,.045,.355,1) !default;
+$--all-transition: all .3s cubic-bezier(.645, .045, .355, 1) !default;
 $--fade-transition: opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) !default;
 $--fade-linear-transition: opacity 200ms linear !default;
 $--md-fade-transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1), opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) !default;
-$--border-transition-base: border-color .2s cubic-bezier(.645,.045,.355,1) !default;
-$--color-transition-base: color .2s cubic-bezier(.645,.045,.355,1) !default;
+$--border-transition-base: border-color .2s cubic-bezier(.645, .045, .355, 1) !default;
+$--color-transition-base: color .2s cubic-bezier(.645, .045, .355, 1) !default;
 
 /* Colors
 -------------------------- */
 $--color-white: #fff !default;
 $--color-black: #000 !default;
 
-$--color-primary: #409EFF !default;
+$--color-primary: #0096ff !default;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
 $--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
 $--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default; /* 79bbff */
@@ -64,7 +64,7 @@ $--border-color-lighter: #ebeef5 !default;
 $--border-color-extra-light: #f2f6fc !default;
 $--border-color-hover: $--color-text-placeholder !default;
 $--border-base: $--border-width-base $--border-style-base $--border-color-base !default;
-$--border-radius-base: 4px !default;
+$--border-radius-base: 3px !default;
 $--border-radius-small: 2px !default;
 $--border-radius-circle: 100% !default;
 
@@ -82,7 +82,9 @@ $--fill-base: $--color-white !default;
 -------------------------- */
 $--font-path: 'fonts' !default;
 $--font-size-base: 14px !default;
-$--font-size-small: 13px !default;
+$--font-size-medium: 13px !default;
+$--font-size-small: 12px !default;
+$--font-size-mini: 12px !default;
 $--font-size-large: 18px !default;
 $--font-color-disabled-base: #bbb !default;
 $--font-weight-primary: 500 !default;
@@ -91,6 +93,11 @@ $--font-line-height-primary: 24px !default;
 /* Size
 -------------------------- */
 $--size-base: 14px !default;
+
+$--height-base: 40px !default;
+$--height-medium: floor($--height-base * 0.9) !default; // 36px
+$--height-small: floor($--height-medium * 0.9) !default; // 32px
+$--height-mini: floor($--height-small * 0.9) !default; // 28px
 
 /* z-index
 -------------------------- */
@@ -111,7 +118,7 @@ $--icon-color-base: $--color-info !default;
 
 /* Checkbox
 -------------------------- */
-$--checkbox-font-size: 14px !default;
+$--checkbox-font-size: $--font-size-base !default;
 $--checkbox-font-weight: $--font-weight-primary !default;
 $--checkbox-color: $--color-text-regular !default;
 $--checkbox-input-height: 14px !default;
@@ -157,11 +164,9 @@ $--checkbox-button-checked-fill: $--color-primary !default;
 $--checkbox-button-checked-color: $--color-white !default;
 $--checkbox-button-checked-border-color: $--color-primary !default;
 
-
-
 /* Radio
 -------------------------- */
-$--radio-font-size: 14px !default;
+$--radio-font-size: $--font-size-base !default;
 $--radio-font-weight: $--font-weight-primary !default;
 $--radio-color: $--color-text-regular !default;
 $--radio-input-height: 14px !default;
@@ -218,7 +223,7 @@ $--select-close-hover-color: $--color-text-secondary !default;
 $--select-input-color: $--color-text-placeholder !default;
 $--select-multiple-input-color: #666 !default;
 $--select-input-focus-background: $--color-primary !default;
-$--select-input-font-size: 14px !default;
+$--select-input-font-size: $--font-size-base !default;
 
 $--select-option-color: $--color-text-regular !default;
 $--select-option-disabled-color: $--color-text-placeholder !default;
@@ -230,7 +235,7 @@ $--select-option-selected-hover: $--background-color-base !default;
 
 $--select-group-color: $--color-info !default;
 $--select-group-height: 30px !default;
-$--select-group-font-size: 12px !default;
+$--select-group-font-size: $--font-size-mini !default;
 
 $--select-dropdown-background: $--color-white !default;
 $--select-dropdown-shadow: $--box-shadow-light !default;
@@ -244,10 +249,10 @@ $--select-dropdown-border: solid 1px $--border-color-light !default;
 -------------------------- */
 $--alert-padding: 8px 16px !default;
 $--alert-border-radius: $--border-radius-base !default;
-$--alert-title-font-size: 13px !default;
-$--alert-description-font-size: 12px !default;
-$--alert-close-font-size: 12px !default;
-$--alert-close-customed-font-size: 13px !default;
+$--alert-title-font-size: $--font-size-medium !default;
+$--alert-description-font-size: $--font-size-small !default;
+$--alert-close-font-size: $--font-size-mini !default;
+$--alert-close-customed-font-size: $--font-size-medium !default;
 
 $--alert-success-color: $--color-success-lighter !default;
 $--alert-info-color: $--color-info-lighter !default;
@@ -264,7 +269,7 @@ $--msgbox-border-radius: 4px !default;
 $--msgbox-font-size: $--font-size-large !default;
 $--msgbox-content-font-size: $--font-size-base !default;
 $--msgbox-content-color: $--color-text-regular !default;
-$--msgbox-error-font-size: 12px !default;
+$--msgbox-error-font-size: $--font-size-small !default;
 $--msgbox-padding-primary: 15px !default;
 
 $--msgbox-success-color: $--color-success !default;
@@ -316,7 +321,7 @@ $--notification-danger-color: $--color-danger !default;
 $--input-font-size: $--font-size-base !default;
 $--input-color: $--color-text-regular !default;
 $--input-width: 140px !default;
-$--input-height: 40px !default;
+$--input-height: $--height-base !default;
 $--input-border: $--border-base !default;
 $--input-border-color: $--border-color-base !default;
 $--input-border-radius: $--border-radius-base !default;
@@ -339,14 +344,14 @@ $--input-disabled-border: $--disabled-border-base !default;
 $--input-disabled-color: $--disabled-color-base !default;
 $--input-disabled-placeholder-color: $--color-text-placeholder !default;
 
-$--input-medium-font-size: 14px !default;
-$--input-medium-height: 36px !default;
+$--input-medium-font-size: $--font-size-medium !default;
+$--input-medium-height: $--height-medium !default;
 
-$--input-small-font-size: 13px !default;
-$--input-small-height: 32px !default;
+$--input-small-font-size: $--font-size-small !default;
+$--input-small-height: $--height-small !default;
 
-$--input-mini-font-size: 12px !default;
-$--input-mini-height: 28px !default;
+$--input-mini-font-size: $--font-size-mini !default;
+$--input-mini-height: $--height-mini !default;
 
 /* Cascader
 -------------------------- */
@@ -393,23 +398,23 @@ $--tab-vertical-header-count-fill: $--color-text-secondary !default;
 
 /* Button
 -------------------------- */
-$--button-font-size: 14px !default;
+$--button-font-size: $--font-size-base !default;
 $--button-font-weight: $--font-weight-primary !default;
 $--button-border-radius: $--border-radius-base !default;
 $--button-padding-vertical: 12px !default;
 $--button-padding-horizontal: 20px !default;
 
-$--button-medium-font-size: 14px !default;
+$--button-medium-font-size: $--font-size-medium !default;
 $--button-medium-border-radius: $--border-radius-base !default;
 $--button-medium-padding-vertical: 10px !default;
 $--button-medium-padding-horizontal: 20px !default;
 
-$--button-small-font-size: 12px !default;
+$--button-small-font-size: $--font-size-small !default;
 $--button-small-border-radius: #{$--border-radius-base - 1} !default;
 $--button-small-padding-vertical: 9px !default;
 $--button-small-padding-horizontal: 15px !default;
 
-$--button-mini-font-size: 12px !default;
+$--button-mini-font-size: $--font-size-mini !default;
 $--button-mini-border-radius: #{$--border-radius-base - 1} !default;
 $--button-mini-padding-vertical: 7px !default;
 $--button-mini-padding-horizontal: 15px !default;
@@ -445,7 +450,6 @@ $--button-info-fill: $--color-info !default;
 $--button-hover-tint-percent: 20% !default;
 $--button-active-shade-percent: 10% !default;
 
-
 /* cascader
 -------------------------- */
 $--cascader-height: 200px !default;
@@ -469,7 +473,7 @@ $--dialog-background-color: $--color-primary-light-4 !default;
 $--dialog-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !default;
 $--dialog-close-hover-color: $--color-primary !default;
 $--dialog-title-font-size: $--font-size-large !default;
-$--dialog-font-size: 14px !default;
+$--dialog-font-size: $--font-size-base !default;
 $--dialog-line-height: $--font-line-height-primary !default;
 $--dialog-padding-primary: 20px !default;
 
@@ -487,7 +491,7 @@ $--table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12) !default;
 
 /* Pagination
 -------------------------- */
-$--pagination-font-size: 13px !default;
+$--pagination-font-size: $--font-size-small !default;
 $--pagination-fill: $--color-white !default;
 $--pagination-color: $--color-text-primary !default;
 $--pagination-border-radius: 3px !default;
@@ -514,7 +518,7 @@ $--popover-title-color: $--color-text-primary !default;
 -------------------------- */
 $--tooltip-fill: $--color-text-primary !default;
 $--tooltip-color: $--color-white !default;
-$--tooltip-font-size: 12px !default;
+$--tooltip-font-size: $--font-size-mini !default;
 $--tooltip-border-color: $--color-text-primary !default;
 $--tooltip-arrow-size: 6px !default;
 $--tooltip-padding: 10px !default;
@@ -525,7 +529,7 @@ $--tag-padding: 0 10px !default;
 $--tag-fill: rgba($--color-primary, 0.10) !default;
 $--tag-color: $--color-primary !default;
 $--tag-border: rgba($--color-primary, 0.20) !default;
-$--tag-font-size: 12px !default;
+$--tag-font-size: $--font-size-mini !default;
 $--tag-border-radius: 4px !default;
 
 $--tag-info-fill: rgba($--color-info, 0.10) !default;
@@ -564,7 +568,7 @@ $--dropdown-menuItem-hover-color: $--link-color !default;
 -------------------------- */
 $--badge-fill: $--color-danger !default;
 $--badge-radius: 10px !default;
-$--badge-font-size: 12px !default;
+$--badge-font-size: $--font-size-mini !default;
 $--badge-padding: 6px !default;
 $--badge-size: 18px !default;
 
@@ -635,7 +639,7 @@ $--scrollbar-hover-background-color: rgba($--color-text-secondary, .5) !default;
 
 /* Carousel
 --------------------------*/
-$--carousel-arrow-font-size: 12px !default;
+$--carousel-arrow-font-size: $--font-size-mini !default;
 $--carousel-arrow-size: 36px !default;
 $--carousel-arrow-background: rgba(31, 45, 61, 0.11) !default;
 $--carousel-arrow-hover-background: rgba(31, 45, 61, 0.23) !default;
