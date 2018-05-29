@@ -94,7 +94,7 @@
           message: '<strong>This is <i>HTML</i> string</strong>'
         });
       },
-      
+
       open13() {
         this.$notify.success({
           title: 'Info',
@@ -394,7 +394,7 @@ Element has added a global method `$notify` for Vue.prototype. So in a vue insta
 Import `Notification`:
 
 ```javascript
-import { Notification } from 'element-ui';
+import { Notification } from 'element-yhui';
 ```
 
 In this case you should call `Notification(options)`. We have also registered methods for different types, e.g. `Notification.success(options)`. You can call `Notification.closeAll()` to manually close all the instances.

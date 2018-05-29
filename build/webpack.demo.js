@@ -22,8 +22,8 @@ function convert(str) {
 }
 
 function wrap(render) {
-  return function() {
-    return render.apply(this, arguments)
+  return function(...args) {
+    return render.apply(this, args)
       .replace('<code v-pre class="', '<code class="hljs ')
       .replace('<code>', '<code class="hljs">');
   };
@@ -32,16 +32,16 @@ function wrap(render) {
 const webpackConfig = {
   entry: isProd ? {
     docs: './examples/entry.js',
-    'element-ui': './src/index.js'
+    'element-yhui': './src/index.js'
   } : (isPlay ? './examples/play.js' : './examples/entry.js'),
   output: {
-    path: path.resolve(process.cwd(), './examples/element-ui/'),
+    path: path.resolve(process.cwd(), './examples/element-yhui/'),
     publicPath: process.env.CI_ENV || '',
     filename: '[name].[hash:7].js',
     chunkFilename: isProd ? '[name].[hash:7].js' : '[name].js'
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.scss'],
     alias: config.alias,
     modules: ['node_modules']
   },
@@ -53,18 +53,18 @@ const webpackConfig = {
   },
   module: {
     rules: [
-      {
-        enforce: 'pre',
-        test: /\.jsx?$/,
-        exclude: /node_modules|bower_components/,
-        loader: 'eslint-loader'
-      },
-      {
-        enforce: 'pre',
-        test: /\.vue$/,
-        exclude: /node_modules|bower_components/,
-        loader: 'eslint-loader'
-      },
+      // {
+      //   enforce: 'pre',
+      //   test: /\.jsx?$/,
+      //   exclude: /node_modules|bower_components/,
+      //   loader: 'eslint-loader'
+      // },
+      // {
+      //   enforce: 'pre',
+      //   test: /\.vue$/,
+      //   exclude: /node_modules|bower_components/,
+      //   loader: 'eslint-loader'
+      // },
       {
         test: /\.(jsx?|babel|es6)$/,
         include: process.cwd(),
@@ -78,25 +78,25 @@ const webpackConfig = {
           use: [
             [require('markdown-it-anchor'), {
               level: 2,
-              slugify: slugify,
+              slugify,
               permalink: true,
               permalinkBefore: true
             }],
             [require('markdown-it-container'), 'demo', {
-              validate: function(params) {
+              validate(params) {
                 return params.trim().match(/^demo\s*(.*)$/);
               },
 
-              render: function(tokens, idx) {
-                var m = tokens[idx].info.trim().match(/^demo\s*(.*)$/);
+              render(tokens, idx) {
+                const m = tokens[idx].info.trim().match(/^demo\s*(.*)$/);
                 if (tokens[idx].nesting === 1) {
-                  var description = (m && m.length > 1) ? m[1] : '';
-                  var content = tokens[idx + 1].content;
-                  var html = convert(striptags.strip(content, ['script', 'style'])).replace(/(<[^>]*)=""(?=.*>)/g, '$1');
-                  var script = striptags.fetch(content, 'script');
-                  var style = striptags.fetch(content, 'style');
-                  var jsfiddle = { html: html, script: script, style: style };
-                  var descriptionHTML = description
+                  const description = (m && m.length > 1) ? m[1] : '';
+                  const content = tokens[idx + 1].content;
+                  const html = convert(striptags.strip(content, ['script', 'style'])).replace(/(<[^>]*)=""(?=.*>)/g, '$1');
+                  const script = striptags.fetch(content, 'script');
+                  const style = striptags.fetch(content, 'style');
+                  let jsfiddle = { html, script, style };
+                  const descriptionHTML = description
                     ? md.render(description)
                     : '';
 
@@ -113,7 +113,7 @@ const webpackConfig = {
             [require('markdown-it-container'), 'tip'],
             [require('markdown-it-container'), 'warning']
           ],
-          preprocess: function(MarkdownIt, source) {
+          preprocess(MarkdownIt, source) {
             MarkdownIt.renderer.rules.table_open = function() {
               return '<table class="table">';
             };
@@ -221,7 +221,7 @@ if (isProd) {
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['element-ui', 'manifest']
+      name: ['element-yhui', 'manifest']
     })
   );
 }

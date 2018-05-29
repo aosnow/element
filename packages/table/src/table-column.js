@@ -1,7 +1,7 @@
-import ElCheckbox from 'element-ui/packages/checkbox';
-import ElTag from 'element-ui/packages/tag';
-import objectAssign from 'element-ui/src/utils/merge';
-import { getPropByPath } from 'element-ui/src/utils/util';
+import ElCheckbox from 'element-yhui/packages/checkbox';
+import ElTag from 'element-yhui/packages/tag';
+import objectAssign from 'element-yhui/src/utils/merge';
+import { getPropByPath } from 'element-yhui/src/utils/util';
 
 let columnIdSeed = 1;
 

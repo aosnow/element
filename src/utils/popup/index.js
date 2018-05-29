@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import merge from 'element-ui/src/utils/merge';
-import PopupManager from 'element-ui/src/utils/popup/popup-manager';
+import merge from '../merge';
+import PopupManager from './popup-manager';
 import getScrollBarWidth from '../scrollbar-width';
 import { getStyle, addClass, removeClass, hasClass } from '../dom';
 
@@ -83,10 +83,12 @@ export default {
           Vue.nextTick(() => {
             this.open();
           });
-        } else {
+        }
+        else {
           this.open();
         }
-      } else {
+      }
+      else {
         this.close();
       }
     }
@@ -112,7 +114,8 @@ export default {
           this._openTimer = null;
           this.doOpen(props);
         }, openDelay);
-      } else {
+      }
+      else {
         this.doOpen(props);
       }
     },
@@ -187,7 +190,8 @@ export default {
           this._closeTimer = null;
           this.doClose();
         }, closeDelay);
-      } else {
+      }
+      else {
         this.doClose();
       }
     },

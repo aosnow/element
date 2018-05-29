@@ -1,7 +1,7 @@
-import defaultLang from 'element-ui/src/locale/lang/zh-CN';
 import Vue from 'vue';
 import deepmerge from 'deepmerge';
 import Format from './format';
+import defaultLang from './lang/zh-CN';
 
 const format = Format(Vue);
 let lang = defaultLang;

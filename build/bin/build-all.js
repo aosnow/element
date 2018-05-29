@@ -1,14 +1,12 @@
-'use strict';
-
 const components = require('../../components.json');
-const execSync = require('child_process').execSync;
-const existsSync = require('fs').existsSync;
+const { execSync } = require('child_process');
+const { existsSync } = require('fs');
 const path = require('path');
 
 let componentPaths = [];
 
-delete components.index;
-delete components.font;
+delete components['index'];
+delete components['font'];
 
 Object.keys(components).forEach(key => {
   const filePath = path.join(__dirname, `../../packages/${key}/cooking.conf.js`);

@@ -15,7 +15,7 @@ const webpackConfig = {
     libraryTarget: 'commonjs2'
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.scss'],
     alias: config.alias,
     modules: ['node_modules']
   },

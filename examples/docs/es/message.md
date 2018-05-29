@@ -4,7 +4,7 @@
       open() {
         this.$message('This is a message.');
       },
-    
+
       openVn() {
         const h = this.$createElement;
         this.$message({
@@ -14,32 +14,32 @@
           ])
         });
       },
-    
+
       open2() {
         this.$message({
           message: 'Congrats, this is a success message.',
           type: 'success'
         });
       },
-    
+
       open3() {
         this.$message({
           message: 'Warning, this is a warning message.',
           type: 'warning'
         });
       },
-    
+
       open4() {
         this.$message.error('Oops, this is a error message.');
       },
-    
+
       open5() {
         this.$message({
           showClose: true,
           message: 'This is a message.'
         });
       },
-    
+
       open6() {
         this.$message({
           showClose: true,
@@ -47,7 +47,7 @@
           type: 'success'
         });
       },
-    
+
       open7() {
         this.$message({
           showClose: true,
@@ -55,7 +55,7 @@
           type: 'warning'
         });
       },
-    
+
       open8() {
         this.$message({
           showClose: true,
@@ -63,14 +63,14 @@
           type: 'error'
         });
       },
-    
+
       openCenter() {
         this.$message({
           message: 'Centered text',
           center: true
         });
       },
-    
+
       openHTML() {
         this.$message({
           dangerouslyUseHTMLString: true,
@@ -103,7 +103,7 @@ Se muestra en la parte superior de la pagina y desaparece despues de 3 segundos.
       open() {
         this.$message('This is a message.');
       },
-      
+
       openVn() {
         const h = this.$createElement;
         this.$message({
@@ -276,7 +276,7 @@ Element ha agregado un método global llamado `$message` para Vue.prototype. Ent
 Import `Message`:
 
 ```javascript
-import { Message } from 'element-ui';
+import { Message } from 'element-yhui';
 ```
 
 En este caso deberia llamar al metodo `Message(options)`. Tambien se han registrado metodos para los diferentes tipos, e.g. `Message.success(options)`. Puede llamar al metodo `Message.closeAll()` para cerrar manualmente todas las instancias.

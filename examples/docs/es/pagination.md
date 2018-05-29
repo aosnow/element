@@ -10,7 +10,7 @@
     display: inline-block;
     width: 50%;
     box-sizing: border-box;
-    
+
     &:last-child {
       border-right: none;
     }
@@ -177,7 +177,7 @@ Agrega más modulos basados en su escenario.
 ```
 :::
 <script>
-  import { addClass } from 'element-ui/src/utils/dom';
+  import { addClass } from 'element-yhui/src/utils/dom';
   export default {
     data() {
       return {

@@ -77,13 +77,13 @@
 </template>
 
 <script type="text/babel">
-  import Popup from 'element-ui/src/utils/popup';
-  import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
-  import { addClass, removeClass } from 'element-ui/src/utils/dom';
-  import { t } from 'element-ui/src/locale';
-  import Dialog from 'element-ui/src/utils/aria-dialog';
+  import Popup from 'element-yhui/src/utils/popup';
+  import Locale from 'element-yhui/src/mixins/locale';
+  import ElInput from 'element-yhui/packages/input';
+  import ElButton from 'element-yhui/packages/button';
+  import { addClass, removeClass } from 'element-yhui/src/utils/dom';
+  import { t } from 'element-yhui/src/locale';
+  import Dialog from 'element-yhui/src/utils/aria-dialog';
 
   let messageBox;
   let typeMap = {

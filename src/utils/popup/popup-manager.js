@@ -1,32 +1,9 @@
 import Vue from 'vue';
-import { addClass, removeClass } from 'element-ui/src/utils/dom';
+import { addClass, removeClass } from '../dom';
 
 let hasModal = false;
 let hasInitZIndex = false;
 let zIndex = 2000;
-
-const getModal = function() {
-  if (Vue.prototype.$isServer) return;
-  let modalDom = PopupManager.modalDom;
-  if (modalDom) {
-    hasModal = true;
-  } else {
-    hasModal = false;
-    modalDom = document.createElement('div');
-    PopupManager.modalDom = modalDom;
-
-    modalDom.addEventListener('touchmove', function(event) {
-      event.preventDefault();
-      event.stopPropagation();
-    });
-
-    modalDom.addEventListener('click', function() {
-      PopupManager.doOnModalClick && PopupManager.doOnModalClick();
-    });
-  }
-
-  return modalDom;
-};
 
 const instances = {};
 
@@ -96,7 +73,8 @@ const PopupManager = {
 
     if (dom && dom.parentNode && dom.parentNode.nodeType !== 11) {
       dom.parentNode.appendChild(modalDom);
-    } else {
+    }
+    else {
       document.body.appendChild(modalDom);
     }
 
@@ -125,7 +103,8 @@ const PopupManager = {
         if (modalStack.length > 0) {
           modalDom.style.zIndex = modalStack[modalStack.length - 1].zIndex;
         }
-      } else {
+      }
+      else {
         for (let i = modalStack.length - 1; i >= 0; i--) {
           if (modalStack[i].id === id) {
             modalStack.splice(i, 1);
@@ -149,6 +128,30 @@ const PopupManager = {
       }, 200);
     }
   }
+};
+
+const getModal = function() {
+  if (Vue.prototype.$isServer) return;
+  let modalDom = PopupManager.modalDom;
+  if (modalDom) {
+    hasModal = true;
+  }
+  else {
+    hasModal = false;
+    modalDom = document.createElement('div');
+    PopupManager.modalDom = modalDom;
+
+    modalDom.addEventListener('touchmove', function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+    });
+
+    modalDom.addEventListener('click', function() {
+      PopupManager.doOnModalClick && PopupManager.doOnModalClick();
+    });
+  }
+
+  return modalDom;
 };
 
 Object.defineProperty(PopupManager, 'zIndex', {

@@ -1,4 +1,4 @@
-import { addClass, removeClass } from 'element-ui/src/utils/dom';
+import { addClass, removeClass } from '../utils/dom';
 
 class Transition {
   beforeEnter(el) {
@@ -19,7 +19,8 @@ class Transition {
       el.style.height = el.scrollHeight + 'px';
       el.style.paddingTop = el.dataset.oldPaddingTop;
       el.style.paddingBottom = el.dataset.oldPaddingBottom;
-    } else {
+    }
+    else {
       el.style.height = '';
       el.style.paddingTop = el.dataset.oldPaddingTop;
       el.style.paddingBottom = el.dataset.oldPaddingBottom;

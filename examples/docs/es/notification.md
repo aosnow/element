@@ -3,13 +3,13 @@
     methods: {
       open() {
         const h = this.$createElement;
-    
+
         this.$notify({
           title: 'Title',
           message: h('i', { style: 'color: teal' }, 'This is a reminder')
         });
       },
-    
+
       open2() {
         this.$notify({
           title: 'Prompt',
@@ -17,7 +17,7 @@
           duration: 0
         });
       },
-    
+
       open3() {
         this.$notify({
           title: 'Success',
@@ -25,7 +25,7 @@
           type: 'success'
         });
       },
-    
+
       open4() {
         this.$notify({
           title: 'Warning',
@@ -33,28 +33,28 @@
           type: 'warning'
         });
       },
-    
+
       open5() {
         this.$notify.info({
           title: 'Info',
           message: 'This is an info message'
         });
       },
-    
+
       open6() {
         this.$notify.error({
           title: 'Error',
           message: 'This is an error message'
         });
       },
-    
+
       open7() {
         this.$notify({
           title: 'Custom Position',
           message: 'I\'m at the top right corner'
         });
       },
-    
+
       open8() {
         this.$notify({
           title: 'Custom Position',
@@ -62,7 +62,7 @@
           position: 'bottom-right'
         });
       },
-    
+
       open9() {
         this.$notify({
           title: 'Custom Position',
@@ -70,7 +70,7 @@
           position: 'bottom-left'
         });
       },
-    
+
       open10() {
         this.$notify({
           title: 'Custom Position',
@@ -78,7 +78,7 @@
           position: 'top-left'
         });
       },
-    
+
       open11() {
         this.$notify.success({
           title: 'Success',
@@ -86,7 +86,7 @@
           offset: 100
         });
       },
-    
+
       open12() {
         this.$notify({
           title: 'HTML String',
@@ -94,7 +94,7 @@
           message: '<strong>This is <i>HTML</i> string</strong>'
         });
       },
-      
+
       open13() {
         this.$notify.success({
           title: 'Info',
@@ -102,7 +102,7 @@
           showClose: false
         });
       },
-    
+
       onClose() {
         console.log('Notification is closed');
       }
@@ -401,7 +401,7 @@ Element ha añadido un método global `$notify` para Vue.prototype. Así que en 
 Importar `Notification`:
 
 ```javascript
-import { Notification } from 'element-ui';
+import { Notification } from 'element-yhui';
 ```
 
 En este caso, debe llamar a `Notification(options)`. También se han registrado métodos para diferentes tipos, e.j. `Notification.success(options)`. Puede llamar al metodo `Notification.closeAll()` para cerrar manualmente todas las instancias.

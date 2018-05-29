@@ -67,9 +67,9 @@
 </template>
 
 <script type="text/jsx">
-  import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
-  import ElCheckbox from 'element-ui/packages/checkbox';
-  import emitter from 'element-ui/src/mixins/emitter';
+  import ElCollapseTransition from 'element-yhui/src/transitions/collapse-transition';
+  import ElCheckbox from 'element-yhui/packages/checkbox';
+  import emitter from 'element-yhui/src/mixins/emitter';
   import { getNodeKey } from './model/util';
 
   export default {

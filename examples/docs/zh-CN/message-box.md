@@ -30,7 +30,7 @@
             this.$message({
               message: '已取消删除',
               type: 'info'
-            });  
+            });
           }, 200);
         });
       },
@@ -186,7 +186,7 @@
           this.$message({
             type: 'info',
             message: '已取消删除'
-          });          
+          });
         });
       }
     }
@@ -224,7 +224,7 @@
           this.$message({
             type: 'info',
             message: '取消输入'
-          });       
+          });
         });
       }
     }
@@ -367,7 +367,7 @@
 如果单独引入 `MessageBox`：
 
 ```javascript
-import { MessageBox } from 'element-ui';
+import { MessageBox } from 'element-yhui';
 ```
 
 那么对应于上述四个全局方法的调用方法依次为：MessageBox, MessageBox.alert, MessageBox.confirm 和 MessageBox.prompt，调用参数与全局方法相同。

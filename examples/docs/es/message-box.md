@@ -12,7 +12,7 @@
           }
         });
       },
-    
+
       open2() {
         this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
           confirmButtonText: 'OK',
@@ -30,11 +30,11 @@
             this.$message({
               message: 'Delete canceled',
               type: 'info'
-            });  
+            });
           }, 200);
         });
       },
-    
+
       open3() {
         this.$prompt('Please input your email', 'Tips', {
           confirmButtonText: 'OK',
@@ -57,7 +57,7 @@
           }, 200);
         });
       },
-    
+
       open4() {
         const h = this.$createElement;
         this.$msgbox({
@@ -92,13 +92,13 @@
           }, 200);
         });
       },
-    
+
       open5() {
         this.$alert('<strong>This is <i>HTML</i> string</strong>', 'HTML String', {
           dangerouslyUseHTMLString: true
         });
       },
-    
+
       open6() {
         this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
           confirmButtonText: 'OK',
@@ -164,7 +164,7 @@ Alert interrumpe las operaciones realizadas hasta que el usuario confirme la ale
 Confirm es utilizado para preguntar al usuario y recibir una confirmacion.
 
 
-:::demo Llamando al metodo `$confirm` para abrir el componente confirm, y simula el sistema `confirm`. Tambien podemos personalizar a gran medida el componente Message Box al mandar un tercer atributo llamado `options` que es literalmente un objeto. El atributo `type` indica el tipo de mensaje, y su valor puede ser `success`, `error`, `info` y `warning`. Se debe tener en cuenta que el segundo atributo `title` debe ser de tipo `string`, y si es de tipo `object`, sera manejado como el atributo `options`. Aqui utilizamos `Promise` para manejar posteriormente el proceso. 
+:::demo Llamando al metodo `$confirm` para abrir el componente confirm, y simula el sistema `confirm`. Tambien podemos personalizar a gran medida el componente Message Box al mandar un tercer atributo llamado `options` que es literalmente un objeto. El atributo `type` indica el tipo de mensaje, y su valor puede ser `success`, `error`, `info` y `warning`. Se debe tener en cuenta que el segundo atributo `title` debe ser de tipo `string`, y si es de tipo `object`, sera manejado como el atributo `options`. Aqui utilizamos `Promise` para manejar posteriormente el proceso.
 
 ```html
 <template>
@@ -188,7 +188,7 @@ Confirm es utilizado para preguntar al usuario y recibir una confirmacion.
           this.$message({
             type: 'info',
             message: 'Delete canceled'
-          });          
+          });
         });
       }
     }
@@ -227,7 +227,7 @@ Prompt es utilizado cuando se requiere entrada de informacion del usuario.
           this.$message({
             type: 'info',
             message: 'Input canceled'
-          });       
+          });
         });
       }
     }
@@ -372,7 +372,7 @@ Si Element fue importado completamente, agregara los siguientes metodos globales
 Si prefieres importar `MessageBox` cuando lo necesites (on demand):
 
 ```javascript
-import { MessageBox } from 'element-ui';
+import { MessageBox } from 'element-yhui';
 ```
 
 Los metodos correspondientes: `MessageBox`, `MessageBox.alert`, `MessageBox.confirm` y `MessageBox.prompt`. Los parametros son los mismos que los anteriores.

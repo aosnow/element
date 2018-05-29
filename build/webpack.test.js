@@ -14,7 +14,7 @@ const webpackConfig = {
     chunkFilename: '[id].js'
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.scss'],
     alias: Object.assign(config.alias, {
       'vue$': 'vue/dist/vue.common.js'
     }),
@@ -85,8 +85,7 @@ const webpackConfig = {
       }
     ]
   },
-  plugins: [
-  ]
+  plugins: []
 };
 
 if (!process.env.CI_ENV) {
