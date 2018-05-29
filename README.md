@@ -1,7 +1,7 @@
 # element-yhui
 > A Vue.js 2.0 UI Toolkit for Web.
-> 详细使用：[使用文档手册](http://mschool.tech/yhui/#/zh-CN)
-> 快速开始：[QuickStart](http://mschool.tech/yhui/#/zh-CN/component/quickstart)
+> 详情：[使用文档手册](http://mschool.tech/yhui/#/zh-CN)
+> 开始：[QuickStart](http://mschool.tech/yhui/#/zh-CN/component/quickstart)
 
 ## Install
 ```shell
