@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import entry from './app';
 import Element from 'main/index.js';
 import 'packages/theme-yinhe/src/index.scss';
+
+import entry from './app';
 import routes from './route.config';
 import demoBlock from './components/demo-block.vue';
 import MainFooter from './components/footer.vue';
@@ -11,6 +12,7 @@ import MainHeader from './components/header.vue';
 import SideNav from './components/side-nav';
 import FooterNav from './components/footer-nav';
 import title from './i18n/title.json';
+
 
 Vue.use(Element);
 Vue.use(VueRouter);

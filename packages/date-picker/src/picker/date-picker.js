@@ -28,7 +28,8 @@ export default {
         this.unmountPicker();
         this.panel = getPanel(type);
         this.mountPicker();
-      } else {
+      }
+      else {
         this.panel = getPanel(type);
       }
     }

@@ -6,10 +6,13 @@
     "expect": true,
     "sinon": true
   },
-  "plugins": ["html", "json"],
+  "plugins": [ "html", "json" ],
   "extends": "elemefe",
   "rules": {
-    "no-restricted-globals": ["error", "event", "fdescribe"]
+    "no-restricted-globals": [ "error", "event", "fdescribe" ],
+    "brace-style": [ "error", "stroustrup", { "allowSingleLine": true } ],
+    "indent": "off",
+    "operator-linebreak": "off"
   },
   "parserOptions": {
     "ecmaFeatures": {

@@ -14,7 +14,8 @@
             type="button"
             class="el-picker-panel__shortcut"
             v-for="shortcut in shortcuts"
-            @click="handleShortcutClick(shortcut)">{{shortcut.text}}</button>
+            @click="handleShortcutClick(shortcut)">{{shortcut.text}}
+          </button>
         </div>
         <div class="el-picker-panel__body">
           <div class="el-date-range-picker__time-header" v-if="showTime">
@@ -28,7 +29,7 @@
                   class="el-date-range-picker__editor"
                   :value="minVisibleDate"
                   @input.native="handleDateInput($event, 'min')"
-                  @change.native="handleDateChange($event, 'min')" />
+                  @change.native="handleDateChange($event, 'min')"/>
               </span>
               <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="() => minTimePickerVisible = false">
                 <el-input
@@ -38,7 +39,7 @@
                   class="el-date-range-picker__editor"
                   :value="minVisibleTime"
                   @focus="minTimePickerVisible = true"
-                  @change.native="handleTimeChange($event, 'min')" />
+                  @change.native="handleTimeChange($event, 'min')"/>
                 <time-picker
                   ref="minTimePicker"
                   @pick="handleMinTimePick"
@@ -59,7 +60,7 @@
                   :value="maxVisibleDate"
                   :readonly="!minDate"
                   @input.native="handleDateInput($event, 'max')"
-                  @change.native="handleDateChange($event, 'max')" />
+                  @change.native="handleDateChange($event, 'max')"/>
               </span>
               <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="() => maxTimePickerVisible = false">
                 <el-input
@@ -71,7 +72,7 @@
                   :value="maxVisibleTime"
                   @focus="minDate && (maxTimePickerVisible = true)"
                   :readonly="!minDate"
-                  @change.native="handleTimeChange($event, 'max')" />
+                  @change.native="handleTimeChange($event, 'max')"/>
                 <time-picker
                   ref="maxTimePicker"
                   @pick="handleMaxTimePick"
@@ -184,440 +185,452 @@
 </template>
 
 <script type="text/babel">
-  import {
-    formatDate,
-    parseDate,
-    isDate,
-    modifyDate,
-    modifyTime,
-    modifyWithDefaultTime,
-    prevYear,
-    nextYear,
-    prevMonth,
-    nextMonth,
-    extractDateFormat,
-    extractTimeFormat
-  } from '../util';
-  import Clickoutside from 'element-yhui/src/utils/clickoutside';
-  import Locale from 'element-yhui/src/mixins/locale';
-  import TimePicker from './time';
-  import DateTable from '../basic/date-table';
-  import ElInput from 'element-yhui/packages/input';
-  import ElButton from 'element-yhui/packages/button';
+import {
+  formatDate,
+  parseDate,
+  isDate,
+  modifyDate,
+  modifyTime,
+  modifyWithDefaultTime,
+  prevYear,
+  nextYear,
+  prevMonth,
+  nextMonth,
+  extractDateFormat,
+  extractTimeFormat
+} from '../util';
+import Clickoutside from 'element-yhui/src/utils/clickoutside';
+import Locale from 'element-yhui/src/mixins/locale';
+import TimePicker from './time';
+import DateTable from '../basic/date-table';
+import ElInput from 'element-yhui/packages/input';
+import ElButton from 'element-yhui/packages/button';
 
-  const advanceDate = (date, amount) => {
-    return new Date(new Date(date).getTime() + amount);
-  };
+const advanceDate = (date, amount) => {
+  return new Date(new Date(date).getTime() + amount);
+};
 
-  const calcDefaultValue = (defaultValue) => {
-    if (Array.isArray(defaultValue)) {
-      return [new Date(defaultValue[0]), new Date(defaultValue[1])];
-    } else if (defaultValue) {
-      return [new Date(defaultValue), advanceDate(defaultValue, 24 * 60 * 60 * 1000)];
-    } else {
-      return [new Date(), advanceDate(Date.now(), 24 * 60 * 60 * 1000)];
+const calcDefaultValue = (defaultValue) => {
+  if (Array.isArray(defaultValue)) {
+    return [new Date(defaultValue[0]), new Date(defaultValue[1])];
+  }
+  else if (defaultValue) {
+    return [new Date(defaultValue), advanceDate(defaultValue, 24 * 60 * 60 * 1000)];
+  }
+  else {
+    return [new Date(), advanceDate(Date.now(), 24 * 60 * 60 * 1000)];
+  }
+};
+
+export default {
+  mixins: [Locale],
+
+  directives: { Clickoutside },
+
+  computed: {
+    btnDisabled() {
+      return !(this.minDate && this.maxDate && !this.selecting);
+    },
+
+    leftLabel() {
+      return this.leftDate.getFullYear() + ' ' + this.t('el.datepicker.year') + ' ' + this.t(`el.datepicker.month${ this.leftDate.getMonth() + 1 }`);
+    },
+
+    rightLabel() {
+      return this.rightDate.getFullYear() + ' ' + this.t('el.datepicker.year') + ' ' + this.t(`el.datepicker.month${ this.rightDate.getMonth() + 1 }`);
+    },
+
+    leftYear() {
+      return this.leftDate.getFullYear();
+    },
+
+    leftMonth() {
+      return this.leftDate.getMonth();
+    },
+
+    leftMonthDate() {
+      return this.leftDate.getDate();
+    },
+
+    rightYear() {
+      return this.rightDate.getFullYear();
+    },
+
+    rightMonth() {
+      return this.rightDate.getMonth();
+    },
+
+    rightMonthDate() {
+      return this.rightDate.getDate();
+    },
+
+    minVisibleDate() {
+      return this.minDate ? formatDate(this.minDate, this.dateFormat) : '';
+    },
+
+    maxVisibleDate() {
+      return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate, this.dateFormat) : '';
+    },
+
+    minVisibleTime() {
+      return this.minDate ? formatDate(this.minDate, this.timeFormat) : '';
+    },
+
+    maxVisibleTime() {
+      return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate, this.timeFormat) : '';
+    },
+
+    timeFormat() {
+      if (this.format) {
+        return extractTimeFormat(this.format);
+      }
+      else {
+        return 'HH:mm:ss';
+      }
+    },
+
+    dateFormat() {
+      if (this.format) {
+        return extractDateFormat(this.format);
+      }
+      else {
+        return 'yyyy-MM-dd';
+      }
+    },
+
+    enableMonthArrow() {
+      const nextMonth = (this.leftMonth + 1) % 12;
+      const yearOffset = this.leftMonth + 1 >= 12 ? 1 : 0;
+      return this.unlinkPanels && new Date(this.leftYear + yearOffset, nextMonth) < new Date(this.rightYear, this.rightMonth);
+    },
+
+    enableYearArrow() {
+      return this.unlinkPanels && this.rightYear * 12 + this.rightMonth - (this.leftYear * 12 + this.leftMonth + 1) >= 12;
     }
-  };
+  },
 
-  export default {
-    mixins: [Locale],
-
-    directives: { Clickoutside },
-
-    computed: {
-      btnDisabled() {
-        return !(this.minDate && this.maxDate && !this.selecting);
+  data() {
+    return {
+      popperClass: '',
+      value: [],
+      defaultValue: null,
+      defaultTime: null,
+      minDate: '',
+      maxDate: '',
+      leftDate: new Date(),
+      rightDate: nextMonth(new Date()),
+      rangeState: {
+        endDate: null,
+        selecting: false,
+        row: null,
+        column: null
       },
+      showTime: false,
+      shortcuts: '',
+      visible: '',
+      disabledDate: '',
+      firstDayOfWeek: 7,
+      minTimePickerVisible: false,
+      maxTimePickerVisible: false,
+      format: '',
+      arrowControl: false,
+      unlinkPanels: false
+    };
+  },
 
-      leftLabel() {
-        return this.leftDate.getFullYear() + ' ' + this.t('el.datepicker.year') + ' ' + this.t(`el.datepicker.month${ this.leftDate.getMonth() + 1 }`);
-      },
-
-      rightLabel() {
-        return this.rightDate.getFullYear() + ' ' + this.t('el.datepicker.year') + ' ' + this.t(`el.datepicker.month${ this.rightDate.getMonth() + 1 }`);
-      },
-
-      leftYear() {
-        return this.leftDate.getFullYear();
-      },
-
-      leftMonth() {
-        return this.leftDate.getMonth();
-      },
-
-      leftMonthDate() {
-        return this.leftDate.getDate();
-      },
-
-      rightYear() {
-        return this.rightDate.getFullYear();
-      },
-
-      rightMonth() {
-        return this.rightDate.getMonth();
-      },
-
-      rightMonthDate() {
-        return this.rightDate.getDate();
-      },
-
-      minVisibleDate() {
-        return this.minDate ? formatDate(this.minDate, this.dateFormat) : '';
-      },
-
-      maxVisibleDate() {
-        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate, this.dateFormat) : '';
-      },
-
-      minVisibleTime() {
-        return this.minDate ? formatDate(this.minDate, this.timeFormat) : '';
-      },
-
-      maxVisibleTime() {
-        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate, this.timeFormat) : '';
-      },
-
-      timeFormat() {
-        if (this.format) {
-          return extractTimeFormat(this.format);
-        } else {
-          return 'HH:mm:ss';
+  watch: {
+    minDate(val) {
+      this.$nextTick(() => {
+        if (this.$refs.maxTimePicker && this.maxDate && this.maxDate < this.minDate) {
+          const format = 'HH:mm:ss';
+          this.$refs.maxTimePicker.selectableRange = [
+            [
+              parseDate(formatDate(this.minDate, format), format),
+              parseDate('23:59:59', format)
+            ]
+          ];
         }
-      },
-
-      dateFormat() {
-        if (this.format) {
-          return extractDateFormat(this.format);
-        } else {
-          return 'yyyy-MM-dd';
-        }
-      },
-
-      enableMonthArrow() {
-        const nextMonth = (this.leftMonth + 1) % 12;
-        const yearOffset = this.leftMonth + 1 >= 12 ? 1 : 0;
-        return this.unlinkPanels && new Date(this.leftYear + yearOffset, nextMonth) < new Date(this.rightYear, this.rightMonth);
-      },
-
-      enableYearArrow() {
-        return this.unlinkPanels && this.rightYear * 12 + this.rightMonth - (this.leftYear * 12 + this.leftMonth + 1) >= 12;
+      });
+      if (val && this.$refs.minTimePicker) {
+        this.$refs.minTimePicker.date = val;
+        this.$refs.minTimePicker.value = val;
       }
     },
 
-    data() {
-      return {
-        popperClass: '',
-        value: [],
-        defaultValue: null,
-        defaultTime: null,
-        minDate: '',
-        maxDate: '',
-        leftDate: new Date(),
-        rightDate: nextMonth(new Date()),
-        rangeState: {
-          endDate: null,
-          selecting: false,
-          row: null,
-          column: null
-        },
-        showTime: false,
-        shortcuts: '',
-        visible: '',
-        disabledDate: '',
-        firstDayOfWeek: 7,
-        minTimePickerVisible: false,
-        maxTimePickerVisible: false,
-        format: '',
-        arrowControl: false,
-        unlinkPanels: false
-      };
+    maxDate(val) {
+      if (val && this.$refs.maxTimePicker) {
+        this.$refs.maxTimePicker.date = val;
+        this.$refs.maxTimePicker.value = val;
+      }
     },
 
-    watch: {
-      minDate(val) {
+    minTimePickerVisible(val) {
+      if (val) {
         this.$nextTick(() => {
-          if (this.$refs.maxTimePicker && this.maxDate && this.maxDate < this.minDate) {
-            const format = 'HH:mm:ss';
-            this.$refs.maxTimePicker.selectableRange = [
-              [
-                parseDate(formatDate(this.minDate, format), format),
-                parseDate('23:59:59', format)
-              ]
-            ];
-          }
+          this.$refs.minTimePicker.date = this.minDate;
+          this.$refs.minTimePicker.value = this.minDate;
+          this.$refs.minTimePicker.adjustSpinners();
         });
-        if (val && this.$refs.minTimePicker) {
-          this.$refs.minTimePicker.date = val;
-          this.$refs.minTimePicker.value = val;
-        }
-      },
-
-      maxDate(val) {
-        if (val && this.$refs.maxTimePicker) {
-          this.$refs.maxTimePicker.date = val;
-          this.$refs.maxTimePicker.value = val;
-        }
-      },
-
-      minTimePickerVisible(val) {
-        if (val) {
-          this.$nextTick(() => {
-            this.$refs.minTimePicker.date = this.minDate;
-            this.$refs.minTimePicker.value = this.minDate;
-            this.$refs.minTimePicker.adjustSpinners();
-          });
-        }
-      },
-
-      maxTimePickerVisible(val) {
-        if (val) {
-          this.$nextTick(() => {
-            this.$refs.maxTimePicker.date = this.maxDate;
-            this.$refs.maxTimePicker.value = this.maxDate;
-            this.$refs.maxTimePicker.adjustSpinners();
-          });
-        }
-      },
-
-      value(newVal) {
-        if (!newVal) {
-          this.minDate = null;
-          this.maxDate = null;
-        } else if (Array.isArray(newVal)) {
-          this.minDate = isDate(newVal[0]) ? new Date(newVal[0]) : null;
-          this.maxDate = isDate(newVal[1]) ? new Date(newVal[1]) : null;
-          // NOTE: currently, maxDate = minDate + 1 month
-          //       should allow them to be set individually in the future
-          if (this.minDate) {
-            this.leftDate = this.minDate;
-            if (this.unlinkPanels && this.maxDate) {
-              const minDateYear = this.minDate.getFullYear();
-              const minDateMonth = this.minDate.getMonth();
-              const maxDateYear = this.maxDate.getFullYear();
-              const maxDateMonth = this.maxDate.getMonth();
-              this.rightDate = minDateYear === maxDateYear && minDateMonth === maxDateMonth
-                ? nextMonth(this.maxDate)
-                : this.maxDate;
-            } else {
-              this.rightDate = nextMonth(this.leftDate);
-            }
-          } else {
-            this.leftDate = calcDefaultValue(this.defaultValue)[0];
-            this.rightDate = nextMonth(this.leftDate);
-          }
-        }
-      },
-
-      defaultValue(val) {
-        if (!Array.isArray(this.value)) {
-          const [left, right] = calcDefaultValue(val);
-          this.leftDate = left;
-          this.rightDate = val && val[1] && this.unlinkPanels
-            ? right
-            : nextMonth(this.leftDate);
-        }
       }
     },
 
-    methods: {
-      handleClear() {
+    maxTimePickerVisible(val) {
+      if (val) {
+        this.$nextTick(() => {
+          this.$refs.maxTimePicker.date = this.maxDate;
+          this.$refs.maxTimePicker.value = this.maxDate;
+          this.$refs.maxTimePicker.adjustSpinners();
+        });
+      }
+    },
+
+    value(newVal) {
+      if (!newVal) {
         this.minDate = null;
         this.maxDate = null;
-        this.leftDate = calcDefaultValue(this.defaultValue)[0];
-        this.rightDate = nextMonth(this.leftDate);
-        this.$emit('pick', null);
-      },
-
-      handleChangeRange(val) {
-        this.minDate = val.minDate;
-        this.maxDate = val.maxDate;
-        this.rangeState = val.rangeState;
-      },
-
-      handleDateInput(event, type) {
-        const value = event.target.value;
-        if (value.length !== this.dateFormat.length) return;
-        const parsedValue = parseDate(value, this.dateFormat);
-
-        if (parsedValue) {
-          if (typeof this.disabledDate === 'function' &&
-            this.disabledDate(new Date(parsedValue))) {
-            return;
+      }
+      else if (Array.isArray(newVal)) {
+        this.minDate = isDate(newVal[0]) ? new Date(newVal[0]) : null;
+        this.maxDate = isDate(newVal[1]) ? new Date(newVal[1]) : null;
+        // NOTE: currently, maxDate = minDate + 1 month
+        //       should allow them to be set individually in the future
+        if (this.minDate) {
+          this.leftDate = this.minDate;
+          if (this.unlinkPanels && this.maxDate) {
+            const minDateYear = this.minDate.getFullYear();
+            const minDateMonth = this.minDate.getMonth();
+            const maxDateYear = this.maxDate.getFullYear();
+            const maxDateMonth = this.maxDate.getMonth();
+            this.rightDate = minDateYear === maxDateYear && minDateMonth === maxDateMonth
+              ? nextMonth(this.maxDate)
+              : this.maxDate;
           }
-          if (type === 'min') {
-            this.minDate = new Date(parsedValue);
-            this.leftDate = new Date(parsedValue);
+          else {
             this.rightDate = nextMonth(this.leftDate);
-          } else {
-            this.maxDate = new Date(parsedValue);
-            this.leftDate = prevMonth(parsedValue);
-            this.rightDate = new Date(parsedValue);
           }
         }
-      },
-
-      handleDateChange(event, type) {
-        const value = event.target.value;
-        const parsedValue = parseDate(value, this.dateFormat);
-        if (parsedValue) {
-          if (type === 'min') {
-            this.minDate = modifyDate(this.minDate, parsedValue.getFullYear(), parsedValue.getMonth(), parsedValue.getDate());
-            if (this.minDate > this.maxDate) {
-              this.maxDate = this.minDate;
-            }
-          } else {
-            this.maxDate = modifyDate(this.maxDate, parsedValue.getFullYear(), parsedValue.getMonth(), parsedValue.getDate());
-            if (this.maxDate < this.minDate) {
-              this.minDate = this.maxDate;
-            }
-          }
-        }
-      },
-
-      handleTimeChange(event, type) {
-        const value = event.target.value;
-        const parsedValue = parseDate(value, this.timeFormat);
-        if (parsedValue) {
-          if (type === 'min') {
-            this.minDate = modifyTime(this.minDate, parsedValue.getHours(), parsedValue.getMinutes(), parsedValue.getSeconds());
-            if (this.minDate > this.maxDate) {
-              this.maxDate = this.minDate;
-            }
-            this.$refs.minTimePicker.value = this.minDate;
-            this.minTimePickerVisible = false;
-          } else {
-            this.maxDate = modifyTime(this.maxDate, parsedValue.getHours(), parsedValue.getMinutes(), parsedValue.getSeconds());
-            if (this.maxDate < this.minDate) {
-              this.minDate = this.maxDate;
-            }
-            this.$refs.maxTimePicker.value = this.minDate;
-            this.maxTimePickerVisible = false;
-          }
-        }
-      },
-
-      handleRangePick(val, close = true) {
-        const defaultTime = this.defaultTime || [];
-        const minDate = modifyWithDefaultTime(val.minDate, defaultTime[0]);
-        const maxDate = modifyWithDefaultTime(val.maxDate, defaultTime[1]);
-
-        if (this.maxDate === maxDate && this.minDate === minDate) {
-          return;
-        }
-        this.onPick && this.onPick(val);
-        this.maxDate = maxDate;
-        this.minDate = minDate;
-
-        // workaround for https://github.com/ElemeFE/element/issues/7539, should remove this block when we don't have to care about Chromium 55 - 57
-        setTimeout(() => {
-          this.maxDate = maxDate;
-          this.minDate = minDate;
-        }, 10);
-        if (!close || this.showTime) return;
-        this.handleConfirm();
-      },
-
-      handleShortcutClick(shortcut) {
-        if (shortcut.onClick) {
-          shortcut.onClick(this);
-        }
-      },
-
-      handleMinTimePick(value, visible, first) {
-        this.minDate = this.minDate || new Date();
-        if (value) {
-          this.minDate = modifyTime(this.minDate, value.getHours(), value.getMinutes(), value.getSeconds());
-        }
-
-        if (!first) {
-          this.minTimePickerVisible = visible;
-        }
-
-        if (!this.maxDate || this.maxDate && this.maxDate.getTime() < this.minDate.getTime()) {
-          this.maxDate = new Date(this.minDate);
-        }
-      },
-
-      handleMaxTimePick(value, visible, first) {
-        if (this.maxDate && value) {
-          this.maxDate = modifyTime(this.maxDate, value.getHours(), value.getMinutes(), value.getSeconds());
-        }
-
-        if (!first) {
-          this.maxTimePickerVisible = visible;
-        }
-
-        if (this.maxDate && this.minDate && this.minDate.getTime() > this.maxDate.getTime()) {
-          this.minDate = new Date(this.maxDate);
-        }
-      },
-
-      // leftPrev*, rightNext* need to take care of `unlinkPanels`
-      leftPrevYear() {
-        this.leftDate = prevYear(this.leftDate);
-        if (!this.unlinkPanels) {
+        else {
+          this.leftDate = calcDefaultValue(this.defaultValue)[0];
           this.rightDate = nextMonth(this.leftDate);
         }
-      },
-
-      leftPrevMonth() {
-        this.leftDate = prevMonth(this.leftDate);
-        if (!this.unlinkPanels) {
-          this.rightDate = nextMonth(this.leftDate);
-        }
-      },
-
-      rightNextYear() {
-        if (!this.unlinkPanels) {
-          this.leftDate = nextYear(this.leftDate);
-          this.rightDate = nextMonth(this.leftDate);
-        } else {
-          this.rightDate = nextYear(this.rightDate);
-        }
-      },
-
-      rightNextMonth() {
-        if (!this.unlinkPanels) {
-          this.leftDate = nextMonth(this.leftDate);
-          this.rightDate = nextMonth(this.leftDate);
-        } else {
-          this.rightDate = nextMonth(this.rightDate);
-        }
-      },
-
-      // leftNext*, rightPrev* are called when `unlinkPanels` is true
-      leftNextYear() {
-        this.leftDate = nextYear(this.leftDate);
-      },
-
-      leftNextMonth() {
-        this.leftDate = nextMonth(this.leftDate);
-      },
-
-      rightPrevYear() {
-        this.rightDate = prevYear(this.rightDate);
-      },
-
-      rightPrevMonth() {
-        this.rightDate = prevMonth(this.rightDate);
-      },
-
-      handleConfirm(visible = false) {
-        this.$emit('pick', [this.minDate, this.maxDate], visible);
-      },
-
-      isValidValue(value) {
-        return Array.isArray(value) &&
-          value && value[0] && value[1] &&
-          isDate(value[0]) && isDate(value[1]) &&
-          value[0].getTime() <= value[1].getTime() && (
-          typeof this.disabledDate === 'function'
-            ? !this.disabledDate(value[0]) && !this.disabledDate(value[1])
-            : true
-        );
       }
     },
 
-    components: { TimePicker, DateTable, ElInput, ElButton }
-  };
+    defaultValue(val) {
+      if (!Array.isArray(this.value)) {
+        const [left, right] = calcDefaultValue(val);
+        this.leftDate = left;
+        this.rightDate = val && val[1] && this.unlinkPanels
+          ? right
+          : nextMonth(this.leftDate);
+      }
+    }
+  },
+
+  methods: {
+    handleClear() {
+      this.minDate = null;
+      this.maxDate = null;
+      this.leftDate = calcDefaultValue(this.defaultValue)[0];
+      this.rightDate = nextMonth(this.leftDate);
+      this.$emit('pick', null);
+    },
+
+    handleChangeRange(val) {
+      this.minDate = val.minDate;
+      this.maxDate = val.maxDate;
+      this.rangeState = val.rangeState;
+    },
+
+    handleDateInput(event, type) {
+      const value = event.target.value;
+      if (value.length !== this.dateFormat.length) return;
+      const parsedValue = parseDate(value, this.dateFormat);
+
+      if (parsedValue) {
+        if (typeof this.disabledDate === 'function' &&
+            this.disabledDate(new Date(parsedValue))) {
+          return;
+        }
+        if (type === 'min') {
+          this.minDate = new Date(parsedValue);
+          this.leftDate = new Date(parsedValue);
+          this.rightDate = nextMonth(this.leftDate);
+        }
+        else {
+          this.maxDate = new Date(parsedValue);
+          this.leftDate = prevMonth(parsedValue);
+          this.rightDate = new Date(parsedValue);
+        }
+      }
+    },
+
+    handleDateChange(event, type) {
+      const value = event.target.value;
+      const parsedValue = parseDate(value, this.dateFormat);
+      if (parsedValue) {
+        if (type === 'min') {
+          this.minDate = modifyDate(this.minDate, parsedValue.getFullYear(), parsedValue.getMonth(), parsedValue.getDate());
+          if (this.minDate > this.maxDate) {
+            this.maxDate = this.minDate;
+          }
+        }
+        else {
+          this.maxDate = modifyDate(this.maxDate, parsedValue.getFullYear(), parsedValue.getMonth(), parsedValue.getDate());
+          if (this.maxDate < this.minDate) {
+            this.minDate = this.maxDate;
+          }
+        }
+      }
+    },
+
+    handleTimeChange(event, type) {
+      const value = event.target.value;
+      const parsedValue = parseDate(value, this.timeFormat);
+      if (parsedValue) {
+        if (type === 'min') {
+          this.minDate = modifyTime(this.minDate, parsedValue.getHours(), parsedValue.getMinutes(), parsedValue.getSeconds());
+          if (this.minDate > this.maxDate) {
+            this.maxDate = this.minDate;
+          }
+          this.$refs.minTimePicker.value = this.minDate;
+          this.minTimePickerVisible = false;
+        }
+        else {
+          this.maxDate = modifyTime(this.maxDate, parsedValue.getHours(), parsedValue.getMinutes(), parsedValue.getSeconds());
+          if (this.maxDate < this.minDate) {
+            this.minDate = this.maxDate;
+          }
+          this.$refs.maxTimePicker.value = this.minDate;
+          this.maxTimePickerVisible = false;
+        }
+      }
+    },
+
+    handleRangePick(val, close = true) {
+      const defaultTime = this.defaultTime || [];
+      const minDate = modifyWithDefaultTime(val.minDate, defaultTime[0]);
+      const maxDate = modifyWithDefaultTime(val.maxDate, defaultTime[1]);
+
+      if (this.maxDate === maxDate && this.minDate === minDate) {
+        return;
+      }
+      this.onPick && this.onPick(val);
+      this.maxDate = maxDate;
+      this.minDate = minDate;
+
+      // workaround for https://github.com/ElemeFE/element/issues/7539, should remove this block when we don't have to care about Chromium 55 - 57
+      setTimeout(() => {
+        this.maxDate = maxDate;
+        this.minDate = minDate;
+      }, 10);
+      if (!close || this.showTime) return;
+      this.handleConfirm();
+    },
+
+    handleShortcutClick(shortcut) {
+      if (shortcut.onClick) {
+        shortcut.onClick(this);
+      }
+    },
+
+    handleMinTimePick(value, visible, first) {
+      this.minDate = this.minDate || new Date();
+      if (value) {
+        this.minDate = modifyTime(this.minDate, value.getHours(), value.getMinutes(), value.getSeconds());
+      }
+
+      if (!first) {
+        this.minTimePickerVisible = visible;
+      }
+
+      if (!this.maxDate || this.maxDate && this.maxDate.getTime() < this.minDate.getTime()) {
+        this.maxDate = new Date(this.minDate);
+      }
+    },
+
+    handleMaxTimePick(value, visible, first) {
+      if (this.maxDate && value) {
+        this.maxDate = modifyTime(this.maxDate, value.getHours(), value.getMinutes(), value.getSeconds());
+      }
+
+      if (!first) {
+        this.maxTimePickerVisible = visible;
+      }
+
+      if (this.maxDate && this.minDate && this.minDate.getTime() > this.maxDate.getTime()) {
+        this.minDate = new Date(this.maxDate);
+      }
+    },
+
+    // leftPrev*, rightNext* need to take care of `unlinkPanels`
+    leftPrevYear() {
+      this.leftDate = prevYear(this.leftDate);
+      if (!this.unlinkPanels) {
+        this.rightDate = nextMonth(this.leftDate);
+      }
+    },
+
+    leftPrevMonth() {
+      this.leftDate = prevMonth(this.leftDate);
+      if (!this.unlinkPanels) {
+        this.rightDate = nextMonth(this.leftDate);
+      }
+    },
+
+    rightNextYear() {
+      if (!this.unlinkPanels) {
+        this.leftDate = nextYear(this.leftDate);
+        this.rightDate = nextMonth(this.leftDate);
+      }
+      else {
+        this.rightDate = nextYear(this.rightDate);
+      }
+    },
+
+    rightNextMonth() {
+      if (!this.unlinkPanels) {
+        this.leftDate = nextMonth(this.leftDate);
+        this.rightDate = nextMonth(this.leftDate);
+      }
+      else {
+        this.rightDate = nextMonth(this.rightDate);
+      }
+    },
+
+    // leftNext*, rightPrev* are called when `unlinkPanels` is true
+    leftNextYear() {
+      this.leftDate = nextYear(this.leftDate);
+    },
+
+    leftNextMonth() {
+      this.leftDate = nextMonth(this.leftDate);
+    },
+
+    rightPrevYear() {
+      this.rightDate = prevYear(this.rightDate);
+    },
+
+    rightPrevMonth() {
+      this.rightDate = prevMonth(this.rightDate);
+    },
+
+    handleConfirm(visible = false) {
+      this.$emit('pick', [this.minDate, this.maxDate], visible);
+    },
+
+    isValidValue(value) {
+      return Array.isArray(value) &&
+             value && value[0] && value[1] &&
+             isDate(value[0]) && isDate(value[1]) &&
+             value[0].getTime() <= value[1].getTime() && (
+               typeof this.disabledDate === 'function'
+                 ? !this.disabledDate(value[0]) && !this.disabledDate(value[1])
+                 : true
+             );
+    }
+  },
+
+  components: { TimePicker, DateTable, ElInput, ElButton }
+};
 </script>

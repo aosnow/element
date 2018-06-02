@@ -43,18 +43,14 @@ function calculateNodeStyling(targetElement) {
     parseFloat(style.getPropertyValue('border-top-width'))
   );
 
-  const contextStyle = CONTEXT_STYLE
-    .map(name => `${name}:${style.getPropertyValue(name)}`)
-    .join(';');
+  const contextStyle = CONTEXT_STYLE.map(name => `${name}:${style.getPropertyValue(name)}`).join(';');
 
   return { contextStyle, paddingSize, borderSize, boxSizing };
 }
 
-export default function calcTextareaHeight(
-  targetElement,
+export default function calcTextareaHeight(targetElement,
   minRows = 1,
-  maxRows = null
-) {
+  maxRows = null) {
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
     document.body.appendChild(hiddenTextarea);
@@ -75,7 +71,8 @@ export default function calcTextareaHeight(
 
   if (boxSizing === 'border-box') {
     height = height + borderSize;
-  } else if (boxSizing === 'content-box') {
+  }
+  else if (boxSizing === 'content-box') {
     height = height - paddingSize;
   }
 

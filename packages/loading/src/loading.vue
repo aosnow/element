@@ -17,25 +17,25 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        text: null,
-        spinner: null,
-        background: null,
-        fullscreen: true,
-        visible: false,
-        customClass: ''
-      };
-    },
+export default {
+  data() {
+    return {
+      text: null,
+      spinner: null,
+      background: null,
+      fullscreen: true,
+      visible: false,
+      customClass: ''
+    };
+  },
 
-    methods: {
-      handleAfterLeave() {
-        this.$emit('after-leave');
-      },
-      setText(text) {
-        this.text = text;
-      }
+  methods: {
+    handleAfterLeave() {
+      this.$emit('after-leave');
+    },
+    setText(text) {
+      this.text = text;
     }
-  };
+  }
+};
 </script>

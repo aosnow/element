@@ -10,32 +10,32 @@
       :style="{backgroundColor: color}">
       <slot></slot>
       <i class="el-tag__close el-icon-close"
-        v-if="closable"
-        @click.stop="handleClose"></i>
+         v-if="closable"
+         @click.stop="handleClose"></i>
     </span>
   </transition>
 </template>
 <script>
-  export default {
-    name: 'ElTag',
-    props: {
-      text: String,
-      closable: Boolean,
-      type: String,
-      hit: Boolean,
-      disableTransitions: Boolean,
-      color: String,
-      size: String
-    },
-    methods: {
-      handleClose(event) {
-        this.$emit('close', event);
-      }
-    },
-    computed: {
-      tagSize() {
-        return this.size || (this.$ELEMENT || {}).size;
-      }
+export default {
+  name: 'ElTag',
+  props: {
+    text: String,
+    closable: Boolean,
+    type: String,
+    hit: Boolean,
+    disableTransitions: Boolean,
+    color: String,
+    size: String
+  },
+  methods: {
+    handleClose(event) {
+      this.$emit('close', event);
     }
-  };
+  },
+  computed: {
+    tagSize() {
+      return this.size || (this.$ELEMENT || {}).size;
+    }
+  }
+};
 </script>

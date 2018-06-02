@@ -1,30 +1,30 @@
 @import "../mixins/mixins";
 
-.v-modal-enter {
+.v-modal-enter{
   animation: v-modal-in .2s ease;
 }
 
-.v-modal-leave {
+.v-modal-leave{
   animation: v-modal-out .2s ease forwards;
 }
 
-@keyframes v-modal-in {
-  0% {
+@keyframes v-modal-in{
+  0%{
     opacity: 0;
   }
-  100% {
+  100%{
   }
 }
 
-@keyframes v-modal-out {
-  0% {
+@keyframes v-modal-out{
+  0%{
   }
-  100% {
+  100%{
     opacity: 0;
   }
 }
 
-.v-modal {
+.v-modal{
   position: fixed;
   left: 0;
   top: 0;
@@ -34,8 +34,8 @@
   background: #000;
 }
 
-@include b(popup-parent) {
-  @include m(hidden) {
+@include b(popup-parent){
+  @include m(hidden){
     overflow: hidden;
   }
 }

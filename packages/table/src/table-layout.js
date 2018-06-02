@@ -63,7 +63,8 @@ class TableLayout {
       el.style[prop] = value + 'px';
 
       this.updateElsHeight();
-    } else if (typeof value === 'string') {
+    }
+    else if (typeof value === 'string') {
       el.style[prop] = value;
       this.updateElsHeight();
     }
@@ -103,7 +104,8 @@ class TableLayout {
     columns.forEach((column) => {
       if (column.isColumnGroup) {
         flattenColumns.push.apply(flattenColumns, column.columns);
-      } else {
+      }
+      else {
         flattenColumns.push(column);
       }
     });
@@ -138,7 +140,8 @@ class TableLayout {
 
         if (flexColumns.length === 1) {
           flexColumns[0].realWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth;
-        } else {
+        }
+        else {
           const allColumnsWidth = flexColumns.reduce((prev, column) => prev + (column.minWidth || 80), 0);
           const flexWidthPerPixel = totalFlexWidth / allColumnsWidth;
           let noneFirstWidth = 0;
@@ -152,7 +155,8 @@ class TableLayout {
 
           flexColumns[0].realWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth - noneFirstWidth;
         }
-      } else { // HAVE HORIZONTAL SCROLL BAR
+      }
+      else { // HAVE HORIZONTAL SCROLL BAR
         this.scrollX = true;
         flexColumns.forEach(function(column) {
           column.realWidth = column.minWidth;
@@ -161,11 +165,13 @@ class TableLayout {
 
       this.bodyWidth = Math.max(bodyMinWidth, bodyWidth);
       this.table.resizeState.width = this.bodyWidth;
-    } else {
+    }
+    else {
       flattenColumns.forEach((column) => {
         if (!column.width && !column.minWidth) {
           column.realWidth = 80;
-        } else {
+        }
+        else {
           column.realWidth = column.width || column.minWidth;
         }
 

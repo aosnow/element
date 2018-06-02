@@ -51,7 +51,8 @@ export default {
     ['xs', 'sm', 'md', 'lg', 'xl'].forEach(size => {
       if (typeof this[size] === 'number') {
         classList.push(`el-col-${size}-${this[size]}`);
-      } else if (typeof this[size] === 'object') {
+      }
+      else if (typeof this[size] === 'object') {
         let props = this[size];
         Object.keys(props).forEach(prop => {
           classList.push(

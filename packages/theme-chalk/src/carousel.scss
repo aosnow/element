@@ -1,16 +1,16 @@
 @import "mixins/mixins";
 @import "common/var";
 
-@include b(carousel) {
+@include b(carousel){
   overflow-x: hidden;
   position: relative;
 
-  @include e(container) {
+  @include e(container){
     position: relative;
     height: 300px;
   }
 
-  @include e(arrow) {
+  @include e(arrow){
     border: none;
     outline: none;
     padding: 0;
@@ -29,24 +29,24 @@
     text-align: center;
     font-size: $--carousel-arrow-font-size;
 
-    @include m(left) {
+    @include m(left){
       left: 16px;
     }
 
-    @include m(right) {
+    @include m(right){
       right: 16px;
     }
 
-    &:hover {
+    &:hover{
       background-color: $--carousel-arrow-hover-background;
     }
 
-    & i {
+    & i{
       cursor: pointer;
     }
   }
 
-  @include e(indicators) {
+  @include e(indicators){
     position: absolute;
     list-style: none;
     bottom: 0;
@@ -56,57 +56,57 @@
     padding: 0;
     z-index: #{$--index-normal + 1};
 
-    @include m(outside) {
+    @include m(outside){
       bottom: #{$--carousel-indicator-height + $--carousel-indicator-padding-vertical * 2};
       text-align: center;
       position: static;
       transform: none;
-      .el-carousel__indicator:hover button {
+      .el-carousel__indicator:hover button{
         opacity: 0.64;
       }
-      button {
+      button{
         background-color: $--carousel-indicator-out-color;
         opacity: 0.24;
       }
     }
 
-    @include m(labels) {
+    @include m(labels){
       left: 0;
       right: 0;
       transform: none;
       text-align: center;
 
-      .el-carousel__button {
+      .el-carousel__button{
         height: auto;
         width: auto;
         padding: 2px 18px;
         font-size: 12px;
       }
 
-      .el-carousel__indicator {
+      .el-carousel__indicator{
         padding: 6px 4px;
       }
     }
   }
 
-  @include e(indicator) {
+  @include e(indicator){
     display: inline-block;
     background-color: transparent;
     padding: $--carousel-indicator-padding-vertical $--carousel-indicator-padding-horizontal;
     cursor: pointer;
 
-    &:hover button {
+    &:hover button{
       opacity: 0.72;
     }
 
-    @include when(active) {
-      button {
+    @include when(active){
+      button{
         opacity: 1;
       }
     }
   }
 
-  @include e(button) {
+  @include e(button){
     display: block;
     opacity: 0.48;
     width: $--carousel-indicator-width;
@@ -122,13 +122,13 @@
 }
 
 .carousel-arrow-left-enter,
-.carousel-arrow-left-leave-active {
+.carousel-arrow-left-leave-active{
   transform: translateY(-50%) translateX(-10px);
   opacity: 0;
 }
 
 .carousel-arrow-right-enter,
-.carousel-arrow-right-leave-active {
+.carousel-arrow-right-leave-active{
   transform: translateY(-50%) translateX(10px);
   opacity: 0;
 }

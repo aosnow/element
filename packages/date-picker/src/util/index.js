@@ -54,7 +54,8 @@ export const getDayCountOfMonth = function(year, month) {
   if (month === 1) {
     if (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) {
       return 29;
-    } else {
+    }
+    else {
       return 28;
     }
   }
@@ -90,7 +91,8 @@ export const getStartDateOfMonth = function(year, month) {
 
   if (day === 0) {
     return prevDate(result, 7);
-  } else {
+  }
+  else {
     return prevDate(result, day);
   }
 };
@@ -122,7 +124,8 @@ export const getRangeHours = function(ranges) {
     for (let i = 0; i < 24; i++) {
       hours[i] = disabledHours.indexOf(i) === -1;
     }
-  } else {
+  }
+  else {
     for (let i = 0; i < 24; i++) {
       hours[i] = false;
     }
@@ -133,7 +136,7 @@ export const getRangeHours = function(ranges) {
 
 export const range = function(n) {
   // see https://stackoverflow.com/questions/3746725/create-a-javascript-array-containing-1-n
-  return Array.apply(null, {length: n}).map((_, n) => n);
+  return Array.apply(null, { length: n }).map((_, n) => n);
 };
 
 export const modifyDate = function(date, y, m, d) {
@@ -227,14 +230,9 @@ export const nextYear = function(date, amount = 1) {
 };
 
 export const extractDateFormat = function(format) {
-  return format
-    .replace(/\W?m{1,2}|\W?ZZ/g, '')
-    .replace(/\W?h{1,2}|\W?s{1,3}|\W?a/gi, '')
-    .trim();
+  return format.replace(/\W?m{1,2}|\W?ZZ/g, '').replace(/\W?h{1,2}|\W?s{1,3}|\W?a/gi, '').trim();
 };
 
 export const extractTimeFormat = function(format) {
-  return format
-    .replace(/\W?D{1,2}|\W?Do|\W?d{1,4}|\W?M{1,4}|\W?y{2,4}/g, '')
-    .trim();
+  return format.replace(/\W?D{1,2}|\W?Do|\W?d{1,4}|\W?M{1,4}|\W?y{2,4}/g, '').trim();
 };

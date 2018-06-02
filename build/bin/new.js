@@ -11,6 +11,7 @@ if (!process.argv[2]) {
 const path = require('path');
 const fileSave = require('file-save');
 const uppercamelcase = require('uppercamelcase');
+
 const componentname = process.argv[2];
 const chineseName = process.argv[3] || componentname;
 const ComponentName = uppercamelcase(componentname);
@@ -49,8 +50,8 @@ module.exports = cooking.resolve();
     "component"
   ],
   "main": "./lib/index.js",
-  "repository": "https://github.com/ElemeFE/element/tree/master/packages/${componentname}",
-  "author": "elemefe",
+  "repository": "https://github.com/aosnow/element-yhui/tree/master/packages/${componentname}",
+  "author": "aosnow（elemefe is original author）",
   "license": "MIT",
   "dependencies": {}
 }`
@@ -97,20 +98,17 @@ describe('${ComponentName}', () => {
 
 // 添加到 components.json
 const componentsFile = require('../../components.json');
+
 if (componentsFile[componentname]) {
   console.error(`${componentname} 已存在.`);
   process.exit(1);
 }
 componentsFile[componentname] = `./packages/${componentname}/index.js`;
-fileSave(path.join(__dirname, '../../components.json'))
-  .write(JSON.stringify(componentsFile, null, '  '), 'utf8')
-  .end('\n');
+fileSave(path.join(__dirname, '../../components.json')).write(JSON.stringify(componentsFile, null, '  '), 'utf8').end('\n');
 
 // 创建 package
 Files.forEach(file => {
-  fileSave(path.join(PackagePath, file.filename))
-    .write(file.content, 'utf8')
-    .end('\n');
+  fileSave(path.join(PackagePath, file.filename)).write(file.content, 'utf8').end('\n');
 });
 
 // 添加到 nav.config.json
@@ -126,8 +124,6 @@ Object.keys(navConfigFile).forEach(lang => {
   });
 });
 
-fileSave(path.join(__dirname, '../../examples/nav.config.json'))
-  .write(JSON.stringify(navConfigFile, null, '  '), 'utf8')
-  .end('\n');
+fileSave(path.join(__dirname, '../../examples/nav.config.json')).write(JSON.stringify(navConfigFile, null, '  '), 'utf8').end('\n');
 
 console.log('DONE!');

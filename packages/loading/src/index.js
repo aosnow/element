@@ -44,19 +44,21 @@ const addStyle = (options, parent, instance) => {
     instance.originalPosition = getStyle(document.body, 'position');
     instance.originalOverflow = getStyle(document.body, 'overflow');
     maskStyle.zIndex = PopupManager.nextZIndex();
-  } else if (options.body) {
+  }
+  else if (options.body) {
     instance.originalPosition = getStyle(document.body, 'position');
     ['top', 'left'].forEach(property => {
       let scroll = property === 'top' ? 'scrollTop' : 'scrollLeft';
       maskStyle[property] = options.target.getBoundingClientRect()[property] +
-        document.body[scroll] +
-        document.documentElement[scroll] +
-        'px';
+                            document.body[scroll] +
+                            document.documentElement[scroll] +
+                            'px';
     });
     ['height', 'width'].forEach(property => {
       maskStyle[property] = options.target.getBoundingClientRect()[property] + 'px';
     });
-  } else {
+  }
+  else {
     instance.originalPosition = getStyle(parent, 'position');
   }
   Object.keys(maskStyle).forEach(property => {
@@ -73,7 +75,8 @@ const Loading = (options = {}) => {
   options.target = options.target || document.body;
   if (options.target !== document.body) {
     options.fullscreen = false;
-  } else {
+  }
+  else {
     options.body = true;
   }
   if (options.fullscreen && fullscreenLoading) {

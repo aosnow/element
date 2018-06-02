@@ -3,45 +3,45 @@
 @import "./input.scss";
 @import "./popper";
 
-@include b(cascader) {
+@include b(cascader){
   display: inline-block;
   position: relative;
   font-size: $--font-size-base;
   line-height: $--input-height;
 
   .el-input,
-  .el-input__inner {
+  .el-input__inner{
     cursor: pointer;
   }
 
-  .el-input__icon {
+  .el-input__icon{
     transition: none;
   }
 
-  .el-icon-arrow-down {
+  .el-icon-arrow-down{
     transition: transform .3s;
     font-size: 14px;
 
-    @include when(reverse) {
+    @include when(reverse){
       transform: rotateZ(180deg);
     }
   }
 
-  .el-icon-circle-close {
+  .el-icon-circle-close{
     z-index: #{$--index-normal + 1};
     transition: $--color-transition-base;
 
-    &:hover {
+    &:hover{
       color: $--color-text-secondary;
     }
   }
 
-  @include e(clearIcon) {
+  @include e(clearIcon){
     z-index: 2;
     position: relative;
   }
 
-  @include e(label) {
+  @include e(label){
     position: absolute;
     left: 0;
     top: 0;
@@ -57,35 +57,35 @@
     text-align: left;
     font-size: inherit;
 
-    span {
+    span{
       color: $--color-black;
     }
   }
 
-  @include m(medium) {
+  @include m(medium){
     font-size: $--input-medium-font-size;
     line-height: #{$--input-medium-height};
   }
 
-  @include m(small) {
+  @include m(small){
     font-size: $--input-small-font-size;
     line-height: #{$--input-small-height};
   }
 
-  @include m(mini) {
+  @include m(mini){
     font-size: $--input-mini-font-size;
     line-height: #{$--input-mini-height};
   }
 
-  @include when(disabled) {
-    .el-cascader__label {
+  @include when(disabled){
+    .el-cascader__label{
       z-index: #{$--index-normal + 1};
       color: $--disabled-color-base;
     }
   }
 }
 
-@include b(cascader-menus) {
+@include b(cascader-menus){
   white-space: nowrap;
   background: #fff;
   position: absolute;
@@ -96,7 +96,7 @@
   box-shadow: $--select-dropdown-shadow;
 }
 
-@include b(cascader-menu) {
+@include b(cascader-menu){
   display: inline-block;
   vertical-align: top;
   height: 204px;
@@ -108,11 +108,11 @@
   padding: 6px 0;
   min-width: 160px;
 
-  &:last-child {
+  &:last-child{
     border-right: 0;
   }
 
-  @include e(item) {
+  @include e(item){
     font-size: $--select-font-size;
     padding: 8px 20px;
     position: relative;
@@ -125,8 +125,8 @@
     box-sizing: border-box;
     cursor: pointer;
     outline: none;
-    @include m(extensible) {
-      &:after {
+    @include m(extensible){
+      &:after{
         font-family: 'element-icons';
         content: "\e604";
         font-size: 14px;
@@ -136,40 +136,40 @@
       }
     }
 
-    @include when(disabled) {
+    @include when(disabled){
       color: $--select-option-disabled-color;
       background-color: $--select-option-disabled-background;
       cursor: not-allowed;
 
-      &:hover {
+      &:hover{
         background-color: $--color-white;
       }
     }
 
-    @include when(active) {
+    @include when(active){
       color: $--select-option-selected;
     }
 
-    &:hover, &:focus:not(:active) {
+    &:hover, &:focus:not(:active){
       background-color: $--select-option-hover-background;
     }
 
-    &.selected {
+    &.selected{
       color: $--color-white;
       background-color: $--select-option-selected-hover;
     }
   }
 
-  @include e(item__keyword) {
+  @include e(item__keyword){
     font-weight: bold;
   }
 
-  @include m(flexible) {
+  @include m(flexible){
     height: auto;
     max-height: 180px;
     overflow: auto;
 
-    .el-cascader-menu__item {
+    .el-cascader-menu__item{
       overflow: visible;
     }
   }

@@ -3,7 +3,8 @@ import {
   PopupManager
 } from './popup';
 
-const PopperJS = Vue.prototype.$isServer ? function() {} : require('./popper');
+const PopperJS = Vue.prototype.$isServer ? function() {
+} : require('./popper');
 const stop = e => e.stopPropagation();
 
 /**
@@ -88,8 +89,8 @@ export default {
       let reference = this.referenceElm = this.referenceElm || this.reference || this.$refs.reference;
 
       if (!reference &&
-        this.$slots.reference &&
-        this.$slots.reference[0]) {
+          this.$slots.reference &&
+          this.$slots.reference[0]) {
         reference = this.referenceElm = this.$slots.reference[0].elm;
       }
 
@@ -123,7 +124,8 @@ export default {
         if (popperJS._popper) {
           popperJS._popper.style.zIndex = PopupManager.nextZIndex();
         }
-      } else {
+      }
+      else {
         this.createPopper();
       }
     },

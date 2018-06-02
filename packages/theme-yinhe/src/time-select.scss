@@ -4,33 +4,33 @@
 @import "./scrollbar.scss";
 @import "./popper";
 
-.time-select {
+.time-select{
   margin: 5px 0;
   min-width: 0;
 }
 
-.time-select .el-picker-panel__content {
+.time-select .el-picker-panel__content{
   max-height: 200px;
   margin: 0;
 }
 
-.time-select-item {
+.time-select-item{
   padding: 8px 10px;
   font-size: 14px;
   line-height: 20px;
 }
 
-.time-select-item.selected:not(.disabled) {
+.time-select-item.selected:not(.disabled){
   color: $--color-primary;
   font-weight: bold;
 }
 
-.time-select-item.disabled {
+.time-select-item.disabled{
   color: $--datepicker-border-color;
   cursor: not-allowed;
 }
 
-.time-select-item:hover {
+.time-select-item:hover{
   background-color: $--background-color-base;
   font-weight: bold;
   cursor: pointer;

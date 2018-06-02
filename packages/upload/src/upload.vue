@@ -30,11 +30,13 @@ export default {
     drag: Boolean,
     onPreview: {
       type: Function,
-      default: function() {}
+      default: function() {
+      }
     },
     onRemove: {
       type: Function,
-      default: function() {}
+      default: function() {
+      }
     },
     fileList: Array,
     autoUpload: Boolean,
@@ -72,9 +74,13 @@ export default {
       }
 
       let postFiles = Array.prototype.slice.call(files);
-      if (!this.multiple) { postFiles = postFiles.slice(0, 1); }
+      if (!this.multiple) {
+        postFiles = postFiles.slice(0, 1);
+      }
 
-      if (postFiles.length === 0) { return; }
+      if (postFiles.length === 0) {
+        return;
+      }
 
       postFiles.forEach(rawFile => {
         this.onStart(rawFile);
@@ -105,15 +111,18 @@ export default {
               }
             }
             this.post(processedFile);
-          } else {
+          }
+          else {
             this.post(rawFile);
           }
         }, () => {
           this.onRemove(null, rawFile);
         });
-      } else if (before !== false) {
+      }
+      else if (before !== false) {
         this.post(rawFile);
-      } else {
+      }
+      else {
         this.onRemove(null, rawFile);
       }
     },
@@ -125,7 +134,8 @@ export default {
         if (reqs[uid]) {
           reqs[uid].abort();
         }
-      } else {
+      }
+      else {
         Object.keys(reqs).forEach((uid) => {
           if (reqs[uid]) reqs[uid].abort();
           delete reqs[uid];
@@ -197,7 +207,7 @@ export default {
     };
     data.class[`el-upload--${listType}`] = true;
     return (
-      <div {...data} tabindex="0" >
+      <div {...data} tabindex="0">
         {
           drag
             ? <upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}</upload-dragger>

@@ -16,7 +16,8 @@ SubMenu.prototype.init = function() {
 SubMenu.prototype.gotoSubIndex = function(idx) {
   if (idx === this.subMenuItems.length) {
     idx = 0;
-  } else if (idx < 0) {
+  }
+  else if (idx < 0) {
     idx = this.subMenuItems.length - 1;
   }
   this.subMenuItems[idx].focus();

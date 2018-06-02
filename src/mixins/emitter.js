@@ -4,11 +4,13 @@ function broadcast(componentName, eventName, params) {
 
     if (name === componentName) {
       child.$emit.apply(child, [eventName].concat(params));
-    } else {
+    }
+    else {
       broadcast.apply(child, [componentName, eventName].concat([params]));
     }
   });
 }
+
 export default {
   methods: {
     dispatch(componentName, eventName, params) {

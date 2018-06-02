@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const algoliasearch = require('algoliasearch');
@@ -16,14 +14,16 @@ const langs = {
 ['zh-CN', 'en-US', 'es'].forEach(lang => {
   const indexName = langs[lang];
   const index = client.initIndex(indexName);
-  index.clearIndex(err => {
-    if (err) return;
-    fs.readdir(path.resolve(__dirname, `../../examples/docs/${ lang }`), (err, files) => {
+
+  index.clearIndex(hasError => {
+    if (hasError) return;
+
+    fs.readdir(path.resolve(__dirname, `../../examples/docs/${lang}`), (err, files) => {
       if (err) return;
       let indices = [];
       files.forEach(file => {
         const component = file.replace('.md', '');
-        const content = fs.readFileSync(path.resolve(__dirname, `../../examples/docs/${ lang }/${ file }`), 'utf8');
+        const content = fs.readFileSync(path.resolve(__dirname, `../../examples/docs/${lang}/${file}`), 'utf8');
         const matches = content
           .replace(/:::[\s\S]*?:::/g, '')
           .replace(/```[\s\S]*?```/g, '')
@@ -41,16 +41,16 @@ const langs = {
         indices = indices.concat(matches.map(match => {
           const isComponent = match[0].indexOf('###') < 0;
           const title = match[0].replace(/#{2,4}/, '').trim();
-          const index = { component, title };
-          index.ranking = isComponent ? 2 : 1;
-          index.anchor = slugify(title);
-          index.content = (match[1] || title).replace(/<[^>]+>/g, '');
-          return index;
+          const indexc = { component, title };
+          indexc.ranking = isComponent ? 2 : 1;
+          indexc.anchor = slugify(title);
+          indexc.content = (match[1] || title).replace(/<[^>]+>/g, '');
+          return indexc;
         }));
       });
 
-      index.addObjects(indices, (err, res) => {
-        console.log(err, res);
+      index.addObjects(indices, (error, res) => {
+        console.log(error, res);
       });
     });
   });

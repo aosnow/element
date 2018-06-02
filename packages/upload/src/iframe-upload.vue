@@ -25,11 +25,13 @@ export default {
     beforeUpload: Function,
     onPreview: {
       type: Function,
-      default: function() {}
+      default: function() {
+      }
     },
     onRemove: {
       type: Function,
-      default: function() {}
+      default: function() {
+      }
     },
     drag: Boolean,
     listType: String,
@@ -110,7 +112,8 @@ export default {
       const response = event.data;
       if (response.result === 'success') {
         self.onSuccess(response, self.file);
-      } else if (response.result === 'failed') {
+      }
+      else if (response.result === 'failed') {
         self.onError(response, self.file);
       }
       self.submitting = false;
@@ -152,7 +155,7 @@ export default {
             on-change={this.handleChange}
             accept={this.accept}>
           </input>
-          <input type="hidden" name="documentDomain" value={ this.$isServer ? '' : document.domain } />
+          <input type="hidden" name="documentDomain" value={this.$isServer ? '' : document.domain}/>
           <span ref="data"></span>
         </form>
         {

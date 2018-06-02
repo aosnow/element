@@ -23,7 +23,8 @@ export const orderBy = function(array, sortKey, reverse, sortMethod, sortBy) {
   }
   if (typeof reverse === 'string') {
     reverse = reverse === 'descending' ? -1 : 1;
-  } else {
+  }
+  else {
     reverse = (reverse && reverse < 0) ? -1 : 1;
   }
   const getKey = sortMethod ? null : function(value, index) {
@@ -34,7 +35,8 @@ export const orderBy = function(array, sortKey, reverse, sortMethod, sortBy) {
       return sortBy.map(function(by) {
         if (typeof by === 'string') {
           return getValueByPath(value, by);
-        } else {
+        }
+        else {
           return by(value, index, array);
         }
       });
@@ -104,7 +106,8 @@ export const getRowIdentity = (row, rowKey) => {
       current = current[key[i]];
     }
     return current;
-  } else if (typeof rowKey === 'function') {
+  }
+  else if (typeof rowKey === 'function') {
     return rowKey.call(null, row);
   }
 };

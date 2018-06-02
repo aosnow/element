@@ -18,7 +18,8 @@ export default function(instance, callback, speed = 300, once = false) {
   };
   if (once) {
     instance.$once('after-leave', afterLeaveCallback);
-  } else {
+  }
+  else {
     instance.$on('after-leave', afterLeaveCallback);
   }
   setTimeout(() => {

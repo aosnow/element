@@ -2,9 +2,11 @@ function getError(action, option, xhr) {
   let msg;
   if (xhr.response) {
     msg = `${xhr.response.error || xhr.response}`;
-  } else if (xhr.responseText) {
+  }
+  else if (xhr.responseText) {
     msg = `${xhr.responseText}`;
-  } else {
+  }
+  else {
     msg = `fail to post ${action} ${xhr.status}`;
   }
 
@@ -23,7 +25,8 @@ function getBody(xhr) {
 
   try {
     return JSON.parse(text);
-  } catch (e) {
+  }
+  catch (e) {
     return text;
   }
 }

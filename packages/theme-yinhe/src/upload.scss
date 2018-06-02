@@ -2,22 +2,22 @@
 @import "progress";
 @import "common/var";
 
-@include b(upload) {
+@include b(upload){
   display: inline-block;
   text-align: center;
   cursor: pointer;
   outline: none;
-  @include e(input) {
+  @include e(input){
     display: none;
   }
 
-  @include e(tip) {
+  @include e(tip){
     font-size: 12px;
     color: $--color-text-regular;
     margin-top: 7px;
   }
 
-  iframe {
+  iframe{
     position: absolute;
     z-index: -1;
     top: 0;
@@ -27,7 +27,7 @@
   }
 
   /* 照片墙模式 */
-  @include m(picture-card) {
+  @include m(picture-card){
     background-color: #fbfdff;
     border: 1px dashed #c0ccda;
     border-radius: 6px;
@@ -38,27 +38,27 @@
     line-height: 146px;
     vertical-align: top;
 
-    i {
+    i{
       font-size: 28px;
       color: #8c939d;
     }
 
-    &:hover {
+    &:hover{
       border-color: $--color-primary;
       color: $--color-primary;
     }
   }
-  &:focus {
+  &:focus{
     border-color: $--color-primary;
     color: $--color-primary;
 
-    .el-upload-dragger {
+    .el-upload-dragger{
       border-color: $--color-primary;
     }
   }
 }
 
-@include b(upload-dragger) {
+@include b(upload-dragger){
   background-color: #fff;
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
@@ -70,51 +70,51 @@
   position: relative;
   overflow: hidden;
 
-  .el-icon-upload {
+  .el-icon-upload{
     font-size: 67px;
     color: $--color-text-placeholder;
     margin: 40px 0 16px;
     line-height: 50px;
   }
 
-  + .el-upload__tip {
+  + .el-upload__tip{
     text-align: center;
   }
 
-  ~ .el-upload__files {
+  ~ .el-upload__files{
     border-top: $--border-base;
     margin-top: 7px;
     padding-top: 5px;
   }
 
-  .el-upload__text {
+  .el-upload__text{
     color: $--color-text-regular;
     font-size: 14px;
     text-align: center;
 
-    em {
+    em{
       color: $--color-primary;
       font-style: normal;
     }
   }
 
-  &:hover {
+  &:hover{
     border-color: $--color-primary;
   }
 
-  @include when(dragover) {
+  @include when(dragover){
     background-color: rgba(32, 159, 255, .06);
     border: 2px dashed $--color-primary;
   }
 }
 
-@include b(upload-list) {
+@include b(upload-list){
   margin: 0;
   padding: 0;
   list-style: none;
 
-  @include e(item) {
-    transition: all .5s cubic-bezier(.55,0,.1,1);
+  @include e(item){
+    transition: all .5s cubic-bezier(.55, 0, .1, 1);
     font-size: 14px;
     color: $--color-text-regular;
     line-height: 1.8;
@@ -124,32 +124,32 @@
     border-radius: 4px;
     width: 100%;
 
-    .el-progress {
+    .el-progress{
       position: absolute;
       top: 20px;
       width: 100%;
     }
 
-    .el-progress__text {
+    .el-progress__text{
       position: absolute;
       right: 0;
       top: -13px;
     }
 
-    .el-progress-bar {
+    .el-progress-bar{
       margin-right: 0;
       padding-right: 0;
     }
 
-    &:first-child {
+    &:first-child{
       margin-top: 10px;
     }
 
-    & .el-icon-upload-success {
+    & .el-icon-upload-success{
       color: $--color-success;
     }
 
-    .el-icon-close {
+    .el-icon-close{
       display: none;
       position: absolute;
       top: 5px;
@@ -159,12 +159,12 @@
       color: $--color-text-regular;
       //transform: scale(.7);
 
-      &:hover {
+      &:hover{
         opacity: 1;
       }
     }
 
-    & .el-icon-close-tip {
+    & .el-icon-close-tip{
       display: none;
       position: absolute;
       top: 5px;
@@ -174,57 +174,57 @@
       opacity: 1;
       color: $--color-primary;
     }
-    
-    &:hover {
+
+    &:hover{
       background-color: $--background-color-base;
 
-      .el-icon-close {
+      .el-icon-close{
         display: inline-block;
       }
 
-      .el-progress__text {
+      .el-progress__text{
         display: none;
       }
     }
 
-    @include when(success) {
-      .el-upload-list__item-status-label {
+    @include when(success){
+      .el-upload-list__item-status-label{
         display: block;
       }
 
-      .el-upload-list__item-name:hover, .el-upload-list__item-name:focus {
+      .el-upload-list__item-name:hover, .el-upload-list__item-name:focus{
         color: $--link-hover-color;
         cursor: pointer;
       }
 
-      &:focus:not(:hover) {  /* 键盘focus */
-        .el-icon-close-tip {
+      &:focus:not(:hover){ /* 键盘focus */
+        .el-icon-close-tip{
           display: inline-block;
         }
       }
 
-      &:not(.focusing):focus, &:active { /* click时 */
+      &:not(.focusing):focus, &:active{ /* click时 */
         outline-width: 0;
-        .el-icon-close-tip {
+        .el-icon-close-tip{
           display: none;
         }
       }
 
-      &:hover, &:focus {
-        .el-upload-list__item-status-label {
+      &:hover, &:focus{
+        .el-upload-list__item-status-label{
           display: none;
         }
       }
     }
   }
 
-  @include when(disabled) {
-    .el-upload-list__item:hover .el-upload-list__item-status-label {
+  @include when(disabled){
+    .el-upload-list__item:hover .el-upload-list__item-status-label{
       display: block;
     }
   }
 
-  @include e(item-name) {
+  @include e(item-name){
     color: $--color-text-regular;
     display: block;
     margin-right: 40px;
@@ -234,7 +234,7 @@
     transition: color .3s;
     white-space: nowrap;
 
-    [class^="el-icon"] {
+    [class^="el-icon"]{
       height: 100%;
       margin-right: 7px;
       color: $--color-text-secondary;
@@ -242,7 +242,7 @@
     }
   }
 
-  @include e(item-status-label) {
+  @include e(item-status-label){
     position: absolute;
     right: 5px;
     top: 0;
@@ -250,7 +250,7 @@
     display: none;
   }
 
-  @include e(item-delete) {
+  @include e(item-delete){
     position: absolute;
     right: 10px;
     top: 0;
@@ -258,17 +258,17 @@
     color: $--color-text-regular;
     display: none;
 
-    &:hover {
+    &:hover{
       color: $--color-primary;
     }
   }
 
-  @include m(picture-card) {
+  @include m(picture-card){
     margin: 0;
     display: inline;
     vertical-align: top;
 
-    .el-upload-list__item {
+    .el-upload-list__item{
       overflow: hidden;
       background-color: #fff;
       border: 1px solid #c0ccda;
@@ -280,34 +280,34 @@
       display: inline-block;
 
       .el-icon-check,
-      .el-icon-circle-check {
+      .el-icon-circle-check{
         color: $--color-white;
       }
 
-      .el-icon-close {
+      .el-icon-close{
         display: none;
       }
-      &:hover {
-        .el-upload-list__item-status-label {
+      &:hover{
+        .el-upload-list__item-status-label{
           display: none;
         }
 
-        .el-progress__text {
+        .el-progress__text{
           display: block;
         }
       }
     }
 
-    .el-upload-list__item-name {
+    .el-upload-list__item-name{
       display: none;
     }
 
-    .el-upload-list__item-thumbnail {
+    .el-upload-list__item-thumbnail{
       width: 100%;
       height: 100%;
     }
 
-    .el-upload-list__item-status-label {
+    .el-upload-list__item-status-label{
       position: absolute;
       right: -15px;
       top: -6px;
@@ -316,16 +316,16 @@
       background: #13ce66;
       text-align: center;
       transform: rotate(45deg);
-      box-shadow: 0 0 1pc 1px rgba(0,0,0,0.2);
+      box-shadow: 0 0 1pc 1px rgba(0, 0, 0, 0.2);
 
-      i {
+      i{
         font-size: 12px;
         margin-top: 11px;
         transform: rotate(-45deg);
       }
     }
 
-    .el-upload-list__item-actions {
+    .el-upload-list__item-actions{
       position: absolute;
       width: 100%;
       height: 100%;
@@ -338,51 +338,51 @@
       font-size: 20px;
       background-color: rgba(0, 0, 0, .5);
       transition: opacity .3s;
-      &::after {
+      &::after{
         display: inline-block;
         content: "";
         height: 100%;
         vertical-align: middle
       }
 
-      span {
+      span{
         display: none;
         cursor: pointer;
       }
 
-      span + span {
+      span + span{
         margin-left: 15px;
       }
 
-      .el-upload-list__item-delete {
+      .el-upload-list__item-delete{
         position: static;
         font-size: inherit;
         color: inherit;
       }
 
-      &:hover {
+      &:hover{
         opacity: 1;
-        span {
+        span{
           display: inline-block;
         }
       }
     }
 
-    .el-progress {
+    .el-progress{
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       bottom: auto;
       width: 126px;
 
-      .el-progress__text {
+      .el-progress__text{
         top: 50%;
       }
     }
   }
 
-  @include m(picture) {
-    .el-upload-list__item {
+  @include m(picture){
+    .el-upload-list__item{
       overflow: hidden;
       z-index: 0;
       background-color: #fff;
@@ -394,35 +394,35 @@
       height: 92px;
 
       .el-icon-check,
-      .el-icon-circle-check {
+      .el-icon-circle-check{
         color: $--color-white;
       }
 
-      &:hover {
-        .el-upload-list__item-status-label {
+      &:hover{
+        .el-upload-list__item-status-label{
           background: transparent;
           box-shadow: none;
           top: -2px;
           right: -12px;
         }
 
-        .el-progress__text {
+        .el-progress__text{
           display: block;
         }
       }
 
-      &.is-success {
-        .el-upload-list__item-name {
+      &.is-success{
+        .el-upload-list__item-name{
           line-height: 70px;
           margin-top: 0;
-          i {
+          i{
             display: none;
           }
         }
       }
     }
 
-    .el-upload-list__item-thumbnail {
+    .el-upload-list__item-thumbnail{
       vertical-align: middle;
       display: inline-block;
       width: 70px;
@@ -433,11 +433,11 @@
       margin-left: -80px;
     }
 
-    .el-upload-list__item-name {
+    .el-upload-list__item-name{
       display: block;
       margin-top: 20px;
 
-      i {
+      i{
         font-size: 70px;
         line-height: 1;
         position: absolute;
@@ -446,7 +446,7 @@
       }
     }
 
-    .el-upload-list__item-status-label {
+    .el-upload-list__item-status-label{
       position: absolute;
       right: -17px;
       top: -7px;
@@ -457,21 +457,21 @@
       transform: rotate(45deg);
       box-shadow: 0 1px 1px #ccc;
 
-      i {
+      i{
         font-size: 12px;
         margin-top: 12px;
         transform: rotate(-45deg);
       }
     }
 
-    .el-progress {
+    .el-progress{
       position: relative;
       top: -7px;
     }
   }
 }
 
-@include b(upload-cover) {
+@include b(upload-cover){
   position: absolute;
   left: 0;
   top: 0;
@@ -482,13 +482,13 @@
   cursor: default;
   @include utils-vertical-center;
 
-  img {
+  img{
     display: block;
     width: 100%;
     height: 100%;
   }
 
-  @include e(label) {
+  @include e(label){
     position: absolute;
     right: -15px;
     top: -6px;
@@ -497,9 +497,9 @@
     background: #13ce66;
     text-align: center;
     transform: rotate(45deg);
-    box-shadow: 0 0 1pc 1px rgba(0,0,0,0.2);
+    box-shadow: 0 0 1pc 1px rgba(0, 0, 0, 0.2);
 
-    i {
+    i{
       font-size: 12px;
       margin-top: 11px;
       transform: rotate(-45deg);
@@ -507,18 +507,18 @@
     }
   }
 
-  @include e(progress) {
+  @include e(progress){
     display: inline-block;
     vertical-align: middle;
     position: static;
     width: 243px;
 
-    + .el-upload__inner {
+    + .el-upload__inner{
       opacity: 0;
     }
   }
 
-  @include e(content) {
+  @include e(content){
     position: absolute;
     top: 0;
     left: 0;
@@ -526,7 +526,7 @@
     height: 100%;
   }
 
-  @include e(interact) {
+  @include e(interact){
     position: absolute;
     bottom: 0;
     left: 0;
@@ -535,7 +535,7 @@
     background-color: rgba(#000, .72);
     text-align: center;
 
-    .btn {
+    .btn{
       display: inline-block;
       color: $--color-white;
       font-size: 14px;
@@ -544,28 +544,28 @@
       transition: $--md-fade-transition;
       margin-top: 60px;
 
-      i {
+      i{
         margin-top: 0;
       }
 
-      span {
+      span{
         opacity: 0;
         transition: opacity .15s linear;
       }
 
-      &:not(:first-child) {
+      &:not(:first-child){
         margin-left: 35px;
       }
 
-      &:hover {
+      &:hover{
         transform: translateY(-13px);
 
-        span {
+        span{
           opacity: 1;
         }
       }
 
-      i {
+      i{
         color: $--color-white;
         display: block;
         font-size: 24px;
@@ -575,7 +575,7 @@
     }
   }
 
-  @include e(title) {
+  @include e(title){
     position: absolute;
     bottom: 0;
     left: 0;
@@ -594,7 +594,7 @@
     color: $--color-text-primary;
   }
 
-  + .el-upload__inner {
+  + .el-upload__inner{
     opacity: 0;
     position: relative;
     z-index: 1;

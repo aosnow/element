@@ -3,6 +3,7 @@ import Loading from './loading.vue';
 import { addClass, removeClass, getStyle } from 'element-yhui/src/utils/dom';
 import { PopupManager } from 'element-yhui/src/utils/popup';
 import afterLeave from 'element-yhui/src/utils/after-leave';
+
 const Mask = Vue.extend(Loading);
 
 const loadingDirective = {};
@@ -18,7 +19,8 @@ loadingDirective.install = Vue => {
 
           addClass(el.mask, 'is-fullscreen');
           insertDom(document.body, el, binding);
-        } else {
+        }
+        else {
           removeClass(el.mask, 'is-fullscreen');
 
           if (binding.modifiers.body) {
@@ -27,23 +29,25 @@ loadingDirective.install = Vue => {
             ['top', 'left'].forEach(property => {
               const scroll = property === 'top' ? 'scrollTop' : 'scrollLeft';
               el.maskStyle[property] = el.getBoundingClientRect()[property] +
-                document.body[scroll] +
-                document.documentElement[scroll] -
-                parseInt(getStyle(document.body, `margin-${ property }`), 10) +
-                'px';
+                                       document.body[scroll] +
+                                       document.documentElement[scroll] -
+                                       parseInt(getStyle(document.body, `margin-${ property }`), 10) +
+                                       'px';
             });
             ['height', 'width'].forEach(property => {
               el.maskStyle[property] = el.getBoundingClientRect()[property] + 'px';
             });
 
             insertDom(document.body, el, binding);
-          } else {
+          }
+          else {
             el.originalPosition = getStyle(el, 'position');
             insertDom(el, el, binding);
           }
         }
       });
-    } else {
+    }
+    else {
       afterLeave(el.instance, _ => {
         el.domVisible = false;
         const target = binding.modifiers.fullscreen || binding.modifiers.body
@@ -75,7 +79,8 @@ loadingDirective.install = Vue => {
       Vue.nextTick(() => {
         if (el.instance.hiding) {
           el.instance.$emit('after-leave');
-        } else {
+        }
+        else {
           el.instance.visible = true;
         }
       });

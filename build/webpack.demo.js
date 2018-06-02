@@ -14,6 +14,8 @@ const isProd = process.env.NODE_ENV === 'production';
 const isDev = process.env.NODE_ENV === 'development';
 const isPlay = !!process.env.PLAY_ENV;
 
+const { CurUiScheme, SchemeOutputPath } = require('./scheme');
+
 function convert(str) {
   str = str.replace(/(&#x)(\w{4});/gi, function($0) {
     return String.fromCharCode(parseInt(encodeURIComponent($0).replace(/(%26%23x)(\w{4})(%3B)/g, '$2'), 16));
@@ -23,19 +25,17 @@ function convert(str) {
 
 function wrap(render) {
   return function(...args) {
-    return render.apply(this, args)
-      .replace('<code v-pre class="', '<code class="hljs ')
-      .replace('<code>', '<code class="hljs">');
+    return render.apply(this, args).replace('<code v-pre class="', '<code class="hljs ').replace('<code>', '<code class="hljs">');
   };
 }
 
 const webpackConfig = {
   entry: isProd ? {
     docs: './examples/entry.js',
-    'element-yhui': './src/index.js'
+    [CurUiScheme]: './src/index.js'
   } : (isPlay ? './examples/play.js' : './examples/entry.js'),
   output: {
-    path: path.resolve(process.cwd(), './examples/element-yhui/'),
+    path: path.resolve(process.cwd(), SchemeOutputPath),
     publicPath: process.env.CI_ENV || '',
     filename: '[name].[hash:7].js',
     chunkFilename: isProd ? '[name].[hash:7].js' : '[name].js'
@@ -221,7 +221,7 @@ if (isProd) {
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['element-yhui', 'manifest']
+      name: [CurUiScheme, 'manifest']
     })
   );
 }

@@ -102,7 +102,8 @@ const rgb2hsv = function(r, g, b) {
 
   if (max === min) {
     h = 0; // achromatic
-  } else {
+  }
+  else {
     switch (max) {
       case r:
         h = (g - b) / d + (g < b ? 6 : 0);
@@ -210,44 +211,53 @@ export default class Color {
     };
 
     if (value.indexOf('hsl') !== -1) {
-      const parts = value.replace(/hsla|hsl|\(|\)/gm, '')
-        .split(/\s|,/g).filter((val) => val !== '').map((val, index) => index > 2 ? parseFloat(val) : parseInt(val, 10));
+      const parts = value.replace(/hsla|hsl|\(|\)/gm, '').split(/\s|,/g).filter((val) => val !== '').map((val, index) => index > 2
+        ? parseFloat(val)
+        : parseInt(val, 10));
 
       if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
-      } else if (parts.length === 3) {
+      }
+      else if (parts.length === 3) {
         this._alpha = 100;
       }
       if (parts.length >= 3) {
         const { h, s, v } = hsl2hsv(parts[0], parts[1], parts[2]);
         fromHSV(h, s, v);
       }
-    } else if (value.indexOf('hsv') !== -1) {
-      const parts = value.replace(/hsva|hsv|\(|\)/gm, '')
-        .split(/\s|,/g).filter((val) => val !== '').map((val, index) => index > 2 ? parseFloat(val) : parseInt(val, 10));
+    }
+    else if (value.indexOf('hsv') !== -1) {
+      const parts = value.replace(/hsva|hsv|\(|\)/gm, '').split(/\s|,/g).filter((val) => val !== '').map((val, index) => index > 2
+        ? parseFloat(val)
+        : parseInt(val, 10));
 
       if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
-      } else if (parts.length === 3) {
+      }
+      else if (parts.length === 3) {
         this._alpha = 100;
       }
       if (parts.length >= 3) {
         fromHSV(parts[0], parts[1], parts[2]);
       }
-    } else if (value.indexOf('rgb') !== -1) {
-      const parts = value.replace(/rgba|rgb|\(|\)/gm, '')
-        .split(/\s|,/g).filter((val) => val !== '').map((val, index) => index > 2 ? parseFloat(val) : parseInt(val, 10));
+    }
+    else if (value.indexOf('rgb') !== -1) {
+      const parts = value.replace(/rgba|rgb|\(|\)/gm, '').split(/\s|,/g).filter((val) => val !== '').map((val, index) => index > 2
+        ? parseFloat(val)
+        : parseInt(val, 10));
 
       if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
-      } else if (parts.length === 3) {
+      }
+      else if (parts.length === 3) {
         this._alpha = 100;
       }
       if (parts.length >= 3) {
         const { h, s, v } = rgb2hsv(parts[0], parts[1], parts[2]);
         fromHSV(h, s, v);
       }
-    } else if (value.indexOf('#') !== -1) {
+    }
+    else if (value.indexOf('#') !== -1) {
       const hex = value.replace('#', '').trim();
       let r, g, b;
 
@@ -255,7 +265,8 @@ export default class Color {
         r = parseHexChannel(hex[0] + hex[0]);
         g = parseHexChannel(hex[1] + hex[1]);
         b = parseHexChannel(hex[2] + hex[2]);
-      } else if (hex.length === 6 || hex.length === 8) {
+      }
+      else if (hex.length === 6 || hex.length === 8) {
         r = parseHexChannel(hex.substring(0, 2));
         g = parseHexChannel(hex.substring(2, 4));
         b = parseHexChannel(hex.substring(4, 6));
@@ -263,7 +274,8 @@ export default class Color {
 
       if (hex.length === 8) {
         this._alpha = Math.floor(parseHexChannel(hex.substring(6)) / 255 * 100);
-      } else if (hex.length === 3 || hex.length === 6) {
+      }
+      else if (hex.length === 3 || hex.length === 6) {
         this._alpha = 100;
       }
 
@@ -274,9 +286,9 @@ export default class Color {
 
   compare(color) {
     return Math.abs(color._hue - this._hue) < 2 &&
-      Math.abs(color._saturation - this._saturation) < 1 &&
-      Math.abs(color._value - this._value) < 1 &&
-      Math.abs(color._alpha - this._alpha) < 1;
+           Math.abs(color._saturation - this._saturation) < 1 &&
+           Math.abs(color._value - this._value) < 1 &&
+           Math.abs(color._alpha - this._alpha) < 1;
   }
 
   doOnChange() {
@@ -295,7 +307,8 @@ export default class Color {
           const { r, g, b } = hsv2rgb(_hue, _saturation, _value);
           this.value = `rgba(${r}, ${g}, ${b}, ${ _alpha / 100 })`;
       }
-    } else {
+    }
+    else {
       switch (format) {
         case 'hsl':
           const hsl = hsv2hsl(_hue, _saturation / 100, _value / 100);

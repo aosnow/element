@@ -11,5 +11,5 @@
   "repository": "https://github.com/ElemeFE/element/tree/master/packages/color-picker",
   "author": "elemefe",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": { }
 }

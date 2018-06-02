@@ -35,7 +35,8 @@ export default {
           if (this.hoverIndex === this.options.length) {
             this.hoverIndex = 0;
           }
-        } else if (direction === 'prev') {
+        }
+        else if (direction === 'prev') {
           this.hoverIndex--;
           if (this.hoverIndex < 0) {
             this.hoverIndex = this.options.length - 1;
@@ -43,8 +44,8 @@ export default {
         }
         const option = this.options[this.hoverIndex];
         if (option.disabled === true ||
-          option.groupDisabled === true ||
-          !option.visible) {
+            option.groupDisabled === true ||
+            !option.visible) {
           this.navigateOptions(direction);
         }
         this.$nextTick(() => this.scrollToOption(this.hoverOption));

@@ -80,20 +80,25 @@ export default {
     if (this.popperVM) {
       this.popperVM.node = (
         <transition
-          name={ this.transition }
-          onAfterLeave={ this.doDestroy }>
+          name={this.transition}
+          onAfterLeave={this.doDestroy}>
           <div
-            onMouseleave={ () => { this.setExpectedState(false); this.debounceClose(); } }
-            onMouseenter= { () => { this.setExpectedState(true); } }
+            onMouseleave={() => {
+              this.setExpectedState(false);
+              this.debounceClose();
+            }}
+            onMouseenter={() => {
+              this.setExpectedState(true);
+            }}
             ref="popper"
             role="tooltip"
             id={this.tooltipId}
-            aria-hidden={ (this.disabled || !this.showPopper) ? 'true' : 'false' }
+            aria-hidden={(this.disabled || !this.showPopper) ? 'true' : 'false'}
             v-show={!this.disabled && this.showPopper}
             class={
               ['el-tooltip__popper', 'is-' + this.effect, this.popperClass]
             }>
-            { this.$slots.content || this.content }
+            {this.$slots.content || this.content}
           </div>
         </transition>);
     }
@@ -125,7 +130,8 @@ export default {
         const instance = this.$slots.default[0].componentInstance;
         if (instance && instance.focus) {
           instance.focus();
-        } else {
+        }
+        else {
           this.handleFocus();
         }
       });
@@ -137,7 +143,8 @@ export default {
     focusing(val) {
       if (val) {
         addClass(this.referenceElm, 'focusing');
-      } else {
+      }
+      else {
         removeClass(this.referenceElm, 'focusing');
       }
     }

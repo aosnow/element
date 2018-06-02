@@ -68,9 +68,11 @@ exports.triggerEvent = function(elm, name, ...opts) {
 
   if (/^mouse|click/.test(name)) {
     eventName = 'MouseEvents';
-  } else if (/^key/.test(name)) {
+  }
+  else if (/^key/.test(name)) {
     eventName = 'KeyboardEvent';
-  } else {
+  }
+  else {
     eventName = 'HTMLEvents';
   }
   const evt = document.createEvent(eventName);

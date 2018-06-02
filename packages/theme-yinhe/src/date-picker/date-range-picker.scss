@@ -1,60 +1,60 @@
 @import "../common/var";
 
-@include b(date-range-picker) {
+@include b(date-range-picker){
   width: 646px;
 
-  &.has-sidebar {
+  &.has-sidebar{
     width: 756px;
   }
 
-  table {
+  table{
     table-layout: fixed;
     width: 100%;
   }
 
-  .el-picker-panel__body {
+  .el-picker-panel__body{
     min-width: 513px;
   }
 
-  .el-picker-panel__content {
+  .el-picker-panel__content{
     margin: 0;
   }
 
-  @include e(header) {
+  @include e(header){
     position: relative;
     text-align: center;
     height: 28px;
 
-    [class*=arrow-left] {
+    [class*=arrow-left]{
       float: left;
     }
 
-    [class*=arrow-right] {
+    [class*=arrow-right]{
       float: right;
     }
 
-    div {
+    div{
       font-size: 16px;
       font-weight: 500;
       margin-right: 50px;
     }
   }
 
-  @include e(content) {
+  @include e(content){
     float: left;
     width: 50%;
     box-sizing: border-box;
     margin: 0;
     padding: 16px;
 
-    @include when(left) {
+    @include when(left){
       border-right: 1px solid $--datepicker-inner-border-color;
     }
 
-    @include when(right) {
-      .el-date-range-picker__header {
+    @include when(right){
+      .el-date-range-picker__header{
 
-        div {
+        div{
           margin-left: 50px;
           margin-right: 50px;
         }
@@ -62,16 +62,16 @@
     }
   }
 
-  @include e(editors-wrap) {
+  @include e(editors-wrap){
     box-sizing: border-box;
     display: table-cell;
 
-    @include when(right) {
+    @include when(right){
       text-align: right;
     }
   }
 
-  @include e(time-header) {
+  @include e(time-header){
     position: relative;
     border-bottom: 1px solid $--datepicker-inner-border-color;
     font-size: 12px;
@@ -80,7 +80,7 @@
     width: 100%;
     box-sizing: border-box;
 
-    > .el-icon-arrow-right {
+    > .el-icon-arrow-right{
       font-size: 20px;
       vertical-align: middle;
       display: table-cell;
@@ -88,12 +88,12 @@
     }
   }
 
-  @include e(time-picker-wrap) {
+  @include e(time-picker-wrap){
     position: relative;
     display: table-cell;
     padding: 0 5px;
 
-    .el-picker-panel {
+    .el-picker-panel{
       position: absolute;
       top: 13px;
       right: 0;

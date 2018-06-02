@@ -34,7 +34,8 @@
         }"></i>
       </label>
       <i class="el-icon-close" v-if="!disabled" @click="$emit('remove', file)"></i>
-      <i class="el-icon-close-tip" v-if="!disabled">{{ t('el.upload.deleteTip') }}</i> <!--因为close按钮只在li:focus的时候 display, li blur后就不存在了，所以键盘导航时永远无法 focus到 close按钮上-->
+      <i class="el-icon-close-tip" v-if="!disabled">{{ t('el.upload.deleteTip') }}</i>
+      <!--因为close按钮只在li:focus的时候 display, li blur后就不存在了，所以键盘导航时永远无法 focus到 close按钮上-->
       <el-progress
         v-if="file.status === 'uploading'"
         :type="listType === 'picture-card' ? 'circle' : 'line'"
@@ -61,40 +62,40 @@
   </transition-group>
 </template>
 <script>
-  import Locale from 'element-yhui/src/mixins/locale';
-  import ElProgress from 'element-yhui/packages/progress';
+import Locale from 'element-yhui/src/mixins/locale';
+import ElProgress from 'element-yhui/packages/progress';
 
-  export default {
-    mixins: [Locale],
+export default {
+  mixins: [Locale],
 
-    data() {
-      return {
-        focusing: false
-      };
-    },
-    components: { ElProgress },
+  data() {
+    return {
+      focusing: false
+    };
+  },
+  components: { ElProgress },
 
-    props: {
-      files: {
-        type: Array,
-        default() {
-          return [];
-        }
-      },
-      disabled: {
-        type: Boolean,
-        default: false
-      },
-      handlePreview: Function,
-      listType: String
-    },
-    methods: {
-      parsePercentage(val) {
-        return parseInt(val, 10);
-      },
-      handleClick(file) {
-        this.handlePreview && this.handlePreview(file);
+  props: {
+    files: {
+      type: Array,
+      default() {
+        return [];
       }
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    handlePreview: Function,
+    listType: String
+  },
+  methods: {
+    parsePercentage(val) {
+      return parseInt(val, 10);
+    },
+    handleClick(file) {
+      this.handlePreview && this.handlePreview(file);
     }
-  };
+  }
+};
 </script>

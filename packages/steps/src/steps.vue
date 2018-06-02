@@ -5,7 +5,7 @@
        !simple && 'el-steps--' + direction,
        simple && 'el-steps--simple'
      ]">
-      <slot></slot>
+    <slot></slot>
   </div>
 </template>
 

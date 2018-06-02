@@ -5,17 +5,17 @@
 @import "./scrollbar.scss";
 @import "./popper";
 
-@include b(autocomplete) {
+@include b(autocomplete){
   position: relative;
   display: inline-block;
 }
 
-@include b(autocomplete-suggestion) {
+@include b(autocomplete-suggestion){
   margin: 5px 0;
   box-shadow: $--box-shadow-light;
   border-radius: $--border-radius-base;
 
-  @include e(wrap) {
+  @include e(wrap){
     max-height: 280px;
     padding: 10px 0;
     box-sizing: border-box;
@@ -25,12 +25,12 @@
     border-radius: $--border-radius-base;
   }
 
-  @include e(list) {
+  @include e(list){
     margin: 0;
     padding: 0;
   }
 
-  & li {
+  & li{
     padding: 0 20px;
     margin: 0;
     line-height: 34px;
@@ -42,26 +42,26 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
-    &:hover {
+    &:hover{
       background-color: $--select-option-hover-background;
     }
 
-    &.highlighted {
+    &.highlighted{
       background-color: $--select-option-hover-background;
     }
 
-    &.divider {
+    &.divider{
       margin-top: 6px;
       border-top: 1px solid $--color-black;
     }
 
-    &.divider:last-child {
+    &.divider:last-child{
       margin-bottom: -6px;
     }
   }
 
-  @include when(loading) {
-    li {
+  @include when(loading){
+    li{
       text-align: center;
       height: 100px;
       line-height: 100px;
@@ -69,12 +69,12 @@
       color: #999;
       @include utils-vertical-center;
 
-      &:hover {
+      &:hover{
         background-color: $--color-white;
       }
     }
 
-    & .el-icon-loading {
+    & .el-icon-loading{
       vertical-align: middle;
     }
   }

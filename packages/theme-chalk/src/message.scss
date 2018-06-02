@@ -1,7 +1,7 @@
 @import "mixins/mixins";
 @import "common/var";
 
-@include b(message) {
+@include b(message){
   min-width: $--message-min-width;
   box-sizing: border-box;
   border-radius: $--border-radius-base;
@@ -19,67 +19,67 @@
   display: flex;
   align-items: center;
 
-  @include when(center) {
+  @include when(center){
     justify-content: center;
   }
 
-  @include when(closable) {
-    .el-message__content {
+  @include when(closable){
+    .el-message__content{
       padding-right: 16px;
     }
   }
 
-  p {
+  p{
     margin: 0;
   }
 
-  @include m(info) {
-    .el-message__content {
+  @include m(info){
+    .el-message__content{
       color: $--message-info-color;
     }
   }
 
-  @include m(success) {
+  @include m(success){
     background-color: $--color-success-lighter;
     border-color: $--color-success-light;
 
-    .el-message__content {
+    .el-message__content{
       color: $--message-success-color;
     }
   }
 
-  @include m(warning) {
+  @include m(warning){
     background-color: $--color-warning-lighter;
     border-color: $--color-warning-light;
 
-    .el-message__content {
+    .el-message__content{
       color: $--message-warning-color;
     }
   }
 
-  @include m(error) {
+  @include m(error){
     background-color: $--color-danger-lighter;
     border-color: $--color-danger-light;
 
-    .el-message__content {
+    .el-message__content{
       color: $--message-danger-color;
     }
   }
 
-  @include e(icon) {
+  @include e(icon){
     margin-right: 10px;
   }
 
-  @include e(content) {
+  @include e(content){
     padding: 0;
     font-size: 14px;
     line-height: 1;
-    &:focus {
+    &:focus{
       outline-width: 0;
     }
   }
 
-  @include e(closeBtn) {
+  @include e(closeBtn){
     position: absolute;
     top: 50%;
     right: 15px;
@@ -88,33 +88,33 @@
     color: $--message-close-color;
     font-size: $--message-close-size;
 
-    &:focus {
+    &:focus{
       outline-width: 0;
     }
-    &:hover {
+    &:hover{
       color: $--message-close-hover-color;
     }
   }
 
-  & .el-icon-success {
+  & .el-icon-success{
     color: $--message-success-color;
   }
 
-  & .el-icon-error {
+  & .el-icon-error{
     color: $--message-danger-color;
   }
 
-  & .el-icon-info {
+  & .el-icon-info{
     color: $--message-info-color;
   }
 
-  & .el-icon-warning {
+  & .el-icon-warning{
     color: $--message-warning-color;
   }
 }
 
 .el-message-fade-enter,
-.el-message-fade-leave-active {
+.el-message-fade-leave-active{
   opacity: 0;
   transform: translate(-50%, -100%);
 }

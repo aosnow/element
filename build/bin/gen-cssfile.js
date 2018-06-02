@@ -3,9 +3,8 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 let Components = require('../../components.json');
-const themes = ['theme-chalk', 'theme-yinhe'];
 
-Components = Object.keys(Components);
+const themes = ['theme-chalk', 'theme-yinhe'];
 const basepath = path.resolve(__dirname, '../../packages/');
 
 function fileExists(filePath) {
@@ -21,7 +20,7 @@ themes.forEach(theme => {
   const isSCSS = theme !== 'theme-default';
   let indexContent = isSCSS ? '@import "./base.scss";\n' : '@import "./base.css";\n';
 
-  Components.forEach(key => {
+  Object.keys(Components).forEach(key => {
     if (['icon', 'option', 'option-group'].indexOf(key) > -1) return;
 
     const fileName = key + (isSCSS ? '.scss' : '.css');

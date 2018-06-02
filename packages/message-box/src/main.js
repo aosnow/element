@@ -47,7 +47,8 @@ const defaultCallback = action => {
     if (typeof callback === 'function') {
       if (instance.showInput) {
         callback(instance.inputValue, action);
-      } else {
+      }
+      else {
         callback(action);
       }
     }
@@ -55,10 +56,12 @@ const defaultCallback = action => {
       if (action === 'confirm') {
         if (instance.showInput) {
           currentMsg.resolve({ value: instance.inputValue, action });
-        } else {
+        }
+        else {
           currentMsg.resolve(action);
         }
-      } else if (action === 'cancel' && currentMsg.reject) {
+      }
+      else if (action === 'cancel' && currentMsg.reject) {
         currentMsg.reject(action);
       }
     }
@@ -101,7 +104,8 @@ const showNextMsg = () => {
       if (isVNode(instance.message)) {
         instance.$slots.default = [instance.message];
         instance.message = null;
-      } else {
+      }
+      else {
         delete instance.$slots.default;
       }
       ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape', 'closeOnHashChange'].forEach(prop => {
@@ -127,7 +131,8 @@ const MessageBox = function(options, callback) {
     if (typeof arguments[1] === 'string') {
       options.title = arguments[1];
     }
-  } else if (options.callback && !callback) {
+  }
+  else if (options.callback && !callback) {
     callback = options.callback;
   }
 
@@ -142,7 +147,8 @@ const MessageBox = function(options, callback) {
 
       showNextMsg();
     });
-  } else {
+  }
+  else {
     msgQueue.push({
       options: merge({}, defaults, MessageBox.defaults, options),
       callback: callback
@@ -160,7 +166,8 @@ MessageBox.alert = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
-  } else if (title === undefined) {
+  }
+  else if (title === undefined) {
     title = '';
   }
   return MessageBox(merge({
@@ -176,7 +183,8 @@ MessageBox.confirm = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
-  } else if (title === undefined) {
+  }
+  else if (title === undefined) {
     title = '';
   }
   return MessageBox(merge({
@@ -191,7 +199,8 @@ MessageBox.prompt = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
-  } else if (title === undefined) {
+  }
+  else if (title === undefined) {
     title = '';
   }
   return MessageBox(merge({

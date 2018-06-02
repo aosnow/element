@@ -38,80 +38,80 @@
 </template>
 
 <script>
-  import SvPanel from './sv-panel';
-  import HueSlider from './hue-slider';
-  import AlphaSlider from './alpha-slider';
-  import Predefine from './predefine';
-  import Popper from 'element-yhui/src/utils/vue-popper';
-  import Locale from 'element-yhui/src/mixins/locale';
-  import ElInput from 'element-yhui/packages/input';
-  import ElButton from 'element-yhui/packages/button';
+import SvPanel from './sv-panel';
+import HueSlider from './hue-slider';
+import AlphaSlider from './alpha-slider';
+import Predefine from './predefine';
+import Popper from 'element-yhui/src/utils/vue-popper';
+import Locale from 'element-yhui/src/mixins/locale';
+import ElInput from 'element-yhui/packages/input';
+import ElButton from 'element-yhui/packages/button';
 
-  export default {
-    name: 'el-color-picker-dropdown',
+export default {
+  name: 'el-color-picker-dropdown',
 
-    mixins: [Popper, Locale],
+  mixins: [Popper, Locale],
 
-    components: {
-      SvPanel,
-      HueSlider,
-      AlphaSlider,
-      ElInput,
-      ElButton,
-      Predefine
+  components: {
+    SvPanel,
+    HueSlider,
+    AlphaSlider,
+    ElInput,
+    ElButton,
+    Predefine
+  },
+
+  props: {
+    color: {
+      required: true
     },
+    showAlpha: Boolean,
+    predefine: Array
+  },
 
-    props: {
-      color: {
-        required: true
-      },
-      showAlpha: Boolean,
-      predefine: Array
-    },
+  data() {
+    return {
+      customInput: ''
+    };
+  },
 
-    data() {
-      return {
-        customInput: ''
-      };
-    },
-
-    computed: {
-      currentColor() {
-        const parent = this.$parent;
-        return !parent.value && !parent.showPanelColor ? '' : parent.color.value;
-      }
-    },
-
-    methods: {
-      confirmValue() {
-        this.$emit('pick');
-      },
-
-      handleConfirm() {
-        this.color.fromString(this.customInput);
-      }
-    },
-
-    mounted() {
-      this.$parent.popperElm = this.popperElm = this.$el;
-      this.referenceElm = this.$parent.$el;
-    },
-
-    watch: {
-      showPopper(val) {
-        if (val === true) {
-          this.$nextTick(() => {
-            const { sl, hue, alpha } = this.$refs;
-            sl && sl.update();
-            hue && hue.update();
-            alpha && alpha.update();
-          });
-        }
-      },
-
-      currentColor(val) {
-        this.customInput = val;
-      }
+  computed: {
+    currentColor() {
+      const parent = this.$parent;
+      return !parent.value && !parent.showPanelColor ? '' : parent.color.value;
     }
-  };
+  },
+
+  methods: {
+    confirmValue() {
+      this.$emit('pick');
+    },
+
+    handleConfirm() {
+      this.color.fromString(this.customInput);
+    }
+  },
+
+  mounted() {
+    this.$parent.popperElm = this.popperElm = this.$el;
+    this.referenceElm = this.$parent.$el;
+  },
+
+  watch: {
+    showPopper(val) {
+      if (val === true) {
+        this.$nextTick(() => {
+          const { sl, hue, alpha } = this.$refs;
+          sl && sl.update();
+          hue && hue.update();
+          alpha && alpha.update();
+        });
+      }
+    },
+
+    currentColor(val) {
+      this.customInput = val;
+    }
+  }
+};
 </script>

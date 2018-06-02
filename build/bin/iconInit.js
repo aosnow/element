@@ -1,16 +1,15 @@
-'use strict';
+const postcss = require('postcss');
+const fs = require('fs');
+const path = require('path');
 
-var postcss = require('postcss');
-var fs = require('fs');
-var path = require('path');
-var fontFile = fs.readFileSync(path.resolve(__dirname, '../../packages/theme-chalk/src/icon.scss'), 'utf8');
-var nodes = postcss.parse(fontFile).nodes;
-var classList = [];
+const fontFile = fs.readFileSync(path.resolve(__dirname, '../../packages/theme-chalk/src/icon.scss'), 'utf8');
+const nodes = postcss.parse(fontFile).nodes;
+const classList = [];
 
-nodes.forEach((node) => {
-  var selector = node.selector || '';
-  var reg = new RegExp(/\.el-icon-([^:]+):before/);
-  var arr = selector.match(reg);
+nodes.forEach(node => {
+  const selector = node.selector || '';
+  const reg = new RegExp(/\.el-icon-([^:]+):before/);
+  const arr = selector.match(reg);
 
   if (arr && arr[1]) {
     classList.push(arr[1]);

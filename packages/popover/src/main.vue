@@ -104,12 +104,14 @@ export default {
     if (this.trigger === 'click') {
       on(reference, 'click', this.doToggle);
       on(document, 'click', this.handleDocumentClick);
-    } else if (this.trigger === 'hover') {
+    }
+    else if (this.trigger === 'hover') {
       on(reference, 'mouseenter', this.handleMouseEnter);
       on(popper, 'mouseenter', this.handleMouseEnter);
       on(reference, 'mouseleave', this.handleMouseLeave);
       on(popper, 'mouseleave', this.handleMouseLeave);
-    } else if (this.trigger === 'focus') {
+    }
+    else if (this.trigger === 'focus') {
       let found = false;
 
       if ([].slice.call(reference.children).length) {
@@ -127,10 +129,11 @@ export default {
       }
       if (found) return;
       if (reference.nodeName === 'INPUT' ||
-        reference.nodeName === 'TEXTAREA') {
+          reference.nodeName === 'TEXTAREA') {
         on(reference, 'focusin', this.doShow);
         on(reference, 'focusout', this.doClose);
-      } else {
+      }
+      else {
         on(reference, 'mousedown', this.doShow);
         on(reference, 'mouseup', this.doClose);
       }
@@ -164,7 +167,8 @@ export default {
         this._timer = setTimeout(() => {
           this.showPopper = true;
         }, this.openDelay);
-      } else {
+      }
+      else {
         this.showPopper = true;
       }
     },
@@ -187,11 +191,13 @@ export default {
         reference = this.referenceElm = this.$slots.reference[0].elm;
       }
       if (!this.$el ||
-        !reference ||
-        this.$el.contains(e.target) ||
-        reference.contains(e.target) ||
-        !popper ||
-        popper.contains(e.target)) return;
+          !reference ||
+          this.$el.contains(e.target) ||
+          reference.contains(e.target) ||
+          !popper ||
+          popper.contains(e.target)) {
+        return;
+      }
       this.showPopper = false;
     },
     handleAfterEnter() {

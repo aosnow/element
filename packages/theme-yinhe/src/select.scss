@@ -8,27 +8,27 @@
 @import "option-group";
 @import "scrollbar";
 
-@include b(select) {
+@include b(select){
   display: inline-block;
   position: relative;
 
-  &:hover {
-    .el-input__inner {
+  &:hover{
+    .el-input__inner{
       border-color: $--select-border-color-hover;
     }
   }
 
-  .el-input__inner {
+  .el-input__inner{
     cursor: pointer;
     padding-right: 35px;
 
-    &:focus {
+    &:focus{
       border-color: $--select-input-focus-background;
     }
   }
 
-  .el-input {
-    & .el-select__caret {
+  .el-input{
+    & .el-select__caret{
       color: $--select-input-color;
       font-size: $--select-input-font-size;
       transition: transform .3s;
@@ -36,11 +36,11 @@
       line-height: 16px;
       cursor: pointer;
 
-      @include when(reverse) {
+      @include when(reverse){
         transform: rotateZ(0deg);
       }
 
-      @include when(show-close) {
+      @include when(show-close){
         font-size: $--select-font-size;
         text-align: center;
         transform: rotateZ(180deg);
@@ -48,32 +48,32 @@
         color: $--select-input-color;
         transition: $--color-transition-base;
 
-        &:hover {
+        &:hover{
           color: $--select-close-hover-color;
         }
       }
     }
 
-    &.is-disabled {
-      & .el-input__inner {
+    &.is-disabled{
+      & .el-input__inner{
         cursor: not-allowed;
 
-        &:hover {
+        &:hover{
           border-color: $--select-disabled-border;
         }
       }
     }
 
-    &.is-focus .el-input__inner {
+    &.is-focus .el-input__inner{
       border-color: $--select-input-focus-background;
     }
   }
 
-  > .el-input {
+  > .el-input{
     display: block;
   }
 
-  @include e(input) {
+  @include e(input){
     border: none;
     outline: none;
     padding: 0;
@@ -83,12 +83,12 @@
     appearance: none;
     height: 28px;
     background-color: transparent;
-    @include when(mini) {
+    @include when(mini){
       height: 14px;
     }
   }
 
-  @include e(close) {
+  @include e(close){
     cursor: pointer;
     position: absolute;
     top: 8px;
@@ -98,12 +98,12 @@
     line-height: 18px;
     font-size: $--select-input-font-size;
 
-    &:hover {
+    &:hover{
       color: $--select-close-hover-color;
     }
   }
 
-  @include e(tags) {
+  @include e(tags){
     position: absolute;
     line-height: normal;
     white-space: normal;
@@ -115,27 +115,27 @@
     flex-wrap: wrap;
   }
 
-  .el-tag__close {
+  .el-tag__close{
     margin-top: -2px;
   }
 
-  .el-tag {
+  .el-tag{
     box-sizing: border-box;
     border-color: transparent;
     margin: 2px 0 2px 6px;
     background-color: #f0f2f5;
 
-    &__close.el-icon-close {
+    &__close.el-icon-close{
       background-color: $--color-text-placeholder;
       right: -7px;
       top: 0;
       color: $--color-white;
 
-      &:hover {
+      &:hover{
         background-color: $--color-text-secondary;
       }
 
-      &::before {
+      &::before{
         display: block;
         transform: translate(0, .5px);
       }

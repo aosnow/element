@@ -1,6 +1,6 @@
 @import "../common/var";
 
-@include b(time-panel) {
+@include b(time-panel){
   margin: 5px 0;
   border: solid 1px $--datepicker-border-color;
   background-color: $--color-white;
@@ -12,12 +12,12 @@
   z-index: $--index-top;
   user-select: none;
 
-  @include e(content) {
+  @include e(content){
     font-size: 0;
     position: relative;
     overflow: hidden;
 
-    &::after, &::before {
+    &::after, &::before{
       content: "";
       top: 50%;
       position: absolute;
@@ -33,30 +33,30 @@
       border-bottom: 1px solid $--border-color-light;
     }
 
-    &::after {
+    &::after{
       left: 50%;
       margin-left: 12%;
       margin-right: 12%;
     }
 
-    &::before {
+    &::before{
       padding-left: 50%;
       margin-right: 12%;
       margin-left: 12%;
     }
 
-    &.has-seconds {
-      &::after {
+    &.has-seconds{
+      &::after{
         left: calc(100% / 3 * 2);
       }
 
-      &::before {
+      &::before{
         padding-left: calc(100% / 3);
       }
     }
   }
 
-  @include e(footer) {
+  @include e(footer){
     border-top: 1px solid $--datepicker-inner-border-color;
     padding: 4px;
     height: 36px;
@@ -65,7 +65,7 @@
     box-sizing: border-box;
   }
 
-  @include e(btn) {
+  @include e(btn){
     border: none;
     line-height: 28px;
     padding: 0 5px;
@@ -76,7 +76,7 @@
     font-size: 12px;
     color: $--color-text-primary;
 
-    &.confirm {
+    &.confirm{
       font-weight: 800;
       color: $--datepicker-active-color;
     }

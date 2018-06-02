@@ -1,10 +1,10 @@
-var webpackConfig = require('../../build/webpack.test');
+const webpackConfig = require('../../build/webpack.test');
 
 // no need for app entry during tests
 // delete webpackConfig.entry;
 
 module.exports = function(config) {
-  var configuration = {
+  const configuration = {
     // to run in additional browsers:
     // 1. install corresponding karma launcher
     //    http://karma-runner.github.io/0.13/config/browsers.html

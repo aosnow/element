@@ -26,7 +26,8 @@ export const on = (function() {
         element.addEventListener(event, handler, false);
       }
     };
-  } else {
+  }
+  else {
     return function(element, event, handler) {
       if (element && event && handler) {
         element.attachEvent('on' + event, handler);
@@ -43,7 +44,8 @@ export const off = (function() {
         element.removeEventListener(event, handler, false);
       }
     };
-  } else {
+  }
+  else {
     return function(element, event, handler) {
       if (element && event) {
         element.detachEvent('on' + event, handler);
@@ -69,7 +71,8 @@ export function hasClass(el, cls) {
   if (cls.indexOf(' ') !== -1) throw new Error('className should not contain space.');
   if (el.classList) {
     return el.classList.contains(cls);
-  } else {
+  }
+  else {
     return (' ' + el.className + ' ').indexOf(' ' + cls + ' ') > -1;
   }
 };
@@ -86,7 +89,8 @@ export function addClass(el, cls) {
 
     if (el.classList) {
       el.classList.add(clsName);
-    } else if (!hasClass(el, clsName)) {
+    }
+    else if (!hasClass(el, clsName)) {
       curClass += ' ' + clsName;
     }
   }
@@ -107,7 +111,8 @@ export function removeClass(el, cls) {
 
     if (el.classList) {
       el.classList.remove(clsName);
-    } else if (hasClass(el, clsName)) {
+    }
+    else if (hasClass(el, clsName)) {
       curClass = curClass.replace(' ' + clsName + ' ', ' ');
     }
   }
@@ -129,13 +134,15 @@ export const getStyle = ieVersion < 9 ? function(element, styleName) {
       case 'opacity':
         try {
           return element.filters.item('alpha').opacity / 100;
-        } catch (e) {
+        }
+        catch (e) {
           return 1.0;
         }
       default:
         return (element.style[styleName] || element.currentStyle ? element.currentStyle[styleName] : null);
     }
-  } catch (e) {
+  }
+  catch (e) {
     return element.style[styleName];
   }
 } : function(element, styleName) {
@@ -148,7 +155,8 @@ export const getStyle = ieVersion < 9 ? function(element, styleName) {
   try {
     var computed = document.defaultView.getComputedStyle(element, '');
     return element.style[styleName] || computed ? computed[styleName] : null;
-  } catch (e) {
+  }
+  catch (e) {
     return element.style[styleName];
   }
 };
@@ -163,11 +171,13 @@ export function setStyle(element, styleName, value) {
         setStyle(element, prop, styleName[prop]);
       }
     }
-  } else {
+  }
+  else {
     styleName = camelCase(styleName);
     if (styleName === 'opacity' && ieVersion < 9) {
       element.style.filter = isNaN(value) ? '' : 'alpha(opacity=' + value * 100 + ')';
-    } else {
+    }
+    else {
       element.style[styleName] = value;
     }
   }

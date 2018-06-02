@@ -11,5 +11,5 @@
   "repository": "https://github.com/ElemeFE/element/tree/master/packages/cascader",
   "author": "elemefe",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": { }
 }

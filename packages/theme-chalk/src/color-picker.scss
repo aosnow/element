@@ -1,46 +1,46 @@
 @import "mixins/mixins";
 @import "common/var";
 
-@include b(color-predefine) {
+@include b(color-predefine){
   display: flex;
   font-size: 12px;
   margin-top: 8px;
   width: 280px;
 
-  @include e(colors) {
+  @include e(colors){
     display: flex;
     flex: 1;
     flex-wrap: wrap;
   }
 
-  @include e(color-selector) {
+  @include e(color-selector){
     margin: 0 0 8px 8px;
     width: 20px;
     height: 20px;
     border-radius: 4px;
     cursor: pointer;
 
-    &:nth-child(10n + 1) {
+    &:nth-child(10n + 1){
       margin-left: 0;
     }
 
-    &.selected {
+    &.selected{
       box-shadow: 0 0 3px 2px $--color-primary;
     }
 
-    > div {
+    > div{
       display: flex;
       height: 100%;
       border-radius: 3px;
     }
 
-    @include when(alpha) {
+    @include when(alpha){
       background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
     }
   }
 }
 
-@include b(color-hue-slider) {
+@include b(color-hue-slider){
   position: relative;
   box-sizing: border-box;
   width: 280px;
@@ -48,17 +48,17 @@
   background-color: #f00;
   padding: 0 2px;
 
-  @include e(bar) {
+  @include e(bar){
     position: relative;
     background: linear-gradient(
-      to right, #f00 0%,
-      #ff0 17%, #0f0 33%,
-      #0ff 50%, #00f 67%,
-      #f0f 83%, #f00 100%);
+        to right, #f00 0%,
+        #ff0 17%, #0f0 33%,
+        #0ff 50%, #00f 67%,
+        #f0f 83%, #f00 100%);
     height: 100%;
   }
 
-  @include e(thumb) {
+  @include e(thumb){
     position: absolute;
     cursor: pointer;
     box-sizing: border-box;
@@ -73,20 +73,20 @@
     z-index: 1;
   }
 
-  @include when(vertical) {
+  @include when(vertical){
     width: 12px;
     height: 180px;
     padding: 2px 0;
 
-    .el-color-hue-slider__bar {
+    .el-color-hue-slider__bar{
       background: linear-gradient(
-        to bottom, #f00 0%,
-        #ff0 17%, #0f0 33%,
-        #0ff 50%, #00f 67%,
-        #f0f 83%, #f00 100%);
+          to bottom, #f00 0%,
+          #ff0 17%, #0f0 33%,
+          #0ff 50%, #00f 67%,
+          #f0f 83%, #f00 100%);
     }
 
-    .el-color-hue-slider__thumb {
+    .el-color-hue-slider__thumb{
       left: 0;
       top: 0;
       width: 100%;
@@ -95,12 +95,12 @@
   }
 }
 
-@include b(color-svpanel) {
+@include b(color-svpanel){
   position: relative;
   width: 280px;
   height: 180px;
 
-  @include e(('white', 'black')) {
+  @include e(('white', 'black')){
     position: absolute;
     top: 0;
     left: 0;
@@ -108,44 +108,44 @@
     bottom: 0;
   }
 
-  @include e('white') {
-    background: linear-gradient(to right, #fff, rgba(255,255,255,0));
+  @include e('white'){
+    background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
   }
 
-  @include e('black') {
-    background: linear-gradient(to top, #000, rgba(0,0,0,0));
+  @include e('black'){
+    background: linear-gradient(to top, #000, rgba(0, 0, 0, 0));
   }
 
-  @include e(cursor) {
+  @include e(cursor){
     position: absolute;
 
-    > div {
+    > div{
       cursor: head;
       width: 4px;
       height: 4px;
-      box-shadow: 0 0 0 1.5px #fff, inset 0 0 1px 1px rgba(0,0,0,0.3), 0 0 1px 2px rgba(0,0,0,0.4);
+      box-shadow: 0 0 0 1.5px #fff, inset 0 0 1px 1px rgba(0, 0, 0, 0.3), 0 0 1px 2px rgba(0, 0, 0, 0.4);
       border-radius: 50%;
       transform: translate(-2px, -2px);
     }
   }
 }
 
-@include b(color-alpha-slider) {
+@include b(color-alpha-slider){
   position: relative;
   box-sizing: border-box;
   width: 280px;
   height: 12px;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
 
-  @include e(bar) {
+  @include e(bar){
     position: relative;
     background: linear-gradient(
-      to right, rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 1) 100%);
+        to right, rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 1) 100%);
     height: 100%;
   }
 
-  @include e(thumb) {
+  @include e(thumb){
     position: absolute;
     cursor: pointer;
     box-sizing: border-box;
@@ -160,17 +160,17 @@
     z-index: 1;
   }
 
-  @include when(vertical) {
+  @include when(vertical){
     width: 20px;
     height: 180px;
 
-    .el-color-alpha-slider__bar {
+    .el-color-alpha-slider__bar{
       background: linear-gradient(
-        to bottom, rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 1) 100%);
+          to bottom, rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 1) 100%);
     }
 
-    .el-color-alpha-slider__thumb {
+    .el-color-alpha-slider__thumb{
       left: 0;
       top: 0;
       width: 100%;
@@ -179,25 +179,25 @@
   }
 }
 
-@include b(color-dropdown) {
+@include b(color-dropdown){
   width: 300px;
 
-  @include e(main-wrapper) {
+  @include e(main-wrapper){
     margin-bottom: 6px;
 
-    &::after {
+    &::after{
       content: "";
       display: table;
       clear: both;
     }
   }
 
-  @include e(btns) {
+  @include e(btns){
     margin-top: 6px;
     text-align: right;
   }
 
-  @include e(value) {
+  @include e(value){
     float: left;
     line-height: 26px;
     font-size: 12px;
@@ -205,7 +205,7 @@
     width: 160px;
   }
 
-  @include e(btn) {
+  @include e(btn){
     border: 1px solid #dcdcdc;
     color: #333;
     line-height: 24px;
@@ -216,93 +216,93 @@
     outline: none;
     font-size: 12px;
 
-    &[disabled] {
+    &[disabled]{
       color: #cccccc;
       cursor: not-allowed;
     }
-    &:hover {
+    &:hover{
       color: $--color-primary;
       border-color: $--color-primary;
     }
   }
 
-  @include e(link-btn) {
+  @include e(link-btn){
     cursor: pointer;
     color: $--color-primary;
     text-decoration: none;
     padding: 15px;
     font-size: 12px;
-    &:hover {
+    &:hover{
       color: tint($--color-primary, $--button-hover-tint-percent);
     }
   }
 }
 
-@include b(color-picker) {
+@include b(color-picker){
   display: inline-block;
   position: relative;
   line-height: normal;
   height: 40px;
 
-  @include when(disabled) {
-    .el-color-picker__trigger {
+  @include when(disabled){
+    .el-color-picker__trigger{
       cursor: not-allowed;
     }
   }
 
-  @include m(medium) {
+  @include m(medium){
     height: 36px;
 
-    .el-color-picker__trigger {
+    .el-color-picker__trigger{
       height: 36px;
       width: 36px;
     }
 
-    .el-color-picker__mask {
+    .el-color-picker__mask{
       height: 34px;
       width: 34px;
     }
   }
 
-  @include m(small) {
+  @include m(small){
     height: 32px;
 
-    .el-color-picker__trigger {
+    .el-color-picker__trigger{
       height: 32px;
       width: 32px;
     }
 
-    .el-color-picker__mask {
+    .el-color-picker__mask{
       height: 30px;
       width: 30px;
     }
 
     .el-color-picker__icon,
-    .el-color-picker__empty {
+    .el-color-picker__empty{
       transform: translate3d(-50%, -50%, 0) scale(0.8);
     }
   }
 
-  @include m(mini) {
+  @include m(mini){
     height: 28px;
 
-    .el-color-picker__trigger {
+    .el-color-picker__trigger{
       height: 28px;
       width: 28px;
     }
 
-    .el-color-picker__mask {
+    .el-color-picker__mask{
       height: 26px;
       width: 26px;
     }
 
     .el-color-picker__icon,
-    .el-color-picker__empty {
+    .el-color-picker__empty{
       transform: translate3d(-50%, -50%, 0) scale(0.8);
     }
   }
 
-  @include e(mask) {
+  @include e(mask){
     height: 38px;
     width: 38px;
     border-radius: 4px;
@@ -314,7 +314,7 @@
     background-color: rgba(255, 255, 255, .7);
   }
 
-  @include e(trigger) {
+  @include e(trigger){
     display: inline-block;
     box-sizing: border-box;
     height: 40px;
@@ -327,7 +327,7 @@
     cursor: pointer;
   }
 
-  @include e(color) {
+  @include e(color){
     position: relative;
     display: block;
     box-sizing: border-box;
@@ -337,12 +337,12 @@
     height: 100%;
     text-align: center;
 
-    @include when(alpha) {
+    @include when(alpha){
       background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
     }
   }
 
-  @include e(color-inner) {
+  @include e(color-inner){
     position: absolute;
     left: 0;
     top: 0;
@@ -350,7 +350,7 @@
     bottom: 0;
   }
 
-  @include e(empty) {
+  @include e(empty){
     font-size: 12px;
     color: #999;
     position: absolute;
@@ -359,7 +359,7 @@
     transform: translate3d(-50%, -50%, 0);
   }
 
-  @include e(icon) {
+  @include e(icon){
     display: inline-block;
     position: absolute;
     width: 100%;
@@ -371,7 +371,7 @@
     font-size: 12px;
   }
 
-  @include e(panel) {
+  @include e(panel){
     position: absolute;
     z-index: 10;
     padding: 6px;

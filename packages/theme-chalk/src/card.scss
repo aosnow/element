@@ -1,7 +1,7 @@
 @import "mixins/mixins";
 @import "common/var";
 
-@include b(card) {
+@include b(card){
   border-radius: $--card-border-radius;
   border: 1px solid $--card-border-color;
   background-color: $--color-white;
@@ -9,24 +9,24 @@
   color: $--color-text-primary;
   transition: 0.3s;
 
-  @include when(always-shadow) {
+  @include when(always-shadow){
     box-shadow: $--box-shadow-light;
   }
 
-  @include when(hover-shadow) {
+  @include when(hover-shadow){
     &:hover,
-    &:focus {
+    &:focus{
       box-shadow: $--box-shadow-light;
     }
   }
 
-  @include e(header) {
+  @include e(header){
     padding: #{$--card-padding - 2 $--card-padding};
     border-bottom: 1px solid $--card-border-color;
     box-sizing: border-box;
   }
 
-  @include e(body) {
+  @include e(body){
     padding: $--card-padding;
   }
 }

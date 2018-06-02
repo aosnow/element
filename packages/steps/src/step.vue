@@ -110,7 +110,7 @@ export default {
     },
     space() {
       const { isSimple, $parent: { space } } = this;
-      return isSimple ? '' : space ;
+      return isSimple ? '' : space;
     },
     style: function() {
       const style = {};
@@ -126,7 +126,8 @@ export default {
       if (this.isVertical) return style;
       if (this.isLast) {
         style.maxWidth = 100 / this.stepsCount + '%';
-      } else {
+      }
+      else {
         style.marginRight = -this.$parent.stepOffset + 'px';
       }
 
@@ -140,9 +141,11 @@ export default {
 
       if (val > this.index) {
         this.internalStatus = this.$parent.finishStatus;
-      } else if (val === this.index && this.prevStatus !== 'error') {
+      }
+      else if (val === this.index && this.prevStatus !== 'error') {
         this.internalStatus = this.$parent.processStatus;
-      } else {
+      }
+      else {
         this.internalStatus = 'wait';
       }
 
@@ -156,7 +159,8 @@ export default {
       style.transitionDelay = 150 * this.index + 'ms';
       if (status === this.$parent.processStatus) {
         step = this.currentStatus !== 'error' ? 0 : 0;
-      } else if (status === 'wait') {
+      }
+      else if (status === 'wait') {
         step = 0;
         style.transitionDelay = (-150 * this.index) + 'ms';
       }

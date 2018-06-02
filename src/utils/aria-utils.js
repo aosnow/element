@@ -52,7 +52,8 @@ aria.Utils.attemptFocus = function(element) {
   aria.Utils.IgnoreUtilFocusChanges = true;
   try {
     element.focus();
-  } catch (e) {
+  }
+  catch (e) {
   }
   aria.Utils.IgnoreUtilFocusChanges = false;
   return (document.activeElement === element);
@@ -93,9 +94,11 @@ aria.Utils.triggerEvent = function(elm, name, ...opts) {
 
   if (/^mouse|click/.test(name)) {
     eventName = 'MouseEvents';
-  } else if (/^key/.test(name)) {
+  }
+  else if (/^key/.test(name)) {
     eventName = 'KeyboardEvent';
-  } else {
+  }
+  else {
     eventName = 'HTMLEvents';
   }
   const evt = document.createEvent(eventName);

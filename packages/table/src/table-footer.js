@@ -28,11 +28,13 @@ export default {
           const value = Number(curr);
           if (!isNaN(value)) {
             return parseFloat((prev + curr).toFixed(Math.min(precision, 20)));
-          } else {
+          }
+          else {
             return prev;
           }
         }, 0);
-      } else {
+      }
+      else {
         sums[index] = '';
       }
     });
@@ -45,32 +47,33 @@ export default {
         border="0">
         <colgroup>
           {
-            this._l(this.columns, column => <col name={ column.id } />)
+            this._l(this.columns, column => <col name={column.id}/>)
           }
           {
-            this.hasGutter ? <col name="gutter" /> : ''
+            this.hasGutter ? <col name="gutter"/> : ''
           }
         </colgroup>
-        <tbody class={ [{ 'has-gutter': this.hasGutter }] }>
-          <tr>
-            {
-              this._l(this.columns, (column, cellIndex) =>
-                <td
-                  colspan={ column.colSpan }
-                  rowspan={ column.rowSpan }
-                  class={ [column.id, column.headerAlign, column.className || '', this.isCellHidden(cellIndex, this.columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : '', column.labelClassName] }>
-                  <div class={ ['cell', column.labelClassName] }>
-                    {
-                      this.summaryMethod ? this.summaryMethod({ columns: this.columns, data: this.store.states.data })[cellIndex] : sums[cellIndex]
-                    }
-                  </div>
-                </td>
-              )
-            }
-            {
-              this.hasGutter ? <th class="gutter"></th> : ''
-            }
-          </tr>
+        <tbody class={[{ 'has-gutter': this.hasGutter }]}>
+        <tr>
+          {
+            this._l(this.columns, (column, cellIndex) =>
+              <td
+                colspan={column.colSpan}
+                rowspan={column.rowSpan}
+                class={[column.id, column.headerAlign, column.className || '', this.isCellHidden(cellIndex, this.columns) ? 'is-hidden' : '',
+                  !column.children ? 'is-leaf' : '', column.labelClassName]}>
+                <div class={['cell', column.labelClassName]}>
+                  {
+                    this.summaryMethod ? this.summaryMethod({ columns: this.columns, data: this.store.states.data })[cellIndex] : sums[cellIndex]
+                  }
+                </div>
+              </td>
+            )
+          }
+          {
+            this.hasGutter ? <th class="gutter"></th> : ''
+          }
+        </tr>
         </tbody>
       </table>
     );
@@ -129,13 +132,15 @@ export default {
     isCellHidden(index, columns) {
       if (this.fixed === true || this.fixed === 'left') {
         return index >= this.leftFixedCount;
-      } else if (this.fixed === 'right') {
+      }
+      else if (this.fixed === 'right') {
         let before = 0;
         for (let i = 0; i < index; i++) {
           before += columns[i].colSpan;
         }
         return before < this.columnsCount - this.rightFixedCount;
-      } else {
+      }
+      else {
         return (index < this.leftFixedCount) || (index >= this.columnsCount - this.rightFixedCount);
       }
     }

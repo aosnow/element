@@ -4,7 +4,7 @@
       role="tab"
       :aria-expanded="isActive"
       :aria-controls="`el-collapse-content-${id}`"
-      :aria-describedby ="`el-collapse-content-${id}`"
+      :aria-describedby="`el-collapse-content-${id}`"
     >
       <div
         class="el-collapse-item__header"
@@ -44,70 +44,71 @@
   </div>
 </template>
 <script>
-  import ElCollapseTransition from 'element-yhui/src/transitions/collapse-transition';
-  import Emitter from 'element-yhui/src/mixins/emitter';
-  import { generateId } from 'element-yhui/src/utils/util';
+import ElCollapseTransition from 'element-yhui/src/transitions/collapse-transition';
+import Emitter from 'element-yhui/src/mixins/emitter';
+import { generateId } from 'element-yhui/src/utils/util';
 
-  export default {
-    name: 'ElCollapseItem',
+export default {
+  name: 'ElCollapseItem',
 
-    componentName: 'ElCollapseItem',
+  componentName: 'ElCollapseItem',
 
-    mixins: [Emitter],
+  mixins: [Emitter],
 
-    components: { ElCollapseTransition },
+  components: { ElCollapseTransition },
 
-    data() {
-      return {
-        contentWrapStyle: {
-          height: 'auto',
-          display: 'block'
-        },
-        contentHeight: 0,
-        focusing: false,
-        isClick: false
-      };
-    },
-
-    inject: ['collapse'],
-
-    props: {
-      title: String,
-      name: {
-        type: [String, Number],
-        default() {
-          return this._uid;
-        }
-      }
-    },
-
-    computed: {
-      isActive() {
-        return this.collapse.activeNames.indexOf(this.name) > -1;
+  data() {
+    return {
+      contentWrapStyle: {
+        height: 'auto',
+        display: 'block'
       },
-      id() {
-        return generateId();
-      }
-    },
+      contentHeight: 0,
+      focusing: false,
+      isClick: false
+    };
+  },
 
-    methods: {
-      handleFocus() {
-        setTimeout(() => {
-          if (!this.isClick) {
-            this.focusing = true;
-          } else {
-            this.isClick = false;
-          }
-        }, 50);
-      },
-      handleHeaderClick() {
-        this.dispatch('ElCollapse', 'item-click', this);
-        this.focusing = false;
-        this.isClick = true;
-      },
-      handleEnterClick() {
-        this.dispatch('ElCollapse', 'item-click', this);
+  inject: ['collapse'],
+
+  props: {
+    title: String,
+    name: {
+      type: [String, Number],
+      default() {
+        return this._uid;
       }
     }
-  };
+  },
+
+  computed: {
+    isActive() {
+      return this.collapse.activeNames.indexOf(this.name) > -1;
+    },
+    id() {
+      return generateId();
+    }
+  },
+
+  methods: {
+    handleFocus() {
+      setTimeout(() => {
+        if (!this.isClick) {
+          this.focusing = true;
+        }
+        else {
+          this.isClick = false;
+        }
+      }, 50);
+    },
+    handleHeaderClick() {
+      this.dispatch('ElCollapse', 'item-click', this);
+      this.focusing = false;
+      this.isClick = true;
+    },
+    handleEnterClick() {
+      this.dispatch('ElCollapse', 'item-click', this);
+    }
+  }
+};
 </script>

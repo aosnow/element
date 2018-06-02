@@ -1,28 +1,29 @@
 @import "../common/var";
-@mixin button-plain($color) {
+
+@mixin button-plain($color){
   color: $color;
   background: mix($--color-white, $color, 90%);
   border-color: mix($--color-white, $color, 60%);
 
   &:hover,
-  &:focus {
+  &:focus{
     background: $color;
     border-color: $color;
     color: $--color-white;
   }
 
-  &:active {
+  &:active{
     background: mix($--color-black, $color, $--button-active-shade-percent);
     border-color: mix($--color-black, $color, $--button-active-shade-percent);
     color: $--color-white;
     outline: none;
   }
 
-  &.is-disabled {
+  &.is-disabled{
     &,
     &:hover,
     &:focus,
-    &:active {
+    &:active{
       color: mix($--color-white, $color, 40%);
       background-color: mix($--color-white, $color, 90%);
       border-color: mix($--color-white, $color, 80%);
@@ -30,52 +31,52 @@
   }
 }
 
-@mixin button-variant($color, $background-color, $border-color) {
+@mixin button-variant($color, $background-color, $border-color){
   color: $color;
   background-color: $background-color;
   border-color: $border-color;
 
   &:hover,
-  &:focus {
+  &:focus{
     background: mix($--color-white, $background-color, $--button-hover-tint-percent);
     border-color: mix($--color-white, $border-color, $--button-hover-tint-percent);
     color: $color;
   }
-  
-  &:active {
+
+  &:active{
     background: mix($--color-black, $background-color, $--button-active-shade-percent);
     border-color: mix($--color-black, $border-color, $--button-active-shade-percent);
     color: $color;
     outline: none;
   }
 
-  &.is-active {
+  &.is-active{
     background: mix($--color-black, $background-color, $--button-active-shade-percent);
     border-color: mix($--color-black, $border-color, $--button-active-shade-percent);
     color: $color;
   }
 
-  &.is-disabled {
+  &.is-disabled{
     &,
     &:hover,
     &:focus,
-    &:active {
+    &:active{
       color: $--color-white;
       background-color: mix($background-color, $--color-white);
       border-color: mix($border-color, $--color-white);
     }
   }
 
-  &.is-plain {
+  &.is-plain{
     @include button-plain($background-color);
   }
 }
 
-@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $border-radius) {
+@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $border-radius){
   padding: $padding-vertical $padding-horizontal;
   font-size: $font-size;
   border-radius: $border-radius;
-  &.is-round {
+  &.is-round{
     padding: $padding-vertical $padding-horizontal;
   }
 }

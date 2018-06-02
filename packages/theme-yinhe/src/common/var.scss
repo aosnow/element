@@ -25,10 +25,10 @@ $--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default; /
 $--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /* d9ecff */
 $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
 
-$--color-success: #67c23a !default;
-$--color-warning: #e6a23c !default;
-$--color-danger: #f56c6c !default;
-$--color-info: #909399 !default;
+$--color-success: #3cc33c !default;
+$--color-warning: #f5912d !default;
+$--color-danger: #f55041 !default;
+$--color-info: #bcbcbc !default;
 
 $--color-success-light: mix($--color-white, $--color-success, 80%) !default;
 $--color-warning-light: mix($--color-white, $--color-warning, 80%) !default;
@@ -40,10 +40,11 @@ $--color-warning-lighter: mix($--color-white, $--color-warning, 90%) !default;
 $--color-danger-lighter: mix($--color-white, $--color-danger, 90%) !default;
 $--color-info-lighter: mix($--color-white, $--color-info, 90%) !default;
 
-$--color-text-primary: #303133 !default;
-$--color-text-regular: #606266 !default;
-$--color-text-secondary: #909399 !default;
-$--color-text-placeholder: #c0c4cc !default;
+// 中性色
+$--color-text-primary: #333333 !default;
+$--color-text-regular: #666666 !default;
+$--color-text-secondary: #999999 !default;
+$--color-text-placeholder: #c0c0c0 !default;
 
 /* Link
 -------------------------- */
@@ -58,10 +59,12 @@ $--background-color-base: #f5f7fa !default;
 -------------------------- */
 $--border-width-base: 1px !default;
 $--border-style-base: solid !default;
-$--border-color-base: #dcdfe6 !default;
-$--border-color-light: #e4e7ed !default;
-$--border-color-lighter: #ebeef5 !default;
-$--border-color-extra-light: #f2f6fc !default;
+
+$--border-color-base: #d5d5d5 !default;
+$--border-color-light: #e4e4e4 !default;
+$--border-color-lighter: #ebebeb !default;
+$--border-color-extra-light: #f2f2f2 !default;
+
 $--border-color-hover: $--color-text-placeholder !default;
 $--border-base: $--border-width-base $--border-style-base $--border-color-base !default;
 $--border-radius-base: 3px !default;
@@ -81,11 +84,14 @@ $--fill-base: $--color-white !default;
 /* Font
 -------------------------- */
 $--font-path: 'fonts' !default;
+
+// 字号设置成偶数，否则将影响平均值的计算
 $--font-size-base: 14px !default;
-$--font-size-medium: 13px !default;
+$--font-size-medium: 14px !default;
 $--font-size-small: 12px !default;
 $--font-size-mini: 12px !default;
 $--font-size-large: 18px !default;
+
 $--font-color-disabled-base: #bbb !default;
 $--font-weight-primary: 500 !default;
 $--font-line-height-primary: 24px !default;
@@ -95,9 +101,9 @@ $--font-line-height-primary: 24px !default;
 $--size-base: 14px !default;
 
 $--height-base: 40px !default;
-$--height-medium: floor($--height-base * 0.9) !default; // 36px
-$--height-small: floor($--height-medium * 0.9) !default; // 32px
-$--height-mini: floor($--height-small * 0.9) !default; // 28px
+$--height-medium: 34px !default;
+$--height-small: 30px !default;
+$--height-mini: 28px !default;
 
 /* z-index
 -------------------------- */
@@ -398,25 +404,32 @@ $--tab-vertical-header-count-fill: $--color-text-secondary !default;
 
 /* Button
 -------------------------- */
+// 按钮的高度不是直接设置，而通过 padding 与 font-size 相加所得
+$--button-height: 40px;
+$--button-medium-height: 34px;
+$--button-small-height: 30px;
+$--button-mini-height: 28px;
+$--button-vertical-border-width: $--border-width-base;
+
 $--button-font-size: $--font-size-base !default;
 $--button-font-weight: $--font-weight-primary !default;
 $--button-border-radius: $--border-radius-base !default;
-$--button-padding-vertical: 12px !default;
+$--button-padding-vertical: floor(($--button-height - $--font-size-base) * 0.5) - $--button-vertical-border-width !default;
 $--button-padding-horizontal: 20px !default;
 
 $--button-medium-font-size: $--font-size-medium !default;
 $--button-medium-border-radius: $--border-radius-base !default;
-$--button-medium-padding-vertical: 10px !default;
+$--button-medium-padding-vertical: floor(($--button-medium-height - $--font-size-medium) * 0.5) - $--button-vertical-border-width !default;
 $--button-medium-padding-horizontal: 20px !default;
 
 $--button-small-font-size: $--font-size-small !default;
 $--button-small-border-radius: #{$--border-radius-base - 1} !default;
-$--button-small-padding-vertical: 9px !default;
+$--button-small-padding-vertical: floor(($--button-small-height - $--font-size-small) * 0.5) - $--button-vertical-border-width !default;
 $--button-small-padding-horizontal: 15px !default;
 
 $--button-mini-font-size: $--font-size-mini !default;
 $--button-mini-border-radius: #{$--border-radius-base - 1} !default;
-$--button-mini-padding-vertical: 7px !default;
+$--button-mini-padding-vertical: floor(($--button-mini-height - $--font-size-mini) * 0.5) - $--button-vertical-border-width !default;
 $--button-mini-padding-horizontal: 15px !default;
 
 $--button-default-color: $--color-text-regular !default;

@@ -1,17 +1,18 @@
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
-export function noop() {};
+export function noop() {
+}
 
 export function hasOwn(obj, key) {
   return hasOwnProperty.call(obj, key);
-};
+}
 
 function extend(to, _from) {
   for (let key in _from) {
     to[key] = _from[key];
   }
   return to;
-};
+}
 
 export function toObject(arr) {
   var res = {};
@@ -21,7 +22,7 @@ export function toObject(arr) {
     }
   }
   return res;
-};
+}
 
 export const getValueByPath = function(object, prop) {
   prop = prop || '';
@@ -53,7 +54,8 @@ export function getPropByPath(obj, path, strict) {
     let key = keyArr[i];
     if (key in tempObj) {
       tempObj = tempObj[key];
-    } else {
+    }
+    else {
       if (strict) {
         throw new Error('please transfer a valid prop path to form item!');
       }
@@ -65,7 +67,7 @@ export function getPropByPath(obj, path, strict) {
     k: keyArr[i],
     v: tempObj ? tempObj[keyArr[i]] : null
   };
-};
+}
 
 export const generateId = function() {
   return Math.floor(Math.random() * 10000);

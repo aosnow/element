@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Main from './main.vue';
 import { PopupManager } from 'element-yhui/src/utils/popup';
 import { isVNode } from 'element-yhui/src/utils/vdom';
+
 const NotificationConstructor = Vue.extend(Main);
 
 let instance;
@@ -76,7 +77,7 @@ Notification.close = function(id, userOnClose) {
   if (len <= 1) return;
   const position = instance.position;
   const removedHeight = instance.dom.offsetHeight;
-  for (let i = index; i < len - 1 ; i++) {
+  for (let i = index; i < len - 1; i++) {
     if (instances[i].position === position) {
       instances[i].dom.style[instance.verticalProperty] =
         parseInt(instances[i].dom.style[instance.verticalProperty], 10) - removedHeight - 16 + 'px';

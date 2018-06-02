@@ -28,23 +28,28 @@ aria.Dialog = function(dialog, focusAfterClosed, focusFirst) {
 
   if (typeof focusAfterClosed === 'string') {
     this.focusAfterClosed = document.getElementById(focusAfterClosed);
-  } else if (typeof focusAfterClosed === 'object') {
+  }
+  else if (typeof focusAfterClosed === 'object') {
     this.focusAfterClosed = focusAfterClosed;
-  } else {
+  }
+  else {
     this.focusAfterClosed = null;
   }
 
   if (typeof focusFirst === 'string') {
     this.focusFirst = document.getElementById(focusFirst);
-  } else if (typeof focusFirst === 'object') {
+  }
+  else if (typeof focusFirst === 'object') {
     this.focusFirst = focusFirst;
-  } else {
+  }
+  else {
     this.focusFirst = null;
   }
 
   if (this.focusFirst) {
     this.focusFirst.focus();
-  } else {
+  }
+  else {
     Utils.focusFirstDescendant(this.dialogNode);
   }
 
@@ -78,7 +83,8 @@ aria.Dialog.prototype.trapFocus = function(event) {
   }
   if (this.dialogNode.contains(event.target)) {
     this.lastFocus = event.target;
-  } else {
+  }
+  else {
     Utils.focusFirstDescendant(this.dialogNode);
     if (this.lastFocus === document.activeElement) {
       Utils.focusLastDescendant(this.dialogNode);

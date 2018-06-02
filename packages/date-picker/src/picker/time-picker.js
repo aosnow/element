@@ -25,7 +25,8 @@ export default {
         this.type = isRange ? 'timerange' : 'time';
         this.panel = isRange ? TimeRangePanel : TimePanel;
         this.mountPicker();
-      } else {
+      }
+      else {
         this.type = isRange ? 'timerange' : 'time';
         this.panel = isRange ? TimeRangePanel : TimePanel;
       }

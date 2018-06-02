@@ -1,29 +1,30 @@
-@mixin utils-user-select($value) {
+@mixin utils-user-select($value){
   -moz-user-select: $value;
   -webkit-user-select: $value;
   -ms-user-select: $value;
 }
 
-@mixin utils-clearfix {
+@mixin utils-clearfix{
   $selector: &;
 
-  @at-root {
+  @at-root{
     #{$selector}::before,
-    #{$selector}::after {
+    #{$selector}::after{
       display: table;
       content: "";
     }
-    #{$selector}::after {
+
+    #{$selector}::after{
       clear: both
     }
   }
 }
 
-@mixin utils-vertical-center {
+@mixin utils-vertical-center{
   $selector: &;
 
-  @at-root {
-    #{$selector}::after {
+  @at-root{
+    #{$selector}::after{
       display: inline-block;
       content: "";
       height: 100%;
@@ -32,7 +33,7 @@
   }
 }
 
-@mixin utils-ellipsis {
+@mixin utils-ellipsis{
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

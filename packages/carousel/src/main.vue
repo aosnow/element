@@ -131,10 +131,11 @@ export default {
     itemInStage(item, index) {
       const length = this.items.length;
       if (index === length - 1 && item.inStage && this.items[0].active ||
-        (item.inStage && this.items[index + 1] && this.items[index + 1].active)) {
+          (item.inStage && this.items[index + 1] && this.items[index + 1].active)) {
         return 'left';
-      } else if (index === 0 && item.inStage && this.items[length - 1].active ||
-        (item.inStage && this.items[index - 1] && this.items[index - 1].active)) {
+      }
+      else if (index === 0 && item.inStage && this.items[length - 1].active ||
+               (item.inStage && this.items[index - 1] && this.items[index - 1].active)) {
         return 'right';
       }
       return false;
@@ -167,7 +168,8 @@ export default {
     playSlides() {
       if (this.activeIndex < this.items.length - 1) {
         this.activeIndex++;
-      } else {
+      }
+      else {
         this.activeIndex = 0;
       }
     },
@@ -198,9 +200,11 @@ export default {
       const oldIndex = this.activeIndex;
       if (index < 0) {
         this.activeIndex = length - 1;
-      } else if (index >= length) {
+      }
+      else if (index >= length) {
         this.activeIndex = 0;
-      } else {
+      }
+      else {
         this.activeIndex = index;
       }
       if (oldIndex === this.activeIndex) {

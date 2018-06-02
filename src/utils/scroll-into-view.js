@@ -21,7 +21,8 @@ export default function scrollIntoView(container, selected) {
 
   if (top < viewRectTop) {
     container.scrollTop = top;
-  } else if (bottom > viewRectBottom) {
+  }
+  else if (bottom > viewRectBottom) {
     container.scrollTop = bottom - container.clientHeight;
   }
 }

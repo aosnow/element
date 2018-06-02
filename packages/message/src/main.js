@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Main from './main.vue';
 import { PopupManager } from 'element-yhui/src/utils/popup';
 import { isVNode } from 'element-yhui/src/utils/vdom';
+
 let MessageConstructor = Vue.extend(Main);
 
 let instance;

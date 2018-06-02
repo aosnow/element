@@ -1,13 +1,13 @@
 @import "../common/var";
 
-@include b(time-spinner) {
-  &.has-seconds {
-    .el-time-spinner__wrapper {
+@include b(time-spinner){
+  &.has-seconds{
+    .el-time-spinner__wrapper{
       width: 33.3%;
     }
   }
 
-  @include e(wrapper) {
+  @include e(wrapper){
     max-height: 190px;
     overflow: auto;
     display: inline-block;
@@ -15,27 +15,27 @@
     vertical-align: top;
     position: relative;
 
-    & .el-scrollbar__wrap:not(.el-scrollbar__wrap--hidden-default) {
+    & .el-scrollbar__wrap:not(.el-scrollbar__wrap--hidden-default){
       padding-bottom: 15px;
     }
 
-    @include when(arrow) {
+    @include when(arrow){
       box-sizing: border-box;
       text-align: center;
       overflow: hidden;
 
-      .el-time-spinner__list {
+      .el-time-spinner__list{
         transform: translateY(-32px);
       }
 
-      .el-time-spinner__item:hover:not(.disabled):not(.active) {
+      .el-time-spinner__item:hover:not(.disabled):not(.active){
         background: $--color-white;
         cursor: default;
       }
     }
   }
 
-  @include e(arrow) {
+  @include e(arrow){
     font-size: 12px;
     color: $--color-text-secondary;
     position: absolute;
@@ -47,38 +47,38 @@
     line-height: 30px;
     cursor: pointer;
 
-    &:hover {
+    &:hover{
       color: $--color-primary;
     }
 
-    &.el-icon-arrow-up {
+    &.el-icon-arrow-up{
       top: 10px;
     }
 
-    &.el-icon-arrow-down {
+    &.el-icon-arrow-down{
       bottom: 10px;
     }
   }
 
-  @include e(input) {
-    &.el-input {
+  @include e(input){
+    &.el-input{
       width: 70%;
 
-      .el-input__inner {
+      .el-input__inner{
         padding: 0;
         text-align: center;
       }
     }
   }
 
-  @include e(list) {
+  @include e(list){
     padding: 0;
     margin: 0;
     list-style: none;
     text-align: center;
 
     &::after,
-    &::before {
+    &::before{
       content: '';
       display: block;
       width: 100%;
@@ -86,23 +86,23 @@
     }
   }
 
-  @include e(item) {
+  @include e(item){
     height: 32px;
     line-height: 32px;
     font-size: 12px;
     color: $--color-text-regular;
 
-    &:hover:not(.disabled):not(.active) {
+    &:hover:not(.disabled):not(.active){
       background: $--background-color-base;
       cursor: pointer;
     }
 
-    &.active:not(.disabled) {
+    &.active:not(.disabled){
       color: $--color-text-primary;
       font-weight: bold;
     }
 
-    &.disabled {
+    &.disabled{
       color: $--color-text-placeholder;
       cursor: not-allowed;
     }

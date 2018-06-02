@@ -1,40 +1,40 @@
 @import "mixins/mixins";
 @import "common/var";
 
-@include b(rate) {
+@include b(rate){
   height: $--rate-height;
   line-height: 1;
 
-  &:focus, &:active {
+  &:focus, &:active{
     outline-width: 0;
   }
 
-  @include e(item) {
+  @include e(item){
     display: inline-block;
     position: relative;
     font-size: 0;
     vertical-align: middle;
   }
 
-  @include e(icon) {
+  @include e(icon){
     position: relative;
     display: inline-block;
     font-size: $--rate-icon-size;
     margin-right: $--rate-icon-margin;
     color: $--rate-icon-color;
     transition: .3s;
-    &.hover {
+    &.hover{
       transform: scale(1.15);
     }
 
-    .path2 {
+    .path2{
       position: absolute;
       left: 0;
       top: 0;
     }
   }
 
-  @include e(decimal) {
+  @include e(decimal){
     position: absolute;
     top: 0;
     left: 0;
@@ -42,7 +42,7 @@
     overflow: hidden;
   }
 
-  @include e(text) {
+  @include e(text){
     font-size: $--rate-font-size;
     vertical-align: middle;
   }

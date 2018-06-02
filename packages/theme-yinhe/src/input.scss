@@ -1,13 +1,13 @@
 @import "mixins/mixins";
 @import "common/var";
 
-@include b(textarea) {
+@include b(textarea){
   display: inline-block;
   width: 100%;
   vertical-align: bottom;
   font-size: $--font-size-base;
 
-  @include e(inner) {
+  @include e(inner){
     display: block;
     resize: vertical;
     padding: 5px 15px;
@@ -22,54 +22,54 @@
     border-radius: $--input-border-radius;
     transition: $--border-transition-base;
 
-    &::placeholder {
+    &::placeholder{
       color: $--input-placeholder-color;
     }
 
-    &:hover {
+    &:hover{
       border-color: $--input-hover-border;
     }
 
-    &:focus {
+    &:focus{
       outline: none;
       border-color: $--input-focus-border;
     }
   }
 
-  @include when(disabled) {
-    .el-textarea__inner {
+  @include when(disabled){
+    .el-textarea__inner{
       background-color: $--input-disabled-fill;
       border-color: $--input-disabled-border;
       color: $--input-disabled-color;
       cursor: not-allowed;
 
-      &::placeholder {
+      &::placeholder{
         color: $--input-disabled-placeholder-color;
       }
     }
   }
 }
 
-@include b(input) {
+@include b(input){
   position: relative;
   font-size: $--font-size-base;
   display: inline-block;
   width: 100%;
   @include scroll-bar;
 
-  & .el-input__clear {
+  & .el-input__clear{
     color: $--input-icon-color;
     font-size: $--input-font-size;
     line-height: 16px;
     cursor: pointer;
     transition: $--color-transition-base;
 
-    &:hover {
+    &:hover{
       color: $--input-clear-hover-color;
     }
   }
 
-  @include e(inner) {
+  @include e(inner){
     -webkit-appearance: none;
     background-color: $--input-fill;
     background-image: none;
@@ -86,21 +86,21 @@
     transition: $--border-transition-base;
     width: 100%;
 
-    &::placeholder {
+    &::placeholder{
       color: $--input-placeholder-color;
     }
 
-    &:hover {
+    &:hover{
       border-color: $--input-hover-border;
     }
 
-    &:focus {
+    &:focus{
       outline: none;
       border-color: $--input-focus-border;
     }
   }
 
-  @include e(suffix) {
+  @include e(suffix){
     position: absolute;
     height: 100%;
     right: 5px;
@@ -111,11 +111,11 @@
     pointer-events: none;
   }
 
-  @include e(suffix-inner) {
+  @include e(suffix-inner){
     pointer-events: all;
   }
 
-  @include e(prefix) {
+  @include e(prefix){
     position: absolute;
     height: 100%;
     left: 5px;
@@ -125,14 +125,14 @@
     transition: all .3s;
   }
 
-  @include e(icon) {
+  @include e(icon){
     height: 100%;
     width: 25px;
     text-align: center;
     transition: all .3s;
     line-height: $--input-height;
 
-    &:after {
+    &:after{
       content: '';
       height: 100%;
       width: 0;
@@ -141,96 +141,96 @@
     }
   }
 
-  @include e(validateIcon) {
+  @include e(validateIcon){
     pointer-events: none;
   }
 
-  @include when(active) {
-    .el-input__inner {
+  @include when(active){
+    .el-input__inner{
       outline: none;
       border-color: $--input-focus-border;
     }
   }
 
-  @include when(disabled) {
-    .el-input__inner {
+  @include when(disabled){
+    .el-input__inner{
       background-color: $--input-disabled-fill;
       border-color: $--input-disabled-border;
       color: $--input-disabled-color;
       cursor: not-allowed;
 
-      &::placeholder {
+      &::placeholder{
         color: $--input-disabled-placeholder-color;
       }
     }
 
-    .el-input__icon {
+    .el-input__icon{
       cursor: not-allowed;
     }
   }
 
-  @include m(suffix) {
-    .el-input__inner {
+  @include m(suffix){
+    .el-input__inner{
       padding-right: 30px;
     }
   }
 
-  @include m(prefix) {
-    .el-input__inner {
+  @include m(prefix){
+    .el-input__inner{
       padding-left: 30px;
     }
   }
 
-  @include m(medium) {
+  @include m(medium){
     font-size: $--input-medium-font-size;
 
-    @include e(inner) {
+    @include e(inner){
       height: $--input-medium-height;
       line-height: $--input-medium-height;
     }
 
-    .el-input__icon {
+    .el-input__icon{
       line-height: $--input-medium-height;
     }
   }
-  @include m(small) {
+  @include m(small){
     font-size: $--input-small-font-size;
 
-    @include e(inner) {
+    @include e(inner){
       height: $--input-small-height;
       line-height: $--input-small-height;
     }
 
-    .el-input__icon {
+    .el-input__icon{
       line-height: $--input-small-height;
     }
   }
-  @include m(mini) {
+  @include m(mini){
     font-size: $--input-mini-font-size;
 
-    @include e(inner) {
+    @include e(inner){
       height: $--input-mini-height;
       line-height: $--input-mini-height;
     }
 
-    .el-input__icon {
+    .el-input__icon{
       line-height: $--input-mini-height;
     }
   }
 }
 
-@include b(input-group) {
+@include b(input-group){
   line-height: normal;
   display: inline-table;
   width: 100%;
   border-collapse: separate;
 
-  > .el-input__inner {
+  > .el-input__inner{
     vertical-align: middle;
     display: table-cell;
   }
 
-  @include e((append, prepend)) {
+  @include e((append, prepend)){
     background-color: $--background-color-base;
     color: $--color-info;
     vertical-align: middle;
@@ -242,19 +242,19 @@
     width: 1px;
     white-space: nowrap;
 
-    &:focus {
+    &:focus{
       outline: none;
     }
 
     .el-select,
-    .el-button {
+    .el-button{
       display: inline-block;
       margin: -10px -20px;
     }
 
     button.el-button,
     div.el-select .el-input__inner,
-    div.el-select:hover .el-input__inner {
+    div.el-select:hover .el-input__inner{
       border-color: transparent;
       background-color: transparent;
       color: inherit;
@@ -263,46 +263,46 @@
     }
 
     .el-button,
-    .el-input {
+    .el-input{
       font-size: inherit;
     }
   }
 
-  @include e(prepend) {
+  @include e(prepend){
     border-right: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
 
-  @include e(append) {
+  @include e(append){
     border-left: 0;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
 
-  @include m(prepend) {
-    .el-input__inner {
+  @include m(prepend){
+    .el-input__inner{
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
-    .el-select .el-input.is-focus .el-input__inner {
+    .el-select .el-input.is-focus .el-input__inner{
       border-color: transparent;
     }
   }
 
-  @include m(append) {
-    .el-input__inner {
+  @include m(append){
+    .el-input__inner{
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
-    .el-select .el-input.is-focus .el-input__inner {
+    .el-select .el-input.is-focus .el-input__inner{
       border-color: transparent;
     }
   }
 }
 
 /** disalbe default clear on IE */
-.el-input__inner::-ms-clear {
+.el-input__inner::-ms-clear{
   display: none;
   width: 0;
   height: 0;

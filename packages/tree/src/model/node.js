@@ -24,14 +24,16 @@ export const getChildState = node => {
 const reInitChecked = function(node) {
   if (node.childNodes.length === 0) return;
 
-  const {all, none, half} = getChildState(node.childNodes);
+  const { all, none, half } = getChildState(node.childNodes);
   if (all) {
     node.checked = true;
     node.indeterminate = false;
-  } else if (half) {
+  }
+  else if (half) {
     node.checked = false;
     node.indeterminate = true;
-  } else if (none) {
+  }
+  else if (none) {
     node.checked = false;
     node.indeterminate = false;
   }
@@ -51,9 +53,11 @@ const getPropertyFromData = function(node, prop) {
 
   if (typeof config === 'function') {
     return config(data, node);
-  } else if (typeof config === 'string') {
+  }
+  else if (typeof config === 'string') {
     return data[config];
-  } else if (typeof config === 'undefined') {
+  }
+  else if (typeof config === 'undefined') {
     const dataProp = data[prop];
     return dataProp === undefined ? '' : dataProp;
   }
@@ -108,7 +112,8 @@ export default class Node {
       if (store.defaultExpandAll) {
         this.expanded = true;
       }
-    } else if (this.level > 0 && store.lazy && store.defaultExpandAll) {
+    }
+    else if (this.level > 0 && store.lazy && store.defaultExpandAll) {
       this.expand();
     }
 
@@ -141,7 +146,8 @@ export default class Node {
     let children;
     if (this.level === 0 && this.data instanceof Array) {
       children = this.data;
-    } else {
+    }
+    else {
       children = getPropertyFromData(this, 'children') || [];
     }
 
@@ -223,7 +229,8 @@ export default class Node {
         if (children.indexOf(child.data) === -1) {
           if (typeof index === 'undefined' || index < 0) {
             children.push(child.data);
-          } else {
+          }
+          else {
             children.splice(index, 0, child.data);
           }
         }
@@ -239,7 +246,8 @@ export default class Node {
 
     if (typeof index === 'undefined' || index < 0) {
       this.childNodes.push(child);
-    } else {
+    }
+    else {
       this.childNodes.splice(index, 0, child);
     }
 
@@ -312,13 +320,15 @@ export default class Node {
         if (data instanceof Array) {
           if (this.checked) {
             this.setChecked(true, true);
-          } else {
+          }
+          else {
             reInitChecked(this);
           }
           done();
         }
       });
-    } else {
+    }
+    else {
       done();
     }
   }
@@ -390,7 +400,8 @@ export default class Node {
           checked: value !== false
         });
         return;
-      } else {
+      }
+      else {
         handleDescendants();
       }
     }
@@ -435,7 +446,8 @@ export default class Node {
     newData.forEach((item, index) => {
       if (item[NODE_KEY]) {
         newDataMap[item[NODE_KEY]] = { index, data: item };
-      } else {
+      }
+      else {
         newNodes.push({ index, data: item });
       }
     });
@@ -469,7 +481,8 @@ export default class Node {
       };
 
       this.store.load(this, resolve);
-    } else {
+    }
+    else {
       if (callback) {
         callback.call(this);
       }

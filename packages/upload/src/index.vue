@@ -5,7 +5,8 @@ import IframeUpload from './iframe-upload';
 import ElProgress from 'element-yhui/packages/progress';
 import Migrating from 'element-yhui/src/mixins/migrating';
 
-function noop() {}
+function noop() {
+}
 
 export default {
   name: 'ElUpload',
@@ -150,7 +151,8 @@ export default {
 
       try {
         file.url = URL.createObjectURL(rawFile);
-      } catch (err) {
+      }
+      catch (err) {
         console.error(err);
         return;
       }
@@ -199,13 +201,15 @@ export default {
 
       if (!this.beforeRemove) {
         doRemove();
-      } else if (typeof this.beforeRemove === 'function') {
+      }
+      else if (typeof this.beforeRemove === 'function') {
         const before = this.beforeRemove(file, this.uploadFiles);
         if (before && before.then) {
           before.then(() => {
             doRemove();
           }, noop);
-        } else if (before !== false) {
+        }
+        else if (before !== false) {
           doRemove();
         }
       }
@@ -226,11 +230,9 @@ export default {
       this.uploadFiles = [];
     },
     submit() {
-      this.uploadFiles
-        .filter(file => file.status === 'ready')
-        .forEach(file => {
-          this.$refs['upload-inner'].upload(file.raw);
-        });
+      this.uploadFiles.filter(file => file.status === 'ready').forEach(file => {
+        this.$refs['upload-inner'].upload(file.raw);
+      });
     },
     getMigratingConfig() {
       return {
@@ -294,14 +296,14 @@ export default {
 
     return (
       <div>
-        { this.listType === 'picture-card' ? uploadList : ''}
+        {this.listType === 'picture-card' ? uploadList : ''}
         {
           this.$slots.trigger
             ? [uploadComponent, this.$slots.default]
             : uploadComponent
         }
         {this.$slots.tip}
-        { this.listType !== 'picture-card' ? uploadList : ''}
+        {this.listType !== 'picture-card' ? uploadList : ''}
       </div>
     );
   }

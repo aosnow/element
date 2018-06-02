@@ -6,22 +6,22 @@
   </span>
 </template>
 <script>
-  export default {
-    name: 'ElSpinner',
-    props: {
+export default {
+  name: 'ElSpinner',
+  props: {
+    type: String,
+    radius: {
+      type: Number,
+      default: 100
+    },
+    strokeWidth: {
+      type: Number,
+      default: 5
+    },
+    strokeColor: {
       type: String,
-      radius: {
-        type: Number,
-        default: 100
-      },
-      strokeWidth: {
-        type: Number,
-        default: 5
-      },
-      strokeColor: {
-        type: String,
-        default: '#efefef'
-      }
+      default: '#efefef'
     }
-  };
+  }
+};
 </script>

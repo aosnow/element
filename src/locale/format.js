@@ -29,9 +29,10 @@ export default function(Vue) {
       let result;
 
       if (string[index - 1] === '{' &&
-        string[index + match.length] === '}') {
+          string[index + match.length] === '}') {
         return i;
-      } else {
+      }
+      else {
         result = hasOwn(args, i) ? args[i] : null;
         if (result === null || result === undefined) {
           return '';

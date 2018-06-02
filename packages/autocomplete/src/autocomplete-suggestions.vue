@@ -18,59 +18,59 @@
   </transition>
 </template>
 <script>
-  import Popper from 'element-yhui/src/utils/vue-popper';
-  import Emitter from 'element-yhui/src/mixins/emitter';
-  import ElScrollbar from 'element-yhui/packages/scrollbar';
+import Popper from 'element-yhui/src/utils/vue-popper';
+import Emitter from 'element-yhui/src/mixins/emitter';
+import ElScrollbar from 'element-yhui/packages/scrollbar';
 
-  export default {
-    components: { ElScrollbar },
-    mixins: [Popper, Emitter],
+export default {
+  components: { ElScrollbar },
+  mixins: [Popper, Emitter],
 
-    componentName: 'ElAutocompleteSuggestions',
+  componentName: 'ElAutocompleteSuggestions',
 
-    data() {
-      return {
-        parent: this.$parent,
-        dropdownWidth: ''
-      };
-    },
+  data() {
+    return {
+      parent: this.$parent,
+      dropdownWidth: ''
+    };
+  },
 
-    props: {
-      options: {
-        default() {
-          return {
-            gpuAcceleration: false
-          };
-        }
-      },
-      id: String
-    },
-
-    methods: {
-      select(item) {
-        this.dispatch('ElAutocomplete', 'item-click', item);
+  props: {
+    options: {
+      default() {
+        return {
+          gpuAcceleration: false
+        };
       }
     },
+    id: String
+  },
 
-    updated() {
-      this.$nextTick(_ => {
-        this.popperJS && this.updatePopper();
-      });
-    },
-
-    mounted() {
-      this.$parent.popperElm = this.popperElm = this.$el;
-      this.referenceElm = this.$parent.$refs.input.$refs.input;
-      this.referenceList = this.$el.querySelector('.el-autocomplete-suggestion__list');
-      this.referenceList.setAttribute('role', 'listbox');
-      this.referenceList.setAttribute('id', this.id);
-    },
-
-    created() {
-      this.$on('visible', (val, inputWidth) => {
-        this.dropdownWidth = inputWidth + 'px';
-        this.showPopper = val;
-      });
+  methods: {
+    select(item) {
+      this.dispatch('ElAutocomplete', 'item-click', item);
     }
-  };
+  },
+
+  updated() {
+    this.$nextTick(_ => {
+      this.popperJS && this.updatePopper();
+    });
+  },
+
+  mounted() {
+    this.$parent.popperElm = this.popperElm = this.$el;
+    this.referenceElm = this.$parent.$refs.input.$refs.input;
+    this.referenceList = this.$el.querySelector('.el-autocomplete-suggestion__list');
+    this.referenceList.setAttribute('role', 'listbox');
+    this.referenceList.setAttribute('id', this.id);
+  },
+
+  created() {
+    this.$on('visible', (val, inputWidth) => {
+      this.dropdownWidth = inputWidth + 'px';
+      this.showPopper = val;
+    });
+  }
+};
 </script>

@@ -162,7 +162,8 @@ export default {
     },
     beforeFilter: {
       type: Function,
-      default: () => (() => {})
+      default: () => (() => {
+      })
     },
     hoverThreshold: {
       type: Number,
@@ -174,7 +175,8 @@ export default {
     return {
       currentValue: this.value || [],
       menu: null,
-      debouncedInputChange() {},
+      debouncedInputChange() {
+      },
       menuVisible: false,
       inputHover: false,
       inputValue: '',
@@ -233,7 +235,7 @@ export default {
       this.dispatch('ElFormItem', 'el.form.change', [value]);
     },
     currentLabels(value) {
-      const inputLabel = this.showAllLevels ? value.join('/') : value[value.length - 1] ;
+      const inputLabel = this.showAllLevels ? value.join('/') : value[value.length - 1];
       this.$refs.input.$refs.input.setAttribute('value', inputLabel);
     },
     options: {
@@ -292,15 +294,17 @@ export default {
       const keyCode = e.keyCode;
       if (keyCode === 13) {
         this.handleClick();
-      } else if (keyCode === 40) { // down
+      }
+      else if (keyCode === 40) { // down
         this.menuVisible = true; // 打开
         setTimeout(() => {
           const firstMenu = this.popperElm.querySelectorAll('.el-cascader-menu')[0];
-          firstMenu.querySelectorAll("[tabindex='-1']")[0].focus();
+          firstMenu.querySelectorAll('[tabindex=\'-1\']')[0].focus();
         });
         e.stopPropagation();
         e.preventDefault();
-      } else if (keyCode === 27 || keyCode === 9) { // esc  tab
+      }
+      else if (keyCode === 27 || keyCode === 9) { // esc  tab
         this.inputValue = '';
         if (this.menu) this.menu.visible = false;
       }
@@ -312,7 +316,8 @@ export default {
 
       if (close) {
         this.menuVisible = false;
-      } else {
+      }
+      else {
         this.$nextTick(this.updatePopper);
       }
     },
@@ -339,7 +344,8 @@ export default {
             disabled: optionStack.some(item => item[this.disabledKey])
           };
         });
-      } else {
+      }
+      else {
         filteredFlatOptions = [{
           __IS__FLAT__OPTIONS: true,
           label: this.t('el.cascader.noMatch'),
@@ -361,11 +367,10 @@ export default {
     },
     highlightKeyword(label, keyword) {
       const h = this._c;
-      return label.split(keyword)
-        .map((node, index) => index === 0 ? node : [
-          h('span', { class: { 'el-cascader-menu__item__keyword': true }}, [this._v(keyword)]),
-          node
-        ]);
+      return label.split(keyword).map((node, index) => index === 0 ? node : [
+        h('span', { class: { 'el-cascader-menu__item__keyword': true } }, [this._v(keyword)]),
+        node
+      ]);
     },
     flattenOptions(options, ancestor = []) {
       let flatOptions = [];
@@ -373,7 +378,8 @@ export default {
         const optionsStack = ancestor.concat(option);
         if (!option[this.childrenKey]) {
           flatOptions.push(optionsStack);
-        } else {
+        }
+        else {
           if (this.changeOnSelect) {
             flatOptions.push(optionsStack);
           }
@@ -417,13 +423,13 @@ export default {
           value: '',
           disabled: true
         }];
-        before
-          .then(() => {
-            this.$nextTick(() => {
-              this.handleInputChange(value);
-            });
+        before.then(() => {
+          this.$nextTick(() => {
+            this.handleInputChange(value);
           });
-      } else if (before !== false) {
+        });
+      }
+      else if (before !== false) {
         this.$nextTick(() => {
           this.handleInputChange(value);
         });

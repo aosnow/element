@@ -11,5 +11,5 @@
   "repository": "https://github.com/ElemeFE/element/tree/master/packages/pagination",
   "author": "qingwei-li<qingwei.li@ele.me>",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": { }
 }

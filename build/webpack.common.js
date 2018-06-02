@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const config = require('./config');
+const { CurUiScheme } = require('./scheme');
 
 module.exports = {
   entry: {
@@ -11,7 +12,7 @@ module.exports = {
   output: {
     path: path.resolve(process.cwd(), './lib'),
     publicPath: '/dist/',
-    filename: 'element-yhui.common.js',
+    filename: `${CurUiScheme}.common.js`,
     chunkFilename: '[id].js',
     libraryTarget: 'commonjs2'
   },

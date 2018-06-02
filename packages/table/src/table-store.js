@@ -28,15 +28,18 @@ const toggleRowSelection = function(states, row, selected) {
     if (index === -1) {
       selection.push(row);
       changed = true;
-    } else {
+    }
+    else {
       selection.splice(index, 1);
       changed = true;
     }
-  } else {
+  }
+  else {
     if (selected && index === -1) {
       selection.push(row);
       changed = true;
-    } else if (!selected && index > -1) {
+    }
+    else if (!selected && index > -1) {
       selection.splice(index, 1);
       changed = true;
     }
@@ -55,18 +58,21 @@ const toggleRowExpansion = function(states, row, expanded) {
         expandRows.push(row);
         changed = true;
       }
-    } else {
+    }
+    else {
       if (index !== -1) {
         expandRows.splice(index, 1);
         changed = true;
       }
     }
-  } else {
+  }
+  else {
     const index = expandRows.indexOf(row);
     if (index === -1) {
       expandRows.push(row);
       changed = true;
-    } else {
+    }
+    else {
       expandRows.splice(index, 1);
       changed = true;
     }
@@ -145,11 +151,13 @@ TableStore.prototype.mutations = {
     if (!states.reserveSelection) {
       if (dataInstanceChanged) {
         this.clearSelection();
-      } else {
+      }
+      else {
         this.cleanSelection();
       }
       this.updateAllSelected();
-    } else {
+    }
+    else {
       if (rowKey) {
         const selection = states.selection;
         const selectedMap = getKeysMap(selection, rowKey);
@@ -163,7 +171,8 @@ TableStore.prototype.mutations = {
         });
 
         this.updateAllSelected();
-      } else {
+      }
+      else {
         console.warn('WARN: rowKey is required when reserve-selection is enabled.');
       }
     }
@@ -171,7 +180,8 @@ TableStore.prototype.mutations = {
     const defaultExpandAll = states.defaultExpandAll;
     if (defaultExpandAll) {
       this.states.expandRows = (states.data || []).slice(0);
-    } else if (rowKey) {
+    }
+    else if (rowKey) {
       // update expandRows to new rows according to rowKey
       const ids = getKeysMap(this.states.expandRows, rowKey);
       let expandRows = [];
@@ -182,7 +192,8 @@ TableStore.prototype.mutations = {
         }
       }
       this.states.expandRows = expandRows;
-    } else {
+    }
+    else {
       // clear the old rows
       this.states.expandRows = [];
     }
@@ -283,7 +294,8 @@ TableStore.prototype.mutations = {
 
     if (typeof index !== 'undefined') {
       array.splice(index, 0, column);
-    } else {
+    }
+    else {
       array.push(column);
     }
 
@@ -356,7 +368,8 @@ TableStore.prototype.mutations = {
         if (states.selectable.call(null, item, index) && toggleRowSelection(states, item, value)) {
           selectionChanged = true;
         }
-      } else {
+      }
+      else {
         if (toggleRowSelection(states, item, value)) {
           selectionChanged = true;
         }
@@ -377,7 +390,8 @@ const doFlattenColumns = (columns) => {
   columns.forEach((column) => {
     if (column.children) {
       result.push.apply(result, doFlattenColumns(column.children));
-    } else {
+    }
+    else {
       result.push(column);
     }
   });
@@ -480,7 +494,8 @@ TableStore.prototype.cleanSelection = function() {
         deleted.push(selectedMap[key].row);
       }
     }
-  } else {
+  }
+  else {
     deleted = selection.filter((item) => {
       return data.indexOf(item) === -1;
     });
@@ -548,7 +563,8 @@ TableStore.prototype.updateAllSelected = function() {
   const isSelected = function(row) {
     if (selectedMap) {
       return !!selectedMap[getRowIdentity(row, rowKey)];
-    } else {
+    }
+    else {
       return selection.indexOf(row) !== -1;
     }
   };
@@ -563,7 +579,8 @@ TableStore.prototype.updateAllSelected = function() {
         isAllSelected = false;
         break;
       }
-    } else {
+    }
+    else {
       selectedCount++;
     }
   }
@@ -611,7 +628,8 @@ TableStore.prototype.commit = function(name, ...args) {
   const mutations = this.mutations;
   if (mutations[name]) {
     mutations[name].apply(this, [this.states].concat(args));
-  } else {
+  }
+  else {
     throw new Error(`Action not found: ${name}`);
   }
 };
