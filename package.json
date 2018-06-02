@@ -1,6 +1,6 @@
 {
   "name": "element-yhui",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Component Library for Silver box Baocheng Technology Co., Ltd.",
   "main": "lib/element-ui.common.js",
   "files": [
