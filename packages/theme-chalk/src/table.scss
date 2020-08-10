@@ -4,7 +4,7 @@
 @import "tooltip";
 @import "common/var";
 
-@include b(table){
+@include b(table) {
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
@@ -13,34 +13,35 @@
   max-width: 100%;
   background-color: $--color-white;
   font-size: 14px;
-  color: $--table-text-color;
+  color: $--table-font-color;
 
   // 数据为空
-  @include e(empty-block){
-    position: relative;
+  @include e(empty-block) {
     min-height: 60px;
     text-align: center;
     width: 100%;
-    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  @include e(empty-text){
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+  @include e(empty-text) {
+    // min-height doesn't work in IE10 and IE11 https://github.com/philipwalton/flexbugs#3-min-height-on-a-flex-container-wont-apply-to-its-flex-items
+    // set empty text line height up to contrainer min-height as workaround.
+    line-height: 60px;
+    width: 50%;
     color: $--color-text-secondary;
   }
 
   // 展开行
-  @include e(expand-column){
-    .cell{
+  @include e(expand-column) {
+    .cell {
       padding: 0;
       text-align: center;
     }
   }
 
-  @include e(expand-icon){
+  @include e(expand-icon) {
     position: relative;
     cursor: pointer;
     color: #666;
@@ -48,11 +49,11 @@
     transition: transform 0.2s ease-in-out;
     height: 20px;
 
-    @include m(expanded){
+    @include m(expanded) {
       transform: rotate(90deg);
     }
 
-    > .el-icon{
+    > .el-icon {
       position: absolute;
       left: 50%;
       top: 50%;
@@ -61,154 +62,148 @@
     }
   }
 
-  @include e(expanded-cell){
+  @include e(expanded-cell) {
     background-color: $--color-white;
 
     // 纯属为了增加权重
-    &[class*=cell]{
+    &[class*=cell] {
       padding: 20px 50px;
     }
 
-    &:hover{
+    &:hover {
       background-color: transparent !important;
     }
   }
 
-  @include m(fit){
+  @include e(placeholder) {
+    display: inline-block;
+    width: 20px;
+  }
+
+  @include e(append-wrapper) {
+    // 避免外边距重合 https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing
+    overflow: hidden;
+  }
+
+  @include m(fit) {
     border-right: 0;
     border-bottom: 0;
 
-    th.gutter, td.gutter{
+    th.gutter, td.gutter {
       border-right-width: 1px;
     }
   }
 
-  @include m(scrollable-x){
-    .el-table__body-wrapper{
+  @include m(scrollable-x) {
+    .el-table__body-wrapper {
       overflow-x: auto;
     }
   }
 
-  @include m(scrollable-y){
-    .el-table__body-wrapper{
+  @include m(scrollable-y) {
+    .el-table__body-wrapper {
       overflow-y: auto;
     }
   }
 
-  thead{
-    color: $--table-header-color;
+  thead {
+    color: $--table-header-font-color;
     font-weight: 500;
 
-    &.is-group{
-      th{
+    &.is-group {
+      th {
         background: $--background-color-base;
       }
     }
   }
 
-  th, td{
+  th, td {
     padding: 12px 0;
     min-width: 0;
     box-sizing: border-box;
     text-overflow: ellipsis;
     vertical-align: middle;
     position: relative;
+    text-align: left;
 
-    @include when(center){
+    @include when(center) {
       text-align: center;
     }
 
-    @include when(left){
-      text-align: left;
-    }
-
-    @include when(right){
+    @include when(right) {
       text-align: right;
     }
 
-    &.gutter{
+    &.gutter {
       width: 15px;
       border-right-width: 0;
       border-bottom-width: 0;
       padding: 0;
     }
 
-    &.is-hidden{
-      > *{
+    &.is-hidden {
+      > * {
         visibility: hidden;
       }
     }
   }
 
-  @include m(medium){
-    th, td{
+  @include m(medium) {
+    th, td {
       padding: 10px 0;
     }
   }
 
-  @include m(small){
+  @include m(small) {
     font-size: 12px;
-    th, td{
+    th, td {
       padding: 8px 0;
     }
   }
 
-  @include m(mini){
+  @include m(mini) {
     font-size: 12px;
-    th, td{
+    th, td {
       padding: 6px 0;
     }
   }
 
-  tr{
+  tr {
     background-color: $--color-white;
 
-    input[type="checkbox"]{
+    input[type="checkbox"] {
       margin: 0;
     }
   }
 
-  th.is-leaf, td{
+  th.is-leaf, td {
     border-bottom: $--table-border;
   }
 
-  th.is-sortable{
+  th.is-sortable {
     cursor: pointer;
   }
 
-  th{
-    white-space: nowrap;
+  th {
     overflow: hidden;
     user-select: none;
-    text-align: left;
-    background-color: $--table-header-background;
+    background-color: $--table-header-background-color;
 
-    div{
+    > .cell {
       display: inline-block;
+      box-sizing: border-box;
+      position: relative;
+      vertical-align: middle;
       padding-left: 10px;
       padding-right: 10px;
-      line-height: 40px;
-      box-sizing: border-box;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    > .cell{
-      position: relative;
-      word-wrap: normal;
-      text-overflow: ellipsis;
-      display: inline-block;
-      vertical-align: middle;
       width: 100%;
-      box-sizing: border-box;
 
-      &.highlight{
+      &.highlight {
         color: $--color-primary;
       }
     }
 
-    &.required > div::before{
+    &.required > div::before {
       display: inline-block;
       content: "";
       width: 8px;
@@ -220,17 +215,17 @@
     }
   }
 
-  td{
-    div{
+  td {
+    div {
       box-sizing: border-box;
     }
 
-    &.gutter{
+    &.gutter {
       width: 0;
     }
   }
 
-  .cell{
+  .cell {
     box-sizing: border-box;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -240,17 +235,17 @@
     padding-left: 10px;
     padding-right: 10px;
 
-    &.el-tooltip{
+    &.el-tooltip {
       white-space: nowrap;
       min-width: 50px;
     }
   }
 
   // 拥有多级表头
-  @include m((group, border)){
+  @include m((group, border)) {
     border: $--table-border;
 
-    @include share-rule(border-pseudo){
+    @include share-rule(border-pseudo) {
       content: '';
       position: absolute;
       background-color: $--table-border-color;
@@ -258,7 +253,7 @@
     }
 
     // 表格右部伪 border
-    &::after{
+    &::after {
       @include extend-rule(border-pseudo);
       top: 0;
       right: 0;
@@ -268,7 +263,7 @@
   }
 
   // 表格底部伪 border，总是有的
-  &::before{
+  &::before {
     @include extend-rule(border-pseudo);
     left: 0;
     bottom: 0;
@@ -277,37 +272,37 @@
   }
 
   // table--border
-  @include m(border){
+  @include m(border) {
     border-right: none;
     border-bottom: none;
 
-    &.el-loading-parent--relative{
+    &.el-loading-parent--relative {
       border-color: transparent;
     }
 
-    th, td{
+    th, td {
       border-right: $--table-border;
 
-      &:first-child .cell{
+      &:first-child .cell {
         padding-left: 10px;
       }
     }
 
-    th.gutter:last-of-type{
+    th.gutter:last-of-type {
       border-bottom: $--table-border;
       border-bottom-width: 1px;
     }
 
-    & th{
+    & th {
       border-bottom: $--table-border;
     }
   }
 
-  @include m(hidden){
+  @include m(hidden) {
     visibility: hidden;
   }
 
-  @include e((fixed, fixed-right)){
+  @include e((fixed, fixed-right)) {
     position: absolute;
     top: 0;
     left: 0;
@@ -315,7 +310,7 @@
     overflow-y: hidden;
     box-shadow: $--table-fixed-box-shadow;
 
-    &::before{
+    &::before {
       content: '';
       position: absolute;
       left: 0;
@@ -327,7 +322,7 @@
     }
   }
 
-  @include e(fixed-right-patch){
+  @include e(fixed-right-patch) {
     position: absolute;
     top: -1px;
     right: 0;
@@ -335,40 +330,40 @@
     border-bottom: $--table-border;
   }
 
-  @include e(fixed-right){
+  @include e(fixed-right) {
     top: 0;
     left: auto;
     right: 0;
 
     .el-table__fixed-header-wrapper,
     .el-table__fixed-body-wrapper,
-    .el-table__fixed-footer-wrapper{
+    .el-table__fixed-footer-wrapper {
       left: auto;
       right: 0;
     }
   }
 
-  @include e(fixed-header-wrapper){
+  @include e(fixed-header-wrapper) {
     position: absolute;
     left: 0;
     top: 0;
     z-index: 3;
   }
 
-  @include e(fixed-footer-wrapper){
+  @include e(fixed-footer-wrapper) {
     position: absolute;
     left: 0;
     bottom: 0;
     z-index: 3;
 
-    & tbody td{
+    & tbody td {
       border-top: $--table-border;
-      background-color: $--table-row-hover-background;
-      color: $--table-text-color;
+      background-color: $--table-row-hover-background-color;
+      color: $--table-font-color;
     }
   }
 
-  @include e(fixed-body-wrapper){
+  @include e(fixed-body-wrapper) {
     position: absolute;
     left: 0;
     top: 37px;
@@ -376,70 +371,70 @@
     z-index: 3;
   }
 
-  @include e((header-wrapper, body-wrapper, footer-wrapper)){
+  @include e((header-wrapper, body-wrapper, footer-wrapper)) {
     width: 100%;
   }
 
-  @include e(footer-wrapper){
+  @include e(footer-wrapper) {
     margin-top: -1px;
-    td{
+    td {
       border-top: $--table-border;
     }
   }
 
-  @include e((header, body, footer)){
+  @include e((header, body, footer)) {
     table-layout: fixed;
     border-collapse: separate;
   }
 
-  @include e((header-wrapper, footer-wrapper)){
+  @include e((header-wrapper, footer-wrapper)) {
     overflow: hidden;
 
-    & tbody td{
-      background-color: $--table-row-hover-background;
-      color: $--table-text-color;
+    & tbody td {
+      background-color: $--table-row-hover-background-color;
+      color: $--table-font-color;
     }
   }
 
-  @include e(body-wrapper){
+  @include e(body-wrapper) {
     overflow: hidden;
     position: relative;
 
-    @include when(scrolling-none){
+    @include when(scrolling-none) {
       ~ .el-table__fixed,
-      ~ .el-table__fixed-right{
+      ~ .el-table__fixed-right {
         box-shadow: none;
       }
     }
 
-    @include when(scrolling-left){
-      ~ .el-table__fixed{
+    @include when(scrolling-left) {
+      ~ .el-table__fixed {
         box-shadow: none;
       }
     }
 
-    @include when(scrolling-right){
-      ~ .el-table__fixed-right{
+    @include when(scrolling-right) {
+      ~ .el-table__fixed-right {
         box-shadow: none;
       }
     }
 
-    .el-table--border{
-      @include when(scrolling-right){
-        ~ .el-table__fixed-right{
+    .el-table--border {
+      @include when(scrolling-right) {
+        ~ .el-table__fixed-right {
           border-left: $--table-border;
         }
       }
 
-      @include when(scrolling-left){
-        ~ .el-table__fixed{
+      @include when(scrolling-left) {
+        ~ .el-table__fixed {
           border-right: $--table-border;
         }
       }
     }
   }
 
-  .caret-wrapper{
+  .caret-wrapper {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -451,69 +446,69 @@
     position: relative;
   }
 
-  .sort-caret{
+  .sort-caret {
     width: 0;
     height: 0;
     border: solid 5px transparent;
     position: absolute;
     left: 7px;
 
-    &.ascending{
+    &.ascending {
       border-bottom-color: $--color-text-placeholder;
       top: 5px;
     }
 
-    &.descending{
+    &.descending {
       border-top-color: $--color-text-placeholder;
       bottom: 7px;
     }
   }
 
-  .ascending .sort-caret.ascending{
+  .ascending .sort-caret.ascending {
     border-bottom-color: $--color-primary;
   }
 
-  .descending .sort-caret.descending{
+  .descending .sort-caret.descending {
     border-top-color: $--color-primary;
   }
 
-  .hidden-columns{
+  .hidden-columns {
     visibility: hidden;
     position: absolute;
     z-index: -1;
   }
 
-  @include m(striped){
-    & .el-table__body{
-      & tr.el-table__row--striped{
-        td{
+  @include m(striped) {
+    & .el-table__body {
+      & tr.el-table__row--striped {
+        td {
           background: #FAFAFA;
         }
 
-        &.current-row td{
-          background-color: $--table-current-row-background;
+        &.current-row td {
+          background-color: $--table-current-row-background-color;
         }
       }
     }
   }
 
-  @include e(body){
-    tr.hover-row{
-      &, &.el-table__row--striped{
-        &, &.current-row{
-          > td{
-            background-color: $--table-current-row-background;
+  @include e(body) {
+    tr.hover-row {
+      &, &.el-table__row--striped {
+        &, &.current-row {
+          > td {
+            background-color: $--table-row-hover-background-color;
           }
         }
       }
     }
 
-    tr.current-row > td{
-      background-color: $--table-current-row-background;
+    tr.current-row > td {
+      background-color: $--table-current-row-background-color;
     }
   }
 
-  @include e(column-resize-proxy){
+  @include e(column-resize-proxy) {
     position: absolute;
     left: 200px;
     top: 0;
@@ -523,35 +518,46 @@
     z-index: 10;
   }
 
-  @include e(column-filter-trigger){
+  @include e(column-filter-trigger) {
     display: inline-block;
     line-height: 34px;
     cursor: pointer;
 
-    & i{
+    & i {
       color: $--color-info;
       font-size: 12px;
       transform: scale(.75);
     }
   }
 
-  @include m(enable-row-transition){
-    .el-table__body td{
+  @include m(enable-row-transition) {
+    .el-table__body td {
       transition: background-color .25s ease;
     }
   }
 
-  @include m(enable-row-hover){
-    .el-table__body tr:hover > td{
-      background-color: $--table-row-hover-background;
+  @include m(enable-row-hover) {
+    .el-table__body tr:hover > td {
+      background-color: $--table-row-hover-background-color;
     }
   }
 
-  @include m(fluid-height){
+  @include m(fluid-height) {
     .el-table__fixed,
-    .el-table__fixed-right{
+    .el-table__fixed-right {
       bottom: 0;
       overflow: hidden;
+    }
+  }
+
+  [class*=el-table__row--level] {
+    .el-table__expand-icon {
+      display: inline-block;
+      width: 20px;
+      line-height: 20px;
+      height: 20px;
+      text-align: center;
+      margin-right: 3px;
     }
   }
 }

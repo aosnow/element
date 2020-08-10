@@ -2,28 +2,28 @@
 @import "mixins/utils";
 @import "common/var";
 
-@include b(progress){
+@include b(progress) {
   position: relative;
   line-height: 1;
 
-  @include e(text){
-    font-size: 14px;
+  @include e(text) {
+    font-size:14px;
     color: $--color-text-regular;
     display: inline-block;
     vertical-align: middle;
     margin-left: 10px;
     line-height: 1;
 
-    i{
+    i {
       vertical-align: middle;
       display: block;
     }
   }
 
-  @include m(circle){
+  @include m((circle,dashboard)) {
     display: inline-block;
 
-    .el-progress__text{
+    .el-progress__text {
       position: absolute;
       top: 50%;
       left: 0;
@@ -32,54 +32,65 @@
       margin: 0;
       transform: translate(0, -50%);
 
-      i{
+      i {
         vertical-align: middle;
         display: inline-block;
       }
     }
   }
 
-  @include m(without-text){
-    .el-progress__text{
+
+  @include m(without-text) {
+    .el-progress__text {
       display: none;
     }
 
-    .el-progress-bar{
+    .el-progress-bar {
       padding-right: 0;
       margin-right: 0;
       display: block;
     }
   }
 
-  @include m(text-inside){
-    .el-progress-bar{
+  @include m(text-inside) {
+    .el-progress-bar {
       padding-right: 0;
       margin-right: 0;
     }
   }
 
-  @include when(success){
-    .el-progress-bar__inner{
+  @include when(success) {
+    .el-progress-bar__inner {
       background-color: $--color-success;
     }
 
-    .el-progress__text{
+    .el-progress__text {
       color: $--color-success;
     }
   }
 
-  @include when(exception){
-    .el-progress-bar__inner{
+  @include when(warning) {
+    .el-progress-bar__inner {
+      background-color: $--color-warning;
+    }
+
+    .el-progress__text {
+      color: $--color-warning;
+    }
+  }
+
+  @include when(exception) {
+    .el-progress-bar__inner {
       background-color: $--color-danger;
     }
 
-    .el-progress__text{
+    .el-progress__text {
       color: $--color-danger;
     }
   }
 }
 
-@include b(progress-bar){
+@include b(progress-bar) {
   padding-right: 50px;
   display: inline-block;
   vertical-align: middle;
@@ -87,7 +98,7 @@
   margin-right: -55px;
   box-sizing: border-box;
 
-  @include e(outer){
+  @include e(outer) {
     height: 6px;
     border-radius: 100px;
     background-color: $--border-color-lighter;
@@ -95,7 +106,7 @@
     position: relative;
     vertical-align: middle;
   }
-  @include e(inner){
+  @include e(inner) {
     position: absolute;
     left: 0;
     top: 0;
@@ -105,10 +116,12 @@
     border-radius: 100px;
     line-height: 1;
     white-space: nowrap;
+    transition: width 0.6s ease;
+
     @include utils-vertical-center;
   }
 
-  @include e(innerText){
+  @include e(innerText) {
     display: inline-block;
     vertical-align: middle;
     color: $--color-white;
@@ -117,12 +130,12 @@
   }
 }
 
-@keyframes progress{
-  0%{
+@keyframes progress {
+  0% {
     background-position: 0 0;
   }
 
-  100%{
+  100% {
     background-position: 32px 0;
   }
 }

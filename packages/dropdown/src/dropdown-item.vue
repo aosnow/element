@@ -9,27 +9,29 @@
     :aria-disabled="disabled"
     :tabindex="disabled ? null : -1"
   >
+    <i :class="icon" v-if="icon"></i>
     <slot></slot>
   </li>
 </template>
 <script>
-import Emitter from 'element-yhui/src/mixins/emitter';
+  import Emitter from 'element-ui/src/mixins/emitter';
 
-export default {
-  name: 'ElDropdownItem',
+  export default {
+    name: 'ElDropdownItem',
 
-  mixins: [Emitter],
+    mixins: [Emitter],
 
-  props: {
-    command: {},
-    disabled: Boolean,
-    divided: Boolean
-  },
+    props: {
+      command: {},
+      disabled: Boolean,
+      divided: Boolean,
+      icon: String
+    },
 
-  methods: {
-    handleClick(e) {
-      this.dispatch('ElDropdown', 'menu-item-click', [this.command, this]);
+    methods: {
+      handleClick(e) {
+        this.dispatch('ElDropdown', 'menu-item-click', [this.command, this]);
+      }
     }
-  }
-};
+  };
 </script>

@@ -1,9 +1,9 @@
-import { hasClass, addClass, removeClass } from 'element-yhui/src/utils/dom';
-import ElCheckbox from 'element-yhui/packages/checkbox';
-import ElTag from 'element-yhui/packages/tag';
 import Vue from 'vue';
+import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
+import ElCheckbox from 'element-ui/packages/checkbox';
 import FilterPanel from './filter-panel.vue';
 import LayoutObserver from './layout-observer';
+import { mapStates } from './store/helper';
 
 const getAllColumns = (columns) => {
   const result = [];
@@ -11,8 +11,7 @@ const getAllColumns = (columns) => {
     if (column.children) {
       result.push(column);
       result.push.apply(result, getAllColumns(column.children));
-    }
-    else {
+    } else {
       result.push(column);
     }
   });
@@ -35,8 +34,7 @@ const convertToRows = (originColumns) => {
         colSpan += subColumn.colSpan;
       });
       column.colSpan = colSpan;
-    }
-    else {
+    } else {
       column.colSpan = 1;
     }
   };
@@ -56,8 +54,7 @@ const convertToRows = (originColumns) => {
   allColumns.forEach((column) => {
     if (!column.children) {
       column.rowSpan = maxLevel - column.level + 1;
-    }
-    else {
+    } else {
       column.rowSpan = 1;
     }
     rows[column.level - 1].push(column);
@@ -85,69 +82,65 @@ export default {
         border="0">
         <colgroup>
           {
-            this._l(this.columns, column => <col name={column.id}/>)
+            this.columns.map(column => <col name={ column.id } key={column.id} />)
           }
           {
-            this.hasGutter ? <col name="gutter"/> : ''
+            this.hasGutter ? <col name="gutter" /> : ''
           }
         </colgroup>
-        <thead class={[{ 'is-group': isGroup, 'has-gutter': this.hasGutter }]}>
-        {
-          this._l(columnRows, (columns, rowIndex) =>
-            <tr
-              style={this.getHeaderRowStyle(rowIndex)}
-              class={this.getHeaderRowClass(rowIndex)}
-            >
-              {
-                this._l(columns, (column, cellIndex) =>
-                  <th
-                    colspan={column.colSpan}
-                    rowspan={column.rowSpan}
-                    on-mousemove={($event) => this.handleMouseMove($event, column)}
-                    on-mouseout={this.handleMouseOut}
-                    on-mousedown={($event) => this.handleMouseDown($event, column)}
-                    on-click={($event) => this.handleHeaderClick($event, column)}
-                    on-contextmenu={($event) => this.handleHeaderContextMenu($event, column)}
-                    style={this.getHeaderCellStyle(rowIndex, cellIndex, columns, column)}
-                    class={this.getHeaderCellClass(rowIndex, cellIndex, columns, column)}>
-                    <div class={['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName]}>
+        <thead class={ [{ 'is-group': isGroup, 'has-gutter': this.hasGutter }] }>
+          {
+            this._l(columnRows, (columns, rowIndex) =>
+              <tr
+                style={ this.getHeaderRowStyle(rowIndex) }
+                class={ this.getHeaderRowClass(rowIndex) }
+              >
+                {
+                  columns.map((column, cellIndex) => (<th
+                    colspan={ column.colSpan }
+                    rowspan={ column.rowSpan }
+                    on-mousemove={ ($event) => this.handleMouseMove($event, column) }
+                    on-mouseout={ this.handleMouseOut }
+                    on-mousedown={ ($event) => this.handleMouseDown($event, column) }
+                    on-click={ ($event) => this.handleHeaderClick($event, column) }
+                    on-contextmenu={ ($event) => this.handleHeaderContextMenu($event, column) }
+                    style={ this.getHeaderCellStyle(rowIndex, cellIndex, columns, column) }
+                    class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }
+                    key={ column.id }>
+                    <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName] }>
                       {
                         column.renderHeader
-                          ? column.renderHeader.call(this._renderProxy, h, {
-                            column,
-                            $index: cellIndex,
-                            store: this.store,
-                            _self: this.$parent.$vnode.context
-                          })
+                          ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
                           : column.label
                       }
                       {
-                        column.sortable
-                          ? <span class="caret-wrapper" on-click={($event) => this.handleSortClick($event, column)}>
-                              <i class="sort-caret ascending" on-click={($event) => this.handleSortClick($event, column, 'ascending')}>
-                              </i>
-                              <i class="sort-caret descending" on-click={($event) => this.handleSortClick($event, column, 'descending')}>
-                              </i>
-                            </span>
-                          : ''
+                        column.sortable ? (<span
+                          class="caret-wrapper"
+                          on-click={ ($event) => this.handleSortClick($event, column) }>
+                          <i class="sort-caret ascending"
+                            on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }>
+                          </i>
+                          <i class="sort-caret descending"
+                            on-click={ ($event) => this.handleSortClick($event, column, 'descending') }>
+                          </i>
+                        </span>) : ''
                       }
                       {
-                        column.filterable
-                          ?
-                          <span class="el-table__column-filter-trigger" on-click={($event) => this.handleFilterClick($event, column)}><i class={['el-icon-arrow-down',
-                            column.filterOpened ? 'el-icon-arrow-up' : '']}></i></span>
-                          : ''
+                        column.filterable ? (<span
+                          class="el-table__column-filter-trigger"
+                          on-click={ ($event) => this.handleFilterClick($event, column) }>
+                          <i class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : ''] }></i>
+                        </span>) : ''
                       }
                     </div>
-                  </th>
-                )
-              }
-              {
-                this.hasGutter ? <th class="gutter"></th> : ''
-              }
-            </tr>
-          )
-        }
+                  </th>))
+                }
+                {
+                  this.hasGutter ? <th class="gutter"></th> : ''
+                }
+              </tr>
+            )
+          }
         </thead>
       </table>
     );
@@ -171,8 +164,7 @@ export default {
   },
 
   components: {
-    ElCheckbox,
-    ElTag
+    ElCheckbox
   },
 
   computed: {
@@ -180,37 +172,19 @@ export default {
       return this.$parent;
     },
 
-    isAllSelected() {
-      return this.store.states.isAllSelected;
-    },
-
-    columnsCount() {
-      return this.store.states.columns.length;
-    },
-
-    leftFixedCount() {
-      return this.store.states.fixedColumns.length;
-    },
-
-    rightFixedCount() {
-      return this.store.states.rightFixedColumns.length;
-    },
-
-    leftFixedLeafCount() {
-      return this.store.states.fixedLeafColumnsLength;
-    },
-
-    rightFixedLeafCount() {
-      return this.store.states.rightFixedLeafColumnsLength;
-    },
-
-    columns() {
-      return this.store.states.columns;
-    },
-
     hasGutter() {
       return !this.fixed && this.tableLayout.gutterWidth;
-    }
+    },
+
+    ...mapStates({
+      columns: 'columns',
+      isAllSelected: 'isAllSelected',
+      leftFixedLeafCount: 'fixedLeafColumnsLength',
+      rightFixedLeafCount: 'rightFixedLeafColumnsLength',
+      columnsCount: states => states.columns.length,
+      leftFixedCount: states => states.fixedColumns.length,
+      rightFixedCount: states => states.rightFixedColumns.length
+    })
   },
 
   created() {
@@ -218,8 +192,12 @@ export default {
   },
 
   mounted() {
-    const { prop, order } = this.defaultSort;
-    this.store.commit('sort', { prop, order });
+    // nextTick 是有必要的 https://github.com/ElemeFE/element/pull/11311
+    this.$nextTick(() => {
+      const { prop, order } = this.defaultSort;
+      const init = true;
+      this.store.commit('sort', { prop, order, init });
+    });
   },
 
   beforeDestroy() {
@@ -240,11 +218,9 @@ export default {
       const after = start + columns[index].colSpan - 1;
       if (this.fixed === true || this.fixed === 'left') {
         return after >= this.leftFixedLeafCount;
-      }
-      else if (this.fixed === 'right') {
+      } else if (this.fixed === 'right') {
         return start < this.columnsCount - this.rightFixedLeafCount;
-      }
-      else {
+      } else {
         return (after < this.leftFixedLeafCount) || (start >= this.columnsCount - this.rightFixedLeafCount);
       }
     },
@@ -263,8 +239,7 @@ export default {
       const headerRowClassName = this.table.headerRowClassName;
       if (typeof headerRowClassName === 'string') {
         classes.push(headerRowClassName);
-      }
-      else if (typeof headerRowClassName === 'function') {
+      } else if (typeof headerRowClassName === 'function') {
         classes.push(headerRowClassName.call(null, { rowIndex }));
       }
 
@@ -302,8 +277,7 @@ export default {
       const headerCellClassName = this.table.headerCellClassName;
       if (typeof headerCellClassName === 'string') {
         classes.push(headerCellClassName);
-      }
-      else if (typeof headerCellClassName === 'function') {
+      } else if (typeof headerCellClassName === 'function') {
         classes.push(headerCellClassName.call(null, {
           rowIndex,
           columnIndex,
@@ -315,7 +289,8 @@ export default {
       return classes.join(' ');
     },
 
-    toggleAllSelection() {
+    toggleAllSelection(event) {
+      event.stopPropagation();
       this.store.commit('toggleAllSelection');
     },
 
@@ -323,6 +298,7 @@ export default {
       event.stopPropagation();
       const target = event.target;
       let cell = target.tagName === 'TH' ? target : target.parentNode;
+      if (hasClass(cell, 'noclick')) return;
       cell = cell.querySelector('.el-table__column-filter-trigger') || cell;
       const table = this.$parent;
 
@@ -353,8 +329,7 @@ export default {
     handleHeaderClick(event, column) {
       if (!column.filters && column.sortable) {
         this.handleSortClick(event, column);
-      }
-      else if (column.filters && !column.sortable) {
+      } else if (column.filterable && !column.sortable) {
         this.handleFilterClick(event, column);
       }
 
@@ -393,12 +368,8 @@ export default {
         const resizeProxy = table.$refs.resizeProxy;
         resizeProxy.style.left = this.dragState.startLeft + 'px';
 
-        document.onselectstart = function() {
-          return false;
-        };
-        document.ondragstart = function() {
-          return false;
-        };
+        document.onselectstart = function() { return false; };
+        document.ondragstart = function() { return false; };
 
         const handleMouseMove = (event) => {
           const deltaLeft = event.clientX - this.dragState.startMouseLeft;
@@ -462,8 +433,7 @@ export default {
             target.style.cursor = 'col-resize';
           }
           this.draggingColumn = column;
-        }
-        else if (!this.dragging) {
+        } else if (!this.dragging) {
           bodyStyle.cursor = '';
           if (hasClass(target, 'is-sortable')) {
             target.style.cursor = 'pointer';
@@ -486,7 +456,9 @@ export default {
 
     handleSortClick(event, column, givenOrder) {
       event.stopPropagation();
-      let order = givenOrder || this.toggleOrder(column);
+      let order = column.order === givenOrder
+        ? null
+        : (givenOrder || this.toggleOrder(column));
 
       let target = event.target;
       while (target && target.tagName !== 'TH') {
@@ -517,10 +489,7 @@ export default {
 
       if (!order) {
         sortOrder = column.order = null;
-        states.sortingColumn = null;
-        sortProp = null;
-      }
-      else {
+      } else {
         sortOrder = column.order = order;
       }
 

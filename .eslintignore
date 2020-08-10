@@ -7,4 +7,5 @@ lib
 coverage
 *.md
 *.scss
-/test/
+*.woff
+*.ttf

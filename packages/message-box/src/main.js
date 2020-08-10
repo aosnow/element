@@ -2,6 +2,7 @@ const defaults = {
   title: null,
   message: '',
   type: '',
+  iconClass: '',
   showInput: false,
   showClose: true,
   modalFade: true,
@@ -28,13 +29,14 @@ const defaults = {
   beforeClose: null,
   dangerouslyUseHTMLString: false,
   center: false,
-  roundButton: false
+  roundButton: false,
+  distinguishCancelAndClose: false
 };
 
 import Vue from 'vue';
 import msgboxVue from './main.vue';
-import merge from 'element-yhui/src/utils/merge';
-import { isVNode } from 'element-yhui/src/utils/vdom';
+import merge from 'element-ui/src/utils/merge';
+import { isVNode } from 'element-ui/src/utils/vdom';
 
 const MessageBoxConstructor = Vue.extend(msgboxVue);
 
@@ -47,8 +49,7 @@ const defaultCallback = action => {
     if (typeof callback === 'function') {
       if (instance.showInput) {
         callback(instance.inputValue, action);
-      }
-      else {
+      } else {
         callback(action);
       }
     }
@@ -56,12 +57,10 @@ const defaultCallback = action => {
       if (action === 'confirm') {
         if (instance.showInput) {
           currentMsg.resolve({ value: instance.inputValue, action });
-        }
-        else {
+        } else {
           currentMsg.resolve(action);
         }
-      }
-      else if (action === 'cancel' && currentMsg.reject) {
+      } else if (currentMsg.reject && (action === 'cancel' || action === 'close')) {
         currentMsg.reject(action);
       }
     }
@@ -104,8 +103,7 @@ const showNextMsg = () => {
       if (isVNode(instance.message)) {
         instance.$slots.default = [instance.message];
         instance.message = null;
-      }
-      else {
+      } else {
         delete instance.$slots.default;
       }
       ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape', 'closeOnHashChange'].forEach(prop => {
@@ -131,8 +129,7 @@ const MessageBox = function(options, callback) {
     if (typeof arguments[1] === 'string') {
       options.title = arguments[1];
     }
-  }
-  else if (options.callback && !callback) {
+  } else if (options.callback && !callback) {
     callback = options.callback;
   }
 
@@ -147,8 +144,7 @@ const MessageBox = function(options, callback) {
 
       showNextMsg();
     });
-  }
-  else {
+  } else {
     msgQueue.push({
       options: merge({}, defaults, MessageBox.defaults, options),
       callback: callback
@@ -166,8 +162,7 @@ MessageBox.alert = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
-  }
-  else if (title === undefined) {
+  } else if (title === undefined) {
     title = '';
   }
   return MessageBox(merge({
@@ -183,8 +178,7 @@ MessageBox.confirm = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
-  }
-  else if (title === undefined) {
+  } else if (title === undefined) {
     title = '';
   }
   return MessageBox(merge({
@@ -199,8 +193,7 @@ MessageBox.prompt = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
-  }
-  else if (title === undefined) {
+  } else if (title === undefined) {
     title = '';
   }
   return MessageBox(merge({

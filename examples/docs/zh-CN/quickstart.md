@@ -1,6 +1,16 @@
 ## 快速上手
 
-本节将介绍如何在项目中使用 Element-yhui。
+本节将介绍如何在项目中使用 Element。
+
+### 使用 vue-cli@3
+
+我们为新版的 vue-cli 准备了相应的 [Element 插件](https://github.com/ElementUI/vue-cli-plugin-element)，你可以用它们快速地搭建一个基于 Element 的项目。
+
+### 使用 Starter Kit
+
+我们提供了通用的[项目模板](https://github.com/ElementUI/element-starter)，你可以直接使用。对于 Laravel 用户，我们也准备了相应的[模板](https://github.com/ElementUI/element-in-laravel-starter)，同样可以直接下载使用。
+
+如果不希望使用我们提供的模板，请继续阅读。
 
 ### 引入 Element
 
@@ -12,8 +22,8 @@
 
 ```javascript
 import Vue from 'vue';
-import ElementUI from 'element-yhui';
-import 'element-yhui/lib/theme-yinhe/index.css';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 import App from './App.vue';
 
 Vue.use(ElementUI);
@@ -45,8 +55,8 @@ npm install babel-plugin-component -D
     [
       "component",
       {
-        "libraryName": "element-yhui",
-        "styleLibraryName": "theme-yinhe"
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
       }
     ]
   ]
@@ -57,12 +67,11 @@ npm install babel-plugin-component -D
 
 ```javascript
 import Vue from 'vue';
-import { Button, Select } from 'element-yhui';
+import { Button, Select } from 'element-ui';
 import App from './App.vue';
 
 Vue.component(Button.name, Button);
 Vue.component(Select.name, Select);
-
 /* 或写为
  * Vue.use(Button)
  * Vue.use(Select)
@@ -74,7 +83,7 @@ new Vue({
 });
 ```
 
-完整组件列表和引入方式（完整组件列表以 [components.json](https://github.com/aosnow/element-yhui/blob/dev/components.json) 为准）
+完整组件列表和引入方式（完整组件列表以 [components.json](https://github.com/ElemeFE/element/blob/master/components.json) 为准）
 
 ```javascript
 import Vue from 'vue';
@@ -125,6 +134,7 @@ import {
   Col,
   Upload,
   Progress,
+  Spinner,
   Badge,
   Card,
   Rate,
@@ -142,11 +152,20 @@ import {
   Aside,
   Main,
   Footer,
+  Timeline,
+  TimelineItem,
+  Link,
+  Divider,
+  Image,
+  Calendar,
+  Backtop,
+  PageHeader,
+  CascaderPanel,
   Loading,
   MessageBox,
   Message,
   Notification
-} from 'element-yhui';
+} from 'element-ui';
 
 Vue.use(Pagination);
 Vue.use(Dialog);
@@ -194,6 +213,7 @@ Vue.use(Row);
 Vue.use(Col);
 Vue.use(Upload);
 Vue.use(Progress);
+Vue.use(Spinner);
 Vue.use(Badge);
 Vue.use(Card);
 Vue.use(Rate);
@@ -205,11 +225,21 @@ Vue.use(Collapse);
 Vue.use(CollapseItem);
 Vue.use(Cascader);
 Vue.use(ColorPicker);
+Vue.use(Transfer);
 Vue.use(Container);
 Vue.use(Header);
 Vue.use(Aside);
 Vue.use(Main);
 Vue.use(Footer);
+Vue.use(Timeline);
+Vue.use(TimelineItem);
+Vue.use(Link);
+Vue.use(Divider);
+Vue.use(Image);
+Vue.use(Calendar);
+Vue.use(Backtop);
+Vue.use(PageHeader);
+Vue.use(CascaderPanel);
 
 Vue.use(Loading.directive);
 
@@ -230,7 +260,7 @@ Vue.prototype.$message = Message;
 
 ```js
 import Vue from 'vue';
-import Element from 'element-yhui';
+import Element from 'element-ui';
 Vue.use(Element, { size: 'small', zIndex: 3000 });
 ```
 
@@ -238,7 +268,7 @@ Vue.use(Element, { size: 'small', zIndex: 3000 });
 
 ```js
 import Vue from 'vue';
-import { Button } from 'element-yhui';
+import { Button } from 'element-ui';
 
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 };
 Vue.use(Button);

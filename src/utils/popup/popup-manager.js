@@ -3,7 +3,7 @@ import { addClass, removeClass } from '../dom';
 
 let hasModal = false;
 let hasInitZIndex = false;
-let zIndex = 2000;
+let zIndex;
 
 const instances = {};
 
@@ -158,7 +158,7 @@ Object.defineProperty(PopupManager, 'zIndex', {
   configurable: true,
   get() {
     if (!hasInitZIndex) {
-      zIndex = (Vue.prototype.$ELEMENT || {}).zIndex || zIndex;
+      zIndex = zIndex || (Vue.prototype.$ELEMENT || {}).zIndex || 2000;
       hasInitZIndex = true;
     }
     return zIndex;

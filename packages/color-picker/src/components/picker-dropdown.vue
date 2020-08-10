@@ -15,6 +15,7 @@
             v-model="customInput"
             @keyup.native.enter="handleConfirm"
             @blur="handleConfirm"
+            :validate-event="false"
             size="mini">
           </el-input>
         </span>
@@ -38,80 +39,83 @@
 </template>
 
 <script>
-import SvPanel from './sv-panel';
-import HueSlider from './hue-slider';
-import AlphaSlider from './alpha-slider';
-import Predefine from './predefine';
-import Popper from 'element-yhui/src/utils/vue-popper';
-import Locale from 'element-yhui/src/mixins/locale';
-import ElInput from 'element-yhui/packages/input';
-import ElButton from 'element-yhui/packages/button';
+  import SvPanel from './sv-panel';
+  import HueSlider from './hue-slider';
+  import AlphaSlider from './alpha-slider';
+  import Predefine from './predefine';
+  import Popper from 'element-ui/src/utils/vue-popper';
+  import Locale from 'element-ui/src/mixins/locale';
+  import ElInput from 'element-ui/packages/input';
+  import ElButton from 'element-ui/packages/button';
 
-export default {
-  name: 'el-color-picker-dropdown',
+  export default {
+    name: 'el-color-picker-dropdown',
 
-  mixins: [Popper, Locale],
+    mixins: [Popper, Locale],
 
-  components: {
-    SvPanel,
-    HueSlider,
-    AlphaSlider,
-    ElInput,
-    ElButton,
-    Predefine
-  },
-
-  props: {
-    color: {
-      required: true
-    },
-    showAlpha: Boolean,
-    predefine: Array
-  },
-
-  data() {
-    return {
-      customInput: ''
-    };
-  },
-
-  computed: {
-    currentColor() {
-      const parent = this.$parent;
-      return !parent.value && !parent.showPanelColor ? '' : parent.color.value;
-    }
-  },
-
-  methods: {
-    confirmValue() {
-      this.$emit('pick');
+    components: {
+      SvPanel,
+      HueSlider,
+      AlphaSlider,
+      ElInput,
+      ElButton,
+      Predefine
     },
 
-    handleConfirm() {
-      this.color.fromString(this.customInput);
-    }
-  },
+    props: {
+      color: {
+        required: true
+      },
+      showAlpha: Boolean,
+      predefine: Array
+    },
 
-  mounted() {
-    this.$parent.popperElm = this.popperElm = this.$el;
-    this.referenceElm = this.$parent.$el;
-  },
+    data() {
+      return {
+        customInput: ''
+      };
+    },
 
-  watch: {
-    showPopper(val) {
-      if (val === true) {
-        this.$nextTick(() => {
-          const { sl, hue, alpha } = this.$refs;
-          sl && sl.update();
-          hue && hue.update();
-          alpha && alpha.update();
-        });
+    computed: {
+      currentColor() {
+        const parent = this.$parent;
+        return !parent.value && !parent.showPanelColor ? '' : parent.color.value;
       }
     },
 
-    currentColor(val) {
-      this.customInput = val;
+    methods: {
+      confirmValue() {
+        this.$emit('pick');
+      },
+
+      handleConfirm() {
+        this.color.fromString(this.customInput);
+      }
+    },
+
+    mounted() {
+      this.$parent.popperElm = this.popperElm = this.$el;
+      this.referenceElm = this.$parent.$el;
+    },
+
+    watch: {
+      showPopper(val) {
+        if (val === true) {
+          this.$nextTick(() => {
+            const { sl, hue, alpha } = this.$refs;
+            sl && sl.update();
+            hue && hue.update();
+            alpha && alpha.update();
+          });
+        }
+      },
+
+      currentColor: {
+        immediate: true,
+        handler(val) {
+          this.customInput = val;
+        }
+      }
     }
-  }
-};
+  };
 </script>

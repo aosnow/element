@@ -25,7 +25,7 @@
 
 /*eslint-disable*/
 // 把 YYYY-MM-DD 改成了 yyyy-MM-dd
-(function(main) {
+(function (main) {
   'use strict';
 
   /**
@@ -34,12 +34,17 @@
    */
   var fecha = {};
   var token = /d{1,4}|M{1,4}|yy(?:yy)?|S{1,3}|Do|ZZ|([HhMsDm])\1?|[aA]|"[^"]*"|'[^']*'/g;
-  var twoDigits = /\d\d?/;
-  var threeDigits = /\d{3}/;
-  var fourDigits = /\d{4}/;
-  var word = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i;
-  var noop = function() {
+  var twoDigits = '\\d\\d?';
+  var threeDigits = '\\d{3}';
+  var fourDigits = '\\d{4}';
+  var word = '[^\\s]+';
+  var literal = /\[([^]*?)\]/gm;
+  var noop = function () {
   };
+
+  function regexEscape(str) {
+    return str.replace( /[|\\{()[^$+*?.-]/g, '\\$&');
+  }
 
   function shorten(arr, sLen) {
     var newArr = [];
@@ -50,7 +55,7 @@
   }
 
   function monthUpdate(arrName) {
-    return function(d, v, i18n) {
+    return function (d, v, i18n) {
       var index = i18n[arrName].indexOf(v.charAt(0).toUpperCase() + v.substr(1).toLowerCase());
       if (~index) {
         d.month = index;
@@ -117,10 +122,10 @@
       return i18n.monthNames[dateObj.getMonth()];
     },
     yy: function(dateObj) {
-      return String(dateObj.getFullYear()).substr(2);
+      return pad(String(dateObj.getFullYear()), 4).substr(2);
     },
     yyyy: function(dateObj) {
-      return dateObj.getFullYear();
+      return pad(dateObj.getFullYear(), 4);
     },
     h: function(dateObj) {
       return dateObj.getHours() % 12 || 12;
@@ -168,52 +173,54 @@
   };
 
   var parseFlags = {
-    d: [twoDigits, function(d, v) {
+    d: [twoDigits, function (d, v) {
       d.day = v;
     }],
-    M: [twoDigits, function(d, v) {
+    Do: [twoDigits + word, function (d, v) {
+      d.day = parseInt(v, 10);
+    }],
+    M: [twoDigits, function (d, v) {
       d.month = v - 1;
     }],
-    yy: [twoDigits, function(d, v) {
+    yy: [twoDigits, function (d, v) {
       var da = new Date(), cent = +('' + da.getFullYear()).substr(0, 2);
       d.year = '' + (v > 68 ? cent - 1 : cent) + v;
     }],
-    h: [twoDigits, function(d, v) {
+    h: [twoDigits, function (d, v) {
       d.hour = v;
     }],
-    m: [twoDigits, function(d, v) {
+    m: [twoDigits, function (d, v) {
       d.minute = v;
     }],
-    s: [twoDigits, function(d, v) {
+    s: [twoDigits, function (d, v) {
       d.second = v;
     }],
-    yyyy: [fourDigits, function(d, v) {
+    yyyy: [fourDigits, function (d, v) {
       d.year = v;
     }],
-    S: [/\d/, function(d, v) {
+    S: ['\\d', function (d, v) {
       d.millisecond = v * 100;
     }],
-    SS: [/\d{2}/, function(d, v) {
+    SS: ['\\d{2}', function (d, v) {
       d.millisecond = v * 10;
     }],
-    SSS: [threeDigits, function(d, v) {
+    SSS: [threeDigits, function (d, v) {
       d.millisecond = v;
     }],
     D: [twoDigits, noop],
     ddd: [word, noop],
     MMM: [word, monthUpdate('monthNamesShort')],
     MMMM: [word, monthUpdate('monthNames')],
-    a: [word, function(d, v, i18n) {
+    a: [word, function (d, v, i18n) {
       var val = v.toLowerCase();
       if (val === i18n.amPm[0]) {
         d.isPm = false;
-      }
-      else if (val === i18n.amPm[1]) {
+      } else if (val === i18n.amPm[1]) {
         d.isPm = true;
       }
     }],
-    ZZ: [/[\+\-]\d\d:?\d\d/, function(d, v) {
-      var parts = (v + '').match(/([\+\-]|\d\d)/gi), minutes;
+    ZZ: ['[^\\s]*?[\\+\\-]\\d\\d:?\\d\\d|[^\\s]*?Z', function (d, v) {
+      var parts = (v + '').match(/([+-]|\d\d)/gi), minutes;
 
       if (parts) {
         minutes = +(parts[1] * 60) + parseInt(parts[2], 10);
@@ -221,18 +228,19 @@
       }
     }]
   };
-  parseFlags.DD = parseFlags.D;
+  parseFlags.dd = parseFlags.d;
   parseFlags.dddd = parseFlags.ddd;
-  parseFlags.Do = parseFlags.dd = parseFlags.d;
+  parseFlags.DD = parseFlags.D;
   parseFlags.mm = parseFlags.m;
   parseFlags.hh = parseFlags.H = parseFlags.HH = parseFlags.h;
   parseFlags.MM = parseFlags.M;
   parseFlags.ss = parseFlags.s;
   parseFlags.A = parseFlags.a;
 
+
   // Some common format strings
   fecha.masks = {
-    'default': 'ddd MMM dd yyyy HH:mm:ss',
+    default: 'ddd MMM dd yyyy HH:mm:ss',
     shortDate: 'M/D/yy',
     mediumDate: 'MMM d, yyyy',
     longDate: 'MMMM d, yyyy',
@@ -248,7 +256,7 @@
    * @param {Date|number} dateObj
    * @param {string} mask Format of the date, i.e. 'mm-dd-yy' or 'shortDate'
    */
-  fecha.format = function(dateObj, mask, i18nSettings) {
+  fecha.format = function (dateObj, mask, i18nSettings) {
     var i18n = i18nSettings || fecha.i18n;
 
     if (typeof dateObj === 'number') {
@@ -261,8 +269,20 @@
 
     mask = fecha.masks[mask] || mask || fecha.masks['default'];
 
-    return mask.replace(token, function($0) {
+    var literals = [];
+
+    // Make literals inactive by replacing them with ??
+    mask = mask.replace(literal, function($0, $1) {
+      literals.push($1);
+      return '@@@';
+    });
+    // Apply formatting rules
+    mask = mask.replace(token, function ($0) {
       return $0 in formatFlags ? formatFlags[$0](dateObj, i18n) : $0.slice(1, $0.length - 1);
+    });
+    // Inline literal values back into the formatted value
+    return mask.replace(/@@@/g, function() {
+      return literals.shift();
     });
   };
 
@@ -273,7 +293,7 @@
    * @param {string} format Date parse format
    * @returns {Date|boolean}
    */
-  fecha.parse = function(dateStr, format, i18nSettings) {
+  fecha.parse = function (dateStr, format, i18nSettings) {
     var i18n = i18nSettings || fecha.i18n;
 
     if (typeof format !== 'string') {
@@ -285,39 +305,41 @@
     // Avoid regular expression denial of service, fail early for really long strings
     // https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
     if (dateStr.length > 1000) {
-      return false;
+      return null;
     }
 
-    var isValid = true;
     var dateInfo = {};
-    format.replace(token, function($0) {
+    var parseInfo = [];
+    var literals = [];
+    format = format.replace(literal, function($0, $1) {
+      literals.push($1);
+      return '@@@';
+    });
+    var newFormat = regexEscape(format).replace(token, function ($0) {
       if (parseFlags[$0]) {
         var info = parseFlags[$0];
-        var index = dateStr.search(info[0]);
-        if (!~index) {
-          isValid = false;
-        }
-        else {
-          dateStr.replace(info[0], function(result) {
-            info[1](dateInfo, result, i18n);
-            dateStr = dateStr.substr(index + result.length);
-            return result;
-          });
-        }
+        parseInfo.push(info[1]);
+        return '(' + info[0] + ')';
       }
 
-      return parseFlags[$0] ? '' : $0.slice(1, $0.length - 1);
+      return $0;
     });
+    newFormat = newFormat.replace(/@@@/g, function() {
+      return literals.shift();
+    });
+    var matches = dateStr.match(new RegExp(newFormat, 'i'));
+    if (!matches) {
+      return null;
+    }
 
-    if (!isValid) {
-      return false;
+    for (var i = 1; i < matches.length; i++) {
+      parseInfo[i - 1](dateInfo, matches[i], i18n);
     }
 
     var today = new Date();
     if (dateInfo.isPm === true && dateInfo.hour != null && +dateInfo.hour !== 12) {
       dateInfo.hour = +dateInfo.hour + 12;
-    }
-    else if (dateInfo.isPm === false && +dateInfo.hour === 12) {
+    } else if (dateInfo.isPm === false && +dateInfo.hour === 12) {
       dateInfo.hour = 0;
     }
 
@@ -326,8 +348,7 @@
       dateInfo.minute = +(dateInfo.minute || 0) - +dateInfo.timezoneOffset;
       date = new Date(Date.UTC(dateInfo.year || today.getFullYear(), dateInfo.month || 0, dateInfo.day || 1,
         dateInfo.hour || 0, dateInfo.minute || 0, dateInfo.second || 0, dateInfo.millisecond || 0));
-    }
-    else {
+    } else {
       date = new Date(dateInfo.year || today.getFullYear(), dateInfo.month || 0, dateInfo.day || 1,
         dateInfo.hour || 0, dateInfo.minute || 0, dateInfo.second || 0, dateInfo.millisecond || 0);
     }
@@ -337,13 +358,11 @@
   /* istanbul ignore next */
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = fecha;
-  }
-  else if (typeof define === 'function' && define.amd) {
-    define(function() {
+  } else if (typeof define === 'function' && define.amd) {
+    define(function () {
       return fecha;
     });
-  }
-  else {
+  } else {
     main.fecha = fecha;
   }
 })(this);
